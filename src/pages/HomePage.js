@@ -1,8 +1,11 @@
 import React from 'react'
+import UserRegister from '../components/UserRegister/UserRegister'
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <div>HomePage
+    <UserRegister></UserRegister>
+    </div>
   )
 }
 

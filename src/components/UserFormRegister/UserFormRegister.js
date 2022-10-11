@@ -15,26 +15,23 @@ const UserFormRegister = () => {
       <>
       <section>
           <h3>¡Bienvenido a Global Pet!</h3>
-          <Grid item >
+          <Grid item sx={{pb:2}} >
           <TextField
-             id="margin-normal" margin="normal"
              label="Nombre"
              size="small"/>
           </Grid>
-          <Grid item>
+          <Grid item sx={{pb:2}} >
           <TextField 
-             id="margin-normal" margin="normal"
              label="Correo"
              size="small"/>
           </Grid>
           <Grid item>
           <TextField 
-            id="margin-normal" margin="normal"
             helperText="Entre 5 y 8 carácteres"
              label="Contraseña"
              size="small"/>
           </Grid>
-          <Grid item>
+          <Grid item sx={{pb:2}}>
           <TextField 
             helperText="Entre 5 y 8 carácteres "
              label="Confirma tu contraseña"
@@ -43,7 +40,7 @@ const UserFormRegister = () => {
           <Grid item display="flex" justifyContent="center" alignItems="center">
           <Button variant="contained">Continuar</Button>
           </Grid>
-          <p>¿Ya tienes cuenta?|Inicia sesión</p>   
+          <p>¿Ya tienes cuenta? | Inicia sesión</p>   
           </section>
     </>
        );

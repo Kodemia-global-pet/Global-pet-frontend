@@ -48,23 +48,5 @@ const UserFormRegister = () => {
   
   export default UserFormRegister;
 
-/*
-  <>
-        <section>
-            <h3>¡Bienvenido a Global Pet!</h3>
-            <Grid item onSubmit={handleSubmit(onSubmit)}>
-            <TextField id="outlined-basic" label="Outlined" variant="outlined"/>
-            </Grid>
-            <Grid item display="flex" justifyContent="center" alignItems="center">
-            <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-            </Grid>
-            <Grid item display="flex" justifyContent="center" alignItems="center">
-            <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-            </Grid>
-            <Grid itemID="" display="flex" justifyContent="center" alignItems="center">
-            <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-            </Grid>
-            <Button variant="contained">Contained</Button>
-        </section>
-      </>
-   */
+//  ¿En que parte va? onSubmit={handleSubmit(onSubmit)}
+// Register... como se usa?

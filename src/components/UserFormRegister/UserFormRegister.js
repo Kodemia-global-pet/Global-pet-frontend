@@ -1,5 +1,5 @@
 import React from "react";
-//import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import {
   Button,
   Grid,
@@ -7,13 +7,13 @@ import {
 } from "@mui/material";
 
 const UserFormRegister = () => {
-  /*
+  
   const { register, handleSubmit } = useForm();
   const onSubmit = data => console.log(data);
-*/
+
     return (
       <>
-      <section>
+      <form onSubmit={handleSubmit(onSubmit)}>
           <h3>¡Bienvenido a Global Pet!</h3>
           <Grid item sx={{pb:2}} >
           <TextField
@@ -41,12 +41,10 @@ const UserFormRegister = () => {
           <Button variant="contained">Continuar</Button>
           </Grid>
           <p>¿Ya tienes cuenta? | Inicia sesión</p>   
-          </section>
+          </form>
     </>
        );
   };
   
   export default UserFormRegister;
 
-//  ¿En que parte va? onSubmit={handleSubmit(onSubmit)}
-// Register... como se usa?

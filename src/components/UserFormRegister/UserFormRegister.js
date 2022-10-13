@@ -12,37 +12,43 @@ const UserFormRegister = () => {
   const onSubmit = data => console.log(data);
 
     return (
-      <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <section>
           <h3>¡Bienvenido a Global Pet!</h3>
-          <Grid item sx={{pb:2}} >
+      <form>
+          <Grid item sx={{pb:2}}>
           <TextField
+             {...register("nombre")}
              label="Nombre"
              size="small"/>
           </Grid>
           <Grid item sx={{pb:2}} >
           <TextField 
+             {...register("correo")}
              label="Correo"
              size="small"/>
           </Grid>
           <Grid item>
           <TextField 
+            {...register("contraseña")}
             helperText="Entre 5 y 8 carácteres"
+            type="password"
              label="Contraseña"
              size="small"/>
           </Grid>
           <Grid item sx={{pb:2}}>
           <TextField 
+            {...register("confirma tu contraseña")}
             helperText="Entre 5 y 8 carácteres "
+            type="password"
              label="Confirma tu contraseña"
              size="small"/>
           </Grid>
           <Grid item display="flex" justifyContent="center" alignItems="center">
-          <Button variant="contained">Continuar</Button>
+          <Button variant="contained" onClick={handleSubmit(onSubmit)}>Continuar</Button>
           </Grid>
           <p>¿Ya tienes cuenta? | Inicia sesión</p>   
           </form>
-    </>
+        </section>
        );
   };
   

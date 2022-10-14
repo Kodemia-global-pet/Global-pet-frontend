@@ -8,8 +8,11 @@ import {
 
 const UserFormRegister = () => {
   
-  const { register, handleSubmit } = useForm();
-  const onSubmit = data => console.log(data);
+  const { register, handleSubmit, reset } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+  }
+  const click =()=>{reset();} 
 
     return (
       <section>
@@ -44,7 +47,7 @@ const UserFormRegister = () => {
              size="small"/>
           </Grid>
           <Grid item display="flex" justifyContent="center" alignItems="center">
-          <Button variant="contained" onClick={handleSubmit(onSubmit)}>Continuar</Button>
+          <Button variant="contained" onClick={handleSubmit(onSubmit, click)} >Continuar</Button>
           </Grid>
           <p>¿Ya tienes cuenta? | Inicia sesión</p>   
           </form>

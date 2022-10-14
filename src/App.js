@@ -1,11 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
+import CreateAccount from './pages/CreateAccount'
 
 function App() {
   return (
     <div>
     <Routes>
-      <Route path="/" element={<HomePage />}></Route>    
+      <Route path="/" element={<CreateAccount/>}></Route>    
     </Routes>
   </div>
   );

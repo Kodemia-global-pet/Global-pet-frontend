@@ -5,11 +5,11 @@ import UserFormRegister from '../components/UserFormRegister/UserFormRegister'
 
 const createAccount = () => {
   return (
-    <main>
-    <Grid container xs={4} md={4} display="flex" justifyContent="center" alignItems="center" sx={{ backgroundColor: "#F0F0F0", color:"#545454"}}>
+    <Grid container >
+    <Grid item xs={4} md={4} display="flex" justifyContent="center" alignItems="center" sx={{ backgroundColor: "#F0F0F0", color:"#545454"}}>
     <UserFormRegister></UserFormRegister>
     </Grid>
-    </main>
+    </Grid>
   )
 }
 

@@ -7,12 +7,12 @@ const UserContext = React.createContext();
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(getTokenLocalStorage());
 
-  const login = async (email, password) => {
+  const login = async ( name, email, password) => {
 
     try {
       // Fetch
-      const response = await loginService(email, password)
-      const jsonData = await response.json();;
+      const response = await loginService(name, email, password)
+      const jsonData = await response.json();
       if (!jsonData.success) {
         return false;
       } else {

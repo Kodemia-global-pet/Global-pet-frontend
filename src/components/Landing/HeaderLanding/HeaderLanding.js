@@ -3,7 +3,7 @@ import React from 'react';
 
 const HeaderLanding = () => {
   return (
-    <header className='header-landing' style={{ backgroundImage: `url(${process.env.PUBLIC_URL + '/images/header-landing.png'})`}}>
+    <header className='landing-header' style={{ backgroundImage: `url(${process.env.PUBLIC_URL + '/images/header-landing.png'})`}}>
         <Box
         component="img"
         sx={{

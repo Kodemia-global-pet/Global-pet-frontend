@@ -1,0 +1,45 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;    
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    color: #393E41;
+}
+h2{
+    font-size: 1.6em;
+    margin: 24px 0;
+}
+
+header.landing-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9;
+    background-size: cover;
+    position: relative;
+}
+.landing-banner{
+   padding: 32px 32px 0 32px;
+   margin-top: -20px;
+   z-index: 0;
+}
+.landing-banner h1{
+    padding: 0;
+    margin: 0 auto;
+}
+.service{
+    width: 100%;
+    height: auto;
+}
+.link{
+    text-decoration: none;
+}
+
+/*Responsive*/
+@media only screen and (min-width: 768px) {
+    header.landing-header{       
+        background-size: contain;
+    }
+}

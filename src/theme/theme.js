@@ -1,43 +1,45 @@
-import { createTheme } from '@mui/material/styles'
+import { createTheme } from "@mui/material/styles";
+import { light } from "@mui/material/styles/createPalette";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#3189A3',
+      main: "#3189A3",
     },
     secondary: {
-      main: '#8FD38E',
+      main: "#8FD38E",
     },
     danger: {
-      main: '#DA4343',
+      main: "#DA4343",
     },
     grey: {
-      main: '#737373',
-      light: 'rgba(211, 208, 195, .5)',
+      main: "#737373",
+      light: "rgba(211, 208, 195, .5)",
+      contrast: "rgba(240, 240, 240, .9)",
     },
     header_primary: {
-      main: '#FED74C',
+      main: "#FED74C",
     },
     header_secondary: {
-      main: '#78D1B4',
+      main: "#78D1B4",
     },
     white: {
-      main: '#ffffff',
+      main: "#ffffff",
     },
     black: {
-      main: '#222222',
+      main: "#393E41",
     },
   },
   typography: {
-    fontFamily: 'Source Sans Pro',
+    fontFamily: "Roboto",
     h5: {
       fontSize: 22,
-      fontWeight: 'bold',
+      fontWeight: "bold",
     },
     h2: {
       fontSize: 18,
-      color: 'black',
+      color: "black",
     },
   },
-})
-export default theme
+});
+export default theme;

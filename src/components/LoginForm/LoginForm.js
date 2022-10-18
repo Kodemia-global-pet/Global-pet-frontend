@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import {
   Grid,
@@ -14,27 +15,25 @@ import {
 } from "@mui/material";
 import { useLogedUser } from "../../context/UserContext";
 
-//let navigate = useNavigate();
-
 const LoginForm = () => {
+  let navigate = useNavigate();
   const [error, setError] = useState(null);
   const { login } = useLogedUser();
   const {
     register,
     getValues,
+    handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const email = getValues("Email");
+  const onSubmit = async () => {
+    const email = getValues("email");
     const password = getValues("password");
     const result = await login(email, password);
     if (!result) setError("No ingresaste Correctamente los Datos");
     else {
       setError(null);
-      //navigate("/");
+      navigate("/");
     }
   };
   console.log();
@@ -50,10 +49,6 @@ const LoginForm = () => {
         }}
       >
         <Container
-          item
-          xs={12}
-          sm={3}
-          md={4}
           component="main"
           sx={{
             backgroundColor: "grey.contrast",
@@ -79,17 +74,15 @@ const LoginForm = () => {
             <Typography component="h1" variant="h5">
               Inicia Sesion ó Registrate
             </Typography>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="email"
                 type="email"
                 label="Correo Electronico"
-                name="email"
                 autoComplete="email"
-                {...register("Email", {
+                {...register("email", {
                   required: "Completa Este Campo",
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -97,12 +90,11 @@ const LoginForm = () => {
                   },
                 })}
                 error={!!errors?.email}
+                helperText={errors.email?.message}
               />
               <TextField
                 margin="normal"
                 fullWidth
-                name="password"
-                id="password"
                 type="password"
                 label="Contraseña"
                 autoComplete="current-password"

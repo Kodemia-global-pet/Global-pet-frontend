@@ -1,36 +1,41 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Grid, TextField, Button } from '@mui/material'
+import { postResponse } from '../../services/backend'
 import { useLogedUser } from '../../context/UserContext'
-import { async } from 'q'
-
+import { useNavigate } from 'react-router'
 
 const UserFormRegister = () => {
-
-  const { login } = useLogedUser
-  
+  const { login } = useLogedUser()
+  const navigate = useNavigate()
   const {
     register,
     formState: { errors },
     handleSubmit,
-    getValues,
     setError,
   } = useForm()
 
-  
   const onSubmit = async (data) => {
-
     console.log(data)
-    const email = getValues('Email')
-    const password = getValues('password')
-    const name = getValues('name')
-    const result = await login(name, email, password)
-    if (!result) setError('Tienes un error')
-    else {
-      setError(null)
-      //navigate("/");
+    if (data.password !== data.confirmPassword) {
+      setError('confirmPassword', { message: 'Las contraseñas no coinciden' })
+      return false
     }
+    try {
+      const responseData = await postResponse(data.name, data.email, data.password)
+      const jsonData = await responseData.json()
+      console.log(jsonData)
+      if (jsonData.success) {
+        const result = await login(data.email, data.password)
+        if (result) {
+          return navigate('/')
+        }
+      }
+    } catch (error) {
+      alert('you entered your data wrong')
+      console.log("error", error)
     }
+  }
 
   return (
     <section>
@@ -115,5 +120,4 @@ const UserFormRegister = () => {
     </section>
   )
 }
-
 export default UserFormRegister

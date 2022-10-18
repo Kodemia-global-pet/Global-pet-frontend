@@ -2,7 +2,9 @@ import { useForm } from 'react-hook-form'
 import React, { useState } from 'react'
 import { Grid, TextField, Alert } from '@mui/material'
 import { useLogedUser } from '../../context/UserContext'
+import EditButton from '../Buttons/EditButton/EditButton'
 //import { useNavigate } from 'react-router-dom';
+
 
 
 
@@ -58,6 +60,9 @@ const LoginForm = () => {
           </div>
         </Grid>
       </div>
+      <Grid>
+        <EditButton></EditButton>
+      </Grid>
     </>
   )
 }

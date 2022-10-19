@@ -36,7 +36,6 @@ const LoginForm = () => {
       navigate("/");
     }
   };
-  console.log();
 
   return (
     <>
@@ -100,7 +99,7 @@ const LoginForm = () => {
                 autoComplete="current-password"
                 {...register("password", {
                   required: "Completa Este Campo",
-                  minLength: { value: 4, message: "Minimo 4 caracteres" },
+                  minLength: { value: 3, message: "Minimo 3 caracteres" },
                 })}
                 error={!!errors?.password}
                 helperText={errors.password?.message}
@@ -118,23 +117,27 @@ const LoginForm = () => {
                 }}
               >
                 <Button
-                  type="submit"
-                  width="170px"
-                  height="43px"
                   variant="contained"
-                  sx={{ backgroundColor: "grey.main", mt: 3, mb: 2 }}
+                  type="submit"
+                  sx={{
+                    width: 170,
+                    height: 43,
+                    backgroundColor: "grey.main",
+                    mt: 3,
+                    mb: 2,
+                  }}
                 >
                   Continuar
                 </Button>
 
                 <Grid item sx={{ color: "black.main", marginTop: 5 }}>
                   <Link href="#" underline="hover" sx={{ color: "black.main" }}>
-                    Olvide Mi Contraseña
+                    Olvidé mi contraseña
                   </Link>
                 </Grid>
                 <Grid item sx={{ marginTop: 5 }}>
                   <Link href="#" underline="hover" sx={{ color: "black.main" }}>
-                    {"Aun no tienes cuenta? Crear Cuenta"}
+                    {"¿Aún no tienes cuenta? Crear cuenta"}
                   </Link>
                 </Grid>
               </Grid>

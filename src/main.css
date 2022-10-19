@@ -33,9 +33,7 @@ header.landing-header{
     width: 100%;
     height: auto;
 }
-.link{
-    text-decoration: none;
-}
+
 
 /*Responsive*/
 @media only screen and (min-width: 768px) {

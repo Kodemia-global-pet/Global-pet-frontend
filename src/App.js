@@ -12,6 +12,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/pet" element={<PetDetail />} />
         <Route path="/faq" element={<FaqPage />} />
+        <Route path="/pet/:petID" element={<PetDetail />} />
       </Routes>
     </div>
   );

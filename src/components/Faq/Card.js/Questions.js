@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import CustomImage from "../../CustomImage/CustomImage";
 
@@ -31,17 +31,19 @@ const Questions = ({ title, src, color, description }) => {
         <CustomImage alt={title} src={src} sx={{ width: 68, height: 65 }} />
       </Box>
       <p>{title}</p>
-      <Typography
-        className="descr"
-        sx={{
-          mt: 2,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        {description}
-      </Typography>
+      <Grid item xs>
+        <Typography
+          sx={{
+            mt: 1,
+            ml: 1,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {description}
+        </Typography>
+      </Grid>
     </Box>
   );
 };

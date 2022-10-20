@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
+import CustomButton from "../CustomButton/CustomButton";
 
 const PetList = ({ pets }) => {
   return (
@@ -19,7 +20,7 @@ const PetList = ({ pets }) => {
         justifyContent="flex-end"
         alignItems="flex-end"
       >
-        <Button variant="contained">Agregar Mascota</Button>
+        <CustomButton label="Agregar Mascota" color="secondary" icon="add" />
       </Box>
 
       <TableContainer component={Paper}>
@@ -34,11 +35,26 @@ const PetList = ({ pets }) => {
             {pets.map((pet) => (
               <TableRow key={pet.name}>
                 <TableCell>{pet.name}</TableCell>
-                <TableCell>
-                  <Button variant="contained">Codigo QR</Button>
-                  <Button variant="contained">Editar</Button>
-                  <Button variant="contained">Agregar Evento</Button>
-                  <Button variant="contained">Agregar Registro</Button>
+                <TableCell
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    justifyContent: "space-evenly",
+                  }}
+                >
+                  <CustomButton label="Codigo QR" color="secondary" icon="qr" />
+                  <CustomButton label="Editar" color="primary" icon="edit" />
+                  <CustomButton
+                    label="Agregar Evento"
+                    color="primary"
+                    icon="add"
+                  />
+                  <CustomButton
+                    label="Agregar Registro"
+                    color="primary"
+                    icon="add"
+                  />
                 </TableCell>
               </TableRow>
             ))}

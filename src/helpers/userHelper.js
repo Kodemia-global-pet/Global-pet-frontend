@@ -30,7 +30,6 @@ export const getUserData = async (token) => {
   );
 
   const user = await response.json();
-  let userData = user.data.user;
-  console.log(userData);
+  let userData = user.data;
   return userData;
 };

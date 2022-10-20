@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import {
   getTokenLocalStorage,
   getUserData,
+  getUserLocalStorage,
   saveTokenLocalStorage,
 } from "../helpers/userHelper";
 import { loginService } from "../services/backend";
@@ -9,8 +10,20 @@ import { loginService } from "../services/backend";
 const UserContext = React.createContext();
 
 const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(getTokenLocalStorage());
+  const [user, setUser] = useState(null);
 
+  const getUserLocalStorage = async (token) => {
+    await getUserData(token);
+    const userData = await getUserData(token);
+    setUser({ token, ...userData });
+  };
+
+  if (!user) {
+    const token = getTokenLocalStorage();
+    if (token) {
+      getUserLocalStorage(token);
+    }
+  }
   const login = async (email, password) => {
     try {
       // Fetch
@@ -21,7 +34,7 @@ const UserProvider = ({ children }) => {
       } else {
         const token = jsonData.data.token;
         const userData = await getUserData(token);
-        console.log(userData);
+
         setUser({ token, ...userData });
         saveTokenLocalStorage(token);
         return true;

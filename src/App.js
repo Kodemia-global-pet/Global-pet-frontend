@@ -12,9 +12,10 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/create-account" element={<CreateAccount />} />
         <Route path="/pet" element={<PetDetail />} />
+        <Route path="/pet/:petID" element={<PetDetail />} />
       </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

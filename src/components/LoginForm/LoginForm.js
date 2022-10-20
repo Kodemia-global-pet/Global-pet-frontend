@@ -1,70 +1,152 @@
-import { useForm } from 'react-hook-form'
-import React, { useState } from 'react'
-import { Grid, TextField, Alert } from '@mui/material'
-import { useLogedUser } from '../../context/UserContext'
-import EditButton from '../Buttons/EditButton/EditButton'
-//import { useNavigate } from 'react-router-dom';
-
-
-
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import {
+  Grid,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Button,
+  Link,
+  Alert,
+  Typography,
+  Container,
+  Box,
+} from "@mui/material";
+import { useLogedUser } from "../../context/UserContext";
 
 const LoginForm = () => {
-  const [error, setError] = useState(null)
-  const { login } = useLogedUser()
+  let navigate = useNavigate();
+  const [error, setError] = useState(null);
+  const { login } = useLogedUser();
   const {
     register,
     getValues,
+    handleSubmit,
     formState: { errors },
-  } = useForm()
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  } = useForm();
 
-    //let navigate = useNavigate();
-    const email = getValues('Email')
-    const password = getValues('password')
-    const result = await login(email, password)
-    if (!result) setError('Tienes un error')
+  const onSubmit = async () => {
+    const email = getValues("email");
+    const password = getValues("password");
+    const result = await login(email, password);
+    if (!result) setError("No ingresaste Correctamente los Datos");
     else {
-      setError(null)
-      //navigate("/");
+      setError(null);
+      navigate("/");
     }
-  }
+  };
 
   return (
     <>
-      <div className="fondogris">
-        {error && <Alert severity="error">{error} </Alert>}
-        <Grid display="flex" justifyContent="center" alignItems="center">
-          <div>
-            <form onSubmit={handleSubmit}>
+      <main
+        style={{
+          backgroundImage: `url(${
+            process.env.PUBLIC_URL + "/images/landingbg.png"
+          })`,
+          width: "100vw",
+        }}
+      >
+        <Container
+          component="main"
+          sx={{
+            backgroundColor: "grey.contrast",
+            color: "#545454",
+            borderRadius: "10px",
+            width: 506,
+            height: 531,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          {error && <Alert severity="error">{error} </Alert>}
+
+          <Box
+            sx={{
+              marginTop: 5,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Typography component="h1" variant="h5">
+              Inicia Sesion ó Registrate
+            </Typography>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <TextField
-                id="outlined-basic"
-                label="Email"
-                variant="outlined"
-                {...register('Email', { required: 'Completa Este Campo' })}
-                error={errors.Email?.message}
+                margin="normal"
+                required
+                fullWidth
+                type="email"
+                label="Correo Electronico"
+                autoComplete="email"
+                {...register("email", {
+                  required: "Completa Este Campo",
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: "Correo Invalido",
+                  },
+                })}
+                error={!!errors?.email}
+                helperText={errors.email?.message}
               />
               <TextField
-                id="outlined-basic"
+                margin="normal"
+                fullWidth
                 type="password"
                 label="Contraseña"
-                variant="outlined"
-                {...register('password', {
-                  required: 'Completa Este Campo',
-                  minLength: { value: 4, message: 'Minimo 4 caracteres' },
+                autoComplete="current-password"
+                {...register("password", {
+                  required: "Completa Este Campo",
+                  minLength: { value: 3, message: "Minimo 3 caracteres" },
                 })}
+                error={!!errors?.password}
+                helperText={errors.password?.message}
               />
-              <p>{errors.lastName?.message}</p>
-              <input type="submit" />
-            </form>
-          </div>
-        </Grid>
-      </div>
-      <Grid>
-        <EditButton></EditButton>
-      </Grid>
-    </>
-  )
-}
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Recuerdame"
+              />
+              <Grid
+                container
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <Button
+                  variant="contained"
+                  type="submit"
+                  sx={{
+                    width: 170,
+                    height: 43,
+                    backgroundColor: "grey.main",
+                    mt: 3,
+                    mb: 2,
+                  }}
+                >
+                  Continuar
+                </Button>
 
-export default LoginForm
+                <Grid item sx={{ color: "black.main", marginTop: 5 }}>
+                  <Link href="#" underline="hover" sx={{ color: "black.main" }}>
+                    Olvidé mi contraseña
+                  </Link>
+                </Grid>
+                <Grid item sx={{ marginTop: 5 }}>
+                  <Link href="#" underline="hover" sx={{ color: "black.main" }}>
+                    {"¿Aún no tienes cuenta? Crear cuenta"}
+                  </Link>
+                </Grid>
+              </Grid>
+            </form>
+          </Box>
+        </Container>
+      </main>
+    </>
+  );
+};
+
+export default LoginForm;

@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import {
   getTokenLocalStorage,
   getUserData,
-  // saveTokenLocalStorage,
+  saveTokenLocalStorage,
 } from "../helpers/userHelper";
 import { loginService } from "../services/backend";
 
@@ -21,8 +21,9 @@ const UserProvider = ({ children }) => {
       } else {
         const token = jsonData.data.token;
         const userData = await getUserData(token);
+        console.log(userData);
         setUser({ token, ...userData });
-        // saveTokenLocalStorage({token, ...userData});
+        saveTokenLocalStorage(token);
         return true;
       }
     } catch (error) {

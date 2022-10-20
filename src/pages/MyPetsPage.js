@@ -2,10 +2,13 @@ import { Alert, CircularProgress, Container, Grid } from "@mui/material";
 import React from "react";
 import EventList from "../components/EventList/EventList";
 import PetList from "../components/PetList/PetList";
+import { useLogedUser } from "../context/UserContext";
 import { getPetRecords } from "../helpers/petHelper";
 import useFetch from "../hooks/useFetch";
 
 const MyPetsPage = () => {
+  let { user } = useLogedUser();
+  if (user) console.log(user);
   const { data, error } = useFetch(
     `${process.env.REACT_APP_BACKEND}users/633e470d666617b7892f67d5`
   );

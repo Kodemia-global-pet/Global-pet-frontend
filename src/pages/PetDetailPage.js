@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import EventList from "../components/EventList/EventList";
 import useFetch from "../hooks/useFetch";
 
-const PetDetail = () => {
+const PetDetailPage = () => {
   const params = useParams();
   const { data, error } = useFetch(
     `${process.env.REACT_APP_BACKEND}pets/${params.petID}/records`
@@ -25,8 +25,9 @@ const PetDetail = () => {
               Pet Data
             </Grid>
             <Grid item xs={12} md={4}>
+              <h2>Registros</h2>
               {!data && <CircularProgress />}
-              {data && <EventList records={data.data.records} />}
+              {data && <EventList records={data.records} showPet={false} />}
             </Grid>
           </Grid>
         </Container>
@@ -35,4 +36,4 @@ const PetDetail = () => {
   );
 };
 
-export default PetDetail;
+export default PetDetailPage;

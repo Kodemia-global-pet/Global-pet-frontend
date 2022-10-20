@@ -4,7 +4,7 @@ import CustomImage from "../components/CustomImage/CustomImage";
 import CardFaq from "../components/Faq/Card.js/CardFaq";
 import Questions from "../components/Faq/Card.js/Questions";
 
-const FaqPage = () => {
+const FaqAnswerPage = () => {
   return (
     <>
       <Grid Container>
@@ -109,4 +109,4 @@ const FaqPage = () => {
   );
 };
 
-export default FaqPage;
+export default FaqAnswerPage;

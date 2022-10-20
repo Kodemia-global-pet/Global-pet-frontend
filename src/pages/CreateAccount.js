@@ -1,16 +1,37 @@
-import { Grid } from '@mui/material'
-import React from 'react'
-import UserFormRegister from '../components/UserFormRegister/UserFormRegister'
-
+import { Grid, Container } from "@mui/material";
+import React from "react";
+import UserFormRegister from "../components/UserFormRegister/UserFormRegister";
 
 const createAccount = () => {
   return (
-    <Grid container >
-    <Grid item xs={4} md={4} display="flex" justifyContent="center" alignItems="center" sx={{ backgroundColor: "#F0F0F0", color:"#545454"}}>
-    <UserFormRegister></UserFormRegister>
+    <Grid container>
+      <Grid item xs={12}>
+        Header
+      </Grid>
+      <main
+        style={{
+          backgroundImage: `url(${
+            process.env.PUBLIC_URL + "/images/landingbg.png"
+          })`,
+          width: "100vw",
+          height: "100vh",
+        }}
+      >
+        <Container maxwidth="xl">
+          <Grid
+            item
+            container
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            xs={12}
+          >
+            <UserFormRegister />
+          </Grid>
+        </Container>
+      </main>
     </Grid>
-    </Grid>
-  )
-}
+  );
+};
 
 export default createAccount;

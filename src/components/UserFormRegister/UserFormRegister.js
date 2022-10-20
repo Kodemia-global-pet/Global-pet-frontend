@@ -1,53 +1,63 @@
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { Grid, TextField, Button } from '@mui/material'
-import { postResponse } from '../../services/backend'
-import { useLogedUser } from '../../context/UserContext'
-import { useNavigate } from 'react-router'
+import React from "react";
+import { useForm } from "react-hook-form";
+import { Grid, TextField, Button, Box } from "@mui/material";
+import { postResponse } from "../../services/backend";
+import { useLogedUser } from "../../context/UserContext";
+import { useNavigate } from "react-router";
 
 const UserFormRegister = () => {
-  const { login } = useLogedUser()
-  const navigate = useNavigate()
+  const { login } = useLogedUser();
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
     handleSubmit,
     setError,
-  } = useForm()
+  } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data)
+    console.log(data);
     if (data.password !== data.confirmPassword) {
-      setError('confirmPassword', { message: 'Las contraseñas no coinciden' })
-      return false
+      setError("confirmPassword", { message: "Las contraseñas no coinciden" });
+      return false;
     }
     try {
-      const responseData = await postResponse(data.name, data.email, data.password)
-      const jsonData = await responseData.json()
-      console.log(jsonData)
+      const responseData = await postResponse(
+        data.name,
+        data.email,
+        data.password
+      );
+      const jsonData = await responseData.json();
+      console.log(jsonData);
       if (jsonData.success) {
-        const result = await login(data.email, data.password)
+        const result = await login(data.email, data.password);
         if (result) {
-          return navigate('/')
+          return navigate("/");
         }
       }
     } catch (error) {
-      alert('you entered your data wrong')
-      console.log("error", error)
+      alert("you entered your data wrong");
+      console.log("error", error);
     }
-  }
+  };
 
   return (
-    <section>
-      <h3>¡Bienvenido a Global Pet!</h3>
+    <Box
+      sx={{ backgroundColor: "#F0F0F0", color: "#545454", p:5 }}
+      xs={4}
+      md={4}
+    >
+      <Grid sx={{ pb: 2}}>
+        <h3>¡Bienvenido a Global Pet!</h3>
+      </Grid>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid item sx={{ pb: 2 }}>
           <TextField
-            {...register('name', {
-              required: 'Ingresa tu nombre',
+            {...register("name", {
+              required: "Ingresa tu nombre",
               minLength: {
                 value: 10,
-                message: 'El nombre debe contener al menos 10 caracteres',
+                message: "El nombre debe contener al menos 10 caracteres",
               },
             })}
             label="Nombre"
@@ -59,8 +69,8 @@ const UserFormRegister = () => {
         </Grid>
         <Grid item sx={{ pb: 2 }}>
           <TextField
-            {...register('email', {
-              required: 'true',
+            {...register("email", {
+              required: "true",
             })}
             label="Correo"
             type="email"
@@ -72,11 +82,11 @@ const UserFormRegister = () => {
         </Grid>
         <Grid item sx={{ pb: 2 }}>
           <TextField
-            {...register('password', {
-              required: 'Ingresa tu contraseña',
+            {...register("password", {
+              required: "Ingresa tu contraseña",
               minLength: {
                 value: 8,
-                message: 'La contraseña debe contener al menos 8 caracteres',
+                message: "La contraseña debe contener al menos 8 caracteres",
               },
             })}
             label="Contraseña"
@@ -89,11 +99,11 @@ const UserFormRegister = () => {
         </Grid>
         <Grid item sx={{ pb: 2 }}>
           <TextField
-            {...register('confirmPassword', {
-              required: 'Confirma tu contraseña',
+            {...register("confirmPassword", {
+              required: "Confirma tu contraseña",
               minLength: {
                 value: 8,
-                message: 'La contraseña debe contener al menos 8 caracteres',
+                message: "La contraseña debe contener al menos 8 caracteres",
               },
             })}
             label="Confirma tu contraseña"
@@ -111,13 +121,20 @@ const UserFormRegister = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <Button variant="contained" type="submit">
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: "grey.main" }}
+            type="submit"
+          >
             Continuar
           </Button>
         </Grid>
-        <p>¿Ya tienes cuenta? | Inicia sesión</p>
+        <Grid>
+          <p>¿Ya tienes cuenta? | Inicia sesión</p>
+        </Grid>
       </form>
-    </section>
-  )
-}
-export default UserFormRegister
+    </Box>
+  );
+};
+export default UserFormRegister;
+

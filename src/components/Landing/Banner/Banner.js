@@ -2,7 +2,6 @@ import { Box, Button, Container, Grid } from "@mui/material";
 import React from "react";
 import CustomImage from "../../CustomImage/CustomImage";
 import { Link as RouterLink } from "react-router-dom";
-import CustomButton from "../../CustomButton/CustomButton";
 
 const Banner = (props) => {
   return (

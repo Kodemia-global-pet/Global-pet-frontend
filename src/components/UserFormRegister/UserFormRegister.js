@@ -1,9 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Grid, TextField, Button, Box } from "@mui/material";
-import { postResponse } from "../../services/backend";
+import { Grid, TextField, Button, Box, Link } from "@mui/material";
+import { createUser } from "../../services/backend";
 import { useLogedUser } from "../../context/UserContext";
 import { useNavigate } from "react-router";
+
 
 const UserFormRegister = () => {
   const { login } = useLogedUser();
@@ -16,13 +17,12 @@ const UserFormRegister = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
     if (data.password !== data.confirmPassword) {
       setError("confirmPassword", { message: "Las contraseñas no coinciden" });
       return false;
     }
     try {
-      const responseData = await postResponse(
+      const responseData = await createUser(
         data.name,
         data.email,
         data.password
@@ -36,18 +36,18 @@ const UserFormRegister = () => {
         }
       }
     } catch (error) {
-      alert("you entered your data wrong");
+      alert("Ingresaste tus datos de forma errónea");
       console.log("error", error);
     }
   };
 
   return (
     <Box
-      sx={{ backgroundColor: "#F0F0F0", color: "#545454", p:5 }}
+      sx={{ backgroundColor: "#F0F0F0", color: "#545454", p: 5 }}
       xs={4}
       md={4}
     >
-      <Grid sx={{ pb: 2}}>
+      <Grid sx={{ pb: 2 }}>
         <h3>¡Bienvenido a Global Pet!</h3>
       </Grid>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -130,11 +130,12 @@ const UserFormRegister = () => {
           </Button>
         </Grid>
         <Grid>
-          <p>¿Ya tienes cuenta? | Inicia sesión</p>
+          <Link href="/login" underline="none" sx={{ color: "grey.main" }}>
+            ¿Ya tienes cuenta? | Inicia sesión
+          </Link>
         </Grid>
       </form>
     </Box>
   );
 };
 export default UserFormRegister;
-

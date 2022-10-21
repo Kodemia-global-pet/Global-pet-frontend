@@ -7,7 +7,7 @@ export const loginService = (email, password) =>
     body: JSON.stringify({ email, password }),
   })
 
-export const postResponse = async (name, email, password) =>
+export const createUser = async (name, email, password) =>
   fetch(`${process.env.REACT_APP_BACKEND}users`, {
     method: 'POST',
     headers: {
@@ -15,11 +15,6 @@ export const postResponse = async (name, email, password) =>
     },
     body: JSON.stringify({ name, email, password }),
   })
-// const response = await fetch(`http://localhost:8080/users/${tokenUserID}`, {
-//   method: 'GET',
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-// })
+
 
 

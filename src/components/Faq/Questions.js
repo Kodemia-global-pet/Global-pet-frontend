@@ -1,6 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
-import CustomImage from "../../CustomImage/CustomImage";
+import CustomImage from "../CustomImage/CustomImage";
 
 const Questions = ({ title, src, color, description }) => {
   return (
@@ -15,7 +15,6 @@ const Questions = ({ title, src, color, description }) => {
       }}
     >
       <Box
-        className="icons"
         sx={{
           display: "flex",
           justifyContent: "center",

@@ -1,8 +1,8 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
 import CustomImage from "../../CustomImage/CustomImage";
 
-const Service = ({ title, src, color }) => {
+const Questions = ({ title, src, color, description }) => {
   return (
     <Box
       sx={{
@@ -15,7 +15,7 @@ const Service = ({ title, src, color }) => {
       }}
     >
       <Box
-        className="service"
+        className="icons"
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -23,13 +23,27 @@ const Service = ({ title, src, color }) => {
           backgroundColor: color,
           p: "36px",
           borderRadius: "50%",
+          width: 68,
+          height: 65,
+          m: "15px",
         }}
       >
-        <CustomImage alt={title} src={src} />
+        <CustomImage alt={title} src={src} sx={{ width: 68, height: 65 }} />
       </Box>
       <p>{title}</p>
+      <Typography
+        className="descr"
+        sx={{
+          mt: 2,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {description}
+      </Typography>
     </Box>
   );
 };
 
-export default Service;
+export default Questions;

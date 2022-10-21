@@ -3,7 +3,7 @@ import LoginPage from "./components/LoginForm/LoginForm";
 import HomePage from "./pages/HomePage";
 import PetDetail from "./pages/PetDetail";
 
-import Navbar from './components/Navbar';
+
 
 function App() {
   return (

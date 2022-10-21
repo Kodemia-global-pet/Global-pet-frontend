@@ -1,52 +1,107 @@
 import React from "react";
-//import { useForm } from "react-hook-form";
-import {
-  Button,
-  Grid,
-  TextField,
-} from "@mui/material";
+import { useForm } from "react-hook-form";
+import { Grid, TextField, Button } from "@mui/material";
+import ContinueButton from "../ContinueButton/ContinueButton";
+import { useLogedUser } from "../../context/UserContext";
 const UserFormRegister = () => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   /*
-  const { register, handleSubmit } = useForm();
-  const onSubmit = data => console.log(data);
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const email = getValues('Email')
+    const password = getValues('password')
+    const name = getValues('name')
+    //const result = await login(name, email, password)
+  }
 */
   return (
-    <>
-      <section>
-        <h3>¡Bienvenido a Global Pet!</h3>
-        <Grid item >
+    <section>
+      <h3>¡Bienvenido a Global Pet!</h3>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Grid item sx={{ pb: 2 }}>
           <TextField
-            id="margin-normal" margin="normal"
+            {...register("name", {
+              required: "Ingresa tu nombre",
+              minLength: {
+                value: 10,
+                message: "El nombre debe contener al menos 10 caracteres",
+              },
+            })}
             label="Nombre"
-            size="small" />
+            size="small"
+            required
+            error={!!errors.name}
+            helperText={errors.name?.message}
+          />
         </Grid>
-        <Grid item>
+        <Grid item sx={{ pb: 2 }}>
           <TextField
-            id="margin-normal" margin="normal"
+            {...register("email", {
+              required: "true",
+            })}
             label="Correo"
-            size="small" />
+            type="email"
+            size="small"
+            required
+            error={!!errors.email}
+            helperText={errors.email?.message}
+          />
         </Grid>
-        <Grid item>
+        <Grid item sx={{ pb: 2 }}>
           <TextField
-            id="margin-normal" margin="normal"
-            helperText="Entre 5 y 8 carácteres"
+            {...register("password", {
+              required: "Ingresa tu contraseña",
+              minLength: {
+                value: 8,
+                message: "La contraseña debe contener al menos 8 caracteres",
+              },
+            })}
             label="Contraseña"
-            size="small" />
+            size="small"
+            required
+            error={!!errors.password}
+            helperText={errors.password?.message}
+            type="password"
+          />
         </Grid>
-        <Grid item>
+        <Grid item sx={{ pb: 2 }}>
           <TextField
-            helperText="Entre 5 y 8 carácteres "
+            {...register("confirmPassword", {
+              required: "Confirma tu contraseña",
+              minLength: {
+                value: 8,
+                message: "La contraseña debe contener al menos 8 caracteres",
+              },
+            })}
             label="Confirma tu contraseña"
-            size="small" />
+            size="small"
+            required
+            error={!!errors.confirmPassword}
+            helperText={errors.confirmPassword?.message}
+            type="password"
+          />
         </Grid>
-        <Grid item display="flex" justifyContent="center" alignItems="center">
-          <Button variant="contained">Continuar</Button>
+        <Grid
+          item
+          sx={{ pb: 2 }}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Button variant="contained" type="submit">
+            Continuar
+          </Button>
         </Grid>
-        <p>¿Ya tienes cuenta?|Inicia sesión</p>
-      </section>
-
-    </>
+        <p>¿Ya tienes cuenta? | Inicia sesión</p>
+      </form>
+    </section>
   );
 };
-
-export default UserFormRegister
+export default UserFormRegister;

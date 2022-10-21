@@ -1,19 +1,21 @@
 import React, { useState, useContext } from "react";
-import { getTokenLocalStorage, getUserData, saveTokenLocalStorage } from "../helpers/userHelper";
+import {
+  getTokenLocalStorage,
+  getUserData,
+  // saveTokenLocalStorage,
+} from "../helpers/userHelper";
 import { loginService } from "../services/backend";
 
 const UserContext = React.createContext();
 
 const UserProvider = ({ children }) => {
-
   const [user, setUser] = useState(getTokenLocalStorage());
 
   const login = async (email, password) => {
-
     try {
       // Fetch
-      const response = await loginService(email, password)
-      const jsonData = await response.json();;
+      const response = await loginService(email, password);
+      const jsonData = await response.json();
       if (!jsonData.success) {
         return false;
       } else {
@@ -22,12 +24,9 @@ const UserProvider = ({ children }) => {
         setUser({ token, ...userData });
         // saveTokenLocalStorage({token, ...userData});
         return true;
-
       }
-
-    }
-    catch (error) {
-      console.log(error)
+    } catch (error) {
+      console.log(error);
       return false;
     }
   };
@@ -41,4 +40,4 @@ const UserProvider = ({ children }) => {
 
 export default UserProvider;
 
-export const useLogedUser = () => useContext(UserContext)
+export const useLogedUser = () => useContext(UserContext);

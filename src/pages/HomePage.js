@@ -7,6 +7,8 @@ import AboutUs from "../components/Landing/AboutUs/AboutUs";
 import Service from "../components/Landing/Service/Service";
 import CustomImage from "../components/CustomImage/CustomImage";
 
+
+
 const HomePage = () => {
   return (
     <Grid container>

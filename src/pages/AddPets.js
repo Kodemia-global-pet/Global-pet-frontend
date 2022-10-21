@@ -25,8 +25,8 @@ const AddPets = () => {
   } = useForm();
 
   const onSubmit = async () => {
-    const email = getValues("email");
-    const password = getValues("password");
+    const email = getValues("name");
+    const password = getValues("breed");
     const result = await login(email, password);
     if (!result) setError("No ingresaste Correctamente los Datos");
     else {
@@ -69,76 +69,88 @@ const AddPets = () => {
             }}
           >
             <Typography component="h1" variant="h5">
-              Inicia Sesion ó Registrate
+              Agregar mascota
             </Typography>
             <form onSubmit={handleSubmit(onSubmit)}>
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                type="text"
                 label="Nombre"
-                autoComplete="email"
-                {...register("email", {
+                autoComplete="name"
+                {...register("name", {
                   required: "Completa Este Campo",
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Correo Invalido",
-                  },
                 })}
-                error={!!errors?.email}
-                helperText={errors.email?.message}
+                error={!!errors?.name}
+                helperText={errors.name?.message}
               />
               <TextField
                 margin="normal"
                 fullWidth
-                type="text"
                 label="Raza"
-                autoComplete="current-password"
-                {...register("password", {
+                autoComplete="breed"
+                {...register("breed", {
                   required: "Completa Este Campo",
-                  minLength: { value: 3, message: "Minimo 3 caracteres" },
                 })}
-                error={!!errors?.password}
-                helperText={errors.password?.message}
+                error={!!errors?.breed}
+                helperText={errors.breed?.message}
               />
               <TextField
+                InputLabelProps={{ shrink: true }}
                 margin="normal"
                 fullWidth
                 type="date"
                 label="Fecha de nacimiento"
-                {...register("password", {
+                {...register("date", {
                   required: "Completa Este Campo",
-                  minLength: { value: 3, message: "Minimo 3 caracteres" },
                 })}
-                error={!!errors?.password}
-                helperText={errors.password?.message}
+                error={!!errors?.date}
+                helperText={errors.date?.message}
+              />
+              <TextField
+                margin="normal"
+                fullWidth
+                label="Tamaño"
+                autoComplete="current-password"
+                {...register("size", {
+                  required: "Completa Este Campo",
+                })}
+                error={!!errors?.size}
+                helperText={errors.size?.message}
+              />
+              <TextField
+                margin="normal"
+                fullWidth
+                label="Alimentacion"
+                autoComplete="feeding"
+                {...register("feeding", {
+                  required: "Completa Este Campo",
+                })}
+                error={!!errors?.feeding}
+                helperText={errors.feeding?.message}
+              />
+              <TextField
+                margin="normal"
+                fullWidth
+                label="Alergias"
+                autoComplete="allergies"
+                {...register("allergies", {
+                  required: "Completa Este Campo",
+                })}
+                error={!!errors?.allergies}
+                helperText={errors.allergies?.message}
               />
               <TextField
                 margin="normal"
                 fullWidth
                 type="text"
-                label="Tamaño"
-                autoComplete="current-password"
-                {...register("password", {
+                label="Actividad fisica"
+                autoComplete="allergies"
+                {...register("allergies", {
                   required: "Completa Este Campo",
-                  minLength: { value: 3, message: "Minimo 3 caracteres" },
                 })}
-                error={!!errors?.password}
-                helperText={errors.password?.message}
-              />
-              <TextField
-                margin="normal"
-                fullWidth
-                type="text"
-                label="Tamaño"
-                autoComplete="current-password"
-                {...register("password", {
-                  required: "Completa Este Campo",
-                  minLength: { value: 3, message: "Minimo 3 caracteres" },
-                })}
-                error={!!errors?.password}
-                helperText={errors.password?.message}
+                error={!!errors?.allergies}
+                helperText={errors.allergies?.message}
               />
               <Grid
                 container

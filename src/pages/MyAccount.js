@@ -1,7 +1,8 @@
-import { Grid, Container } from "@mui/material";
+import { Grid, Container} from "@mui/material";
 import React from "react";
-import MyAccountList from "../../components/MyAccount/MyAccountList/MyAccountList";
+import MyAccountHeader from "../components/MyAccount/MyAccountHeader";
 
+  
 const MyAccount = () => {
   return (
     <Grid container>
@@ -19,7 +20,7 @@ const MyAccount = () => {
       >
         <Container maxwidth="xl">
         <Grid item>
-        <MyAccountList/>
+        <MyAccountHeader/>
         </Grid>
         </Container>
       </main>

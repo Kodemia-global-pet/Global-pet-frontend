@@ -3,7 +3,7 @@ import LoginPage from './components/LoginForm/LoginForm';
 import HomePage from './pages/HomePage';
 import CreateAccount from './pages/CreateAccount';
 import PetDetail from './pages/PetDetail';
-import MyAccount from './pages/MyAccount/MyAccount';
+import MyAccount from './pages/MyAccount';
 import FaqPage from "./pages/FaqPage";
 
 function App() {

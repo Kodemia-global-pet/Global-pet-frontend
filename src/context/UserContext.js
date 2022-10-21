@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   getTokenLocalStorage,
   getUserData,
@@ -12,18 +12,17 @@ const UserContext = React.createContext();
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const getUserLocalStorage = async (token) => {
-    await getUserData(token);
-    const userData = await getUserData(token);
-    setUser({ token, ...userData });
-  };
+  useEffect(() => {
+    const loadData = async () => {
+      const token = getTokenLocalStorage();
+      if (token) {
+        const userData = await getUserData(token);
+        setUser({ token, ...userData });
+      }
+    };
+    loadData();
+  }, []);
 
-  if (!user) {
-    const token = getTokenLocalStorage();
-    if (token) {
-      getUserLocalStorage(token);
-    }
-  }
   const login = async (email, password) => {
     try {
       // Fetch

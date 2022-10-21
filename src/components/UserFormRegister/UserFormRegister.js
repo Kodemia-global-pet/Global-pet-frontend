@@ -1,29 +1,55 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Grid, TextField, Button } from "@mui/material";
-import ContinueButton from "../ContinueButton/ContinueButton";
+import { Grid, TextField, Button, Box, Link } from "@mui/material";
+import { createUser } from "../../services/backend";
 import { useLogedUser } from "../../context/UserContext";
+import { useNavigate } from "react-router";
+
+
 const UserFormRegister = () => {
+  const { login } = useLogedUser();
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
     handleSubmit,
+    setError,
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+
+  const onSubmit = async (data) => {
+    if (data.password !== data.confirmPassword) {
+      setError("confirmPassword", { message: "Las contraseñas no coinciden" });
+      return false;
+    }
+    try {
+      const responseData = await createUser(
+        data.name,
+        data.email,
+        data.password
+      );
+      const jsonData = await responseData.json();
+      console.log(jsonData);
+      if (jsonData.success) {
+        const result = await login(data.email, data.password);
+        if (result) {
+          return navigate("/");
+        }
+      }
+    } catch (error) {
+      alert("Ingresaste tus datos de forma errónea");
+      console.log("error", error);
+    }
   };
-  /*
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    const email = getValues('Email')
-    const password = getValues('password')
-    const name = getValues('name')
-    //const result = await login(name, email, password)
-  }
-*/
+
   return (
-    <section>
-      <h3>¡Bienvenido a Global Pet!</h3>
+    <Box
+      sx={{ backgroundColor: "#F0F0F0", color: "#545454", p: 5 }}
+      xs={4}
+      md={4}
+    >
+      <Grid sx={{ pb: 2 }}>
+        <h3>¡Bienvenido a Global Pet!</h3>
+      </Grid>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid item sx={{ pb: 2 }}>
           <TextField
@@ -95,13 +121,21 @@ const UserFormRegister = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <Button variant="contained" type="submit">
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: "grey.main" }}
+            type="submit"
+          >
             Continuar
           </Button>
         </Grid>
-        <p>¿Ya tienes cuenta? | Inicia sesión</p>
+        <Grid>
+          <Link href="/login" underline="none" sx={{ color: "grey.main" }}>
+            ¿Ya tienes cuenta? | Inicia sesión
+          </Link>
+        </Grid>
       </form>
-    </section>
+    </Box>
   );
 };
 export default UserFormRegister;

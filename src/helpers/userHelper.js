@@ -1,3 +1,5 @@
+import { getUserService } from "../services/backend";
+
 const key = "token";
 
 export const getTokenLocalStorage = () => {
@@ -19,16 +21,7 @@ export const getUserData = async (token) => {
   const payload = token.split(".")[1];
   const tokenUserID = JSON.parse(atob(payload)).id;
 
-  const response = await fetch(
-    `${process.env.REACT_APP_BACKEND}users/${tokenUserID}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-
+  const response = await getUserService(tokenUserID);
   const user = await response.json();
   let userData = user.data;
   return userData;

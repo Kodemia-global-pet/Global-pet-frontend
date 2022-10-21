@@ -31,9 +31,9 @@ const PetList = ({ pets }) => {
               <TableCell>Acciones</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody sx={{ color: "#545454" }}>
+          <TableBody sx={{ color: "black.light" }}>
             {pets.map((pet) => (
-              <TableRow key={pet.name}>
+              <TableRow key={pet._id}>
                 <TableCell>{pet.name}</TableCell>
                 <TableCell
                   sx={{

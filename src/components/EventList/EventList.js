@@ -20,7 +20,7 @@ const EventList = ({ records, showPet }) => {
         </TableHead>
         <TableBody sx={{ color: "#545454" }}>
           {records.map((record) => (
-            <TableRow key={record.title}>
+            <TableRow key={record._id}>
               <TableCell>
                 {new Date(record.date).toLocaleDateString("en-us", {
                   month: "short",

@@ -1,26 +1,27 @@
 import React from "react";
 import CustomButton from "../../CustomButton/CustomButton";
-import { Grid} from "@mui/material";
+import { Grid, Box} from "@mui/material";
 
 const MyAccountList = () => {
   return (
-    <box>
+    <>
       <h1>Mi cuenta</h1>
       <h3>Foto de perfil</h3>
       <Grid display="flex" justifyContent="space-between" alignItems="center">
-      <box>
+      <Box>
           <img src="" alt="" ></img>
-        </box>
-        <box >
-          <box sx={{p:6}}>
+        </Box>
+        <Box display="flex" flexDirection="row" >
+          <Box sx={{pr:2}}>
           <CustomButton label="Eliminar foto" color="danger" icon="delete"/>
-          </box>
-          <box>
+          </Box>
+          <Box>
           <CustomButton label="Cambiar imagen" color="secondary" />
-          </box>
-        </box>
+          </Box>
+        </Box>
       </Grid>
-    </box>
+      
+    </>
   );
 };
 

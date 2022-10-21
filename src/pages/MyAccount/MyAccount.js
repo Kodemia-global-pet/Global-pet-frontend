@@ -18,7 +18,7 @@ const MyAccount = () => {
         }}
       >
         <Container maxwidth="xl">
-        <Grid Item>
+        <Grid item>
         <MyAccountList/>
         </Grid>
         </Container>

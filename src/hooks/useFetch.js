@@ -8,7 +8,7 @@ export default function useFetch(url) {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        setData(data);
+        setData(data.data);
         setError(null);
       })
       .catch((error) => setError(error));

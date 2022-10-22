@@ -36,6 +36,7 @@ const theme = createTheme({
     },
     black: {
       main: "#393E41",
+      light: "#545454",
     },
   },
   typography: {

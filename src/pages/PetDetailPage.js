@@ -4,7 +4,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import EventList from "../components/EventList/EventList";
 import useFetch from "../hooks/useFetch";
-import MainNavbar from "../components/Header/MainNavbar/MainNavbar"
+
 
 const PetDetailPage = () => {
   const params = useParams();

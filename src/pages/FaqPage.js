@@ -7,7 +7,7 @@ import Questions from "../components/FAQ/Questions";
 const FaqPage = () => {
   return (
     <>
-      {/* <Grid Container xs={12}>
+      <Grid Container xs={12}>
         <Grid item>HEADER</Grid>
         <Grid item container>
           <main
@@ -92,7 +92,7 @@ const FaqPage = () => {
             </Grid>
           </main>
         </Grid>
-      </Grid> */}
+      </Grid> 
     </>
   );
 };

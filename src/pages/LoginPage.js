@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, ThemeProvider } from "@mui/material";
-import LoginForm1 from "../components/LoginForm/LoginForm";
+import LoginForm1 from "../components/LoginForm/LoginForm1";
 import "../main.css";
 import MainNavbar from "../components/Header/MainNavbar/MainNavbar";
 import Footer from "../components/Footer/Footer";

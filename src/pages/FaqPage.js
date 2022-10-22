@@ -1,13 +1,13 @@
-import { Container, Grid } from "@mui/material";
-import React from "react";
-import CustomImage from "../components/CustomImage/CustomImage";
-import CardFaq from "../components/Faq/CardFaq";
-import Questions from "../components/Faq/Questions";
+// import { Container, Grid } from "@mui/material";
+// import React from "react";
+// import CustomImage from "../components/CustomImage/CustomImage";
+// import CardFaq from "../components/Faq/CardFaq";
+// import Questions from "../components/Faq/Questions";
 
 const FaqPage = () => {
   return (
     <>
-      <Grid Container xs={12}>
+      {/* <Grid Container xs={12}>
         <Grid item>HEADER</Grid>
         <Grid item container>
           <main
@@ -92,7 +92,7 @@ const FaqPage = () => {
             </Grid>
           </main>
         </Grid>
-      </Grid>
+      </Grid> */}
     </>
   );
 };

@@ -6,14 +6,12 @@ import "../main.css";
 import AboutUs from "../components/Landing/AboutUs/AboutUs";
 import Service from "../components/Landing/Service/Service";
 import CustomImage from "../components/CustomImage/CustomImage";
-import MainNavbar from "../components/Header/MainNavbar/MainNavbar";
 
 const HomePage = () => {
   return (
     <Grid container>
       <Grid item xs={12}>
-        {/*<HeaderLanding />*/}
-        <MainNavbar/>
+        <HeaderLanding />
       </Grid>
       <Grid item container xs={12}>
         <main

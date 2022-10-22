@@ -1,57 +1,62 @@
-import React from 'react'
-import {AppBar, Toolbar, Typography} from '@mui/material'
-import Button from '@mui/material/Button';
+import React from "react";
+import { AppBar, makeStyles, Toolbar, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import HomeIcon from "@mui/icons-material/Home";
+import PetsIcon from "@mui/icons-material/Pets";
+import SettingsIcon from "@mui/icons-material/Settings";
+import HelpIcon from "@mui/icons-material/Help";
 
-import Box from '@mui/material/Box';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const MainNavbar = () => {
   const [value, setValue] = React.useState(0);
-    return (
-      <div>
-        <AppBar sx={{backgroundColor: "header_primary.main"}}>
-             <Toolbar>
-             <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO HAKY
-          </Typography>
 
-      <Box sx={{ width: 500 }}>
-      <BottomNavigation
-        showLabels
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-      >
-        <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
-      </BottomNavigation>
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" sx={{ backgroundColor: "header_primary.main" }}>
+        <Toolbar>
+          <Box
+            sx={{
+              p: 1,
+              flexGrow: 1,
+              height: 80,
+              width: 80,
+              maxHeight: { xs: 80, md: 80 },
+              maxWidth: { xs: 80, md: 80 },
+            }}
+            component="img"
+            alt="Haky"
+            src={process.env.PUBLIC_URL + "/images/logoHaky.png"}
+          />
+
+          <Box sx={{ flexGrow: 1 }} />
+
+          <Box>
+            <BottomNavigationAction
+              showLabel
+              label="Inicio"
+              icon={<HomeIcon />}
+            />
+            <BottomNavigationAction
+              showLabel
+              label="Mis mascotas"
+              icon={<PetsIcon />}
+            />
+            <BottomNavigationAction
+              showLabel
+              label="Configuracion"
+              icon={<SettingsIcon />}
+            />
+            <BottomNavigationAction
+              showLabel
+              label="Ayuda"
+              icon={<HelpIcon />}
+            />
+          </Box>
+        </Toolbar>
+      </AppBar>
     </Box>
-              
-                <Button variant="outlined" sx={{ color: "black.main", borderColor: "black.main", mb:1}}> Crear cuenta</Button>
-             </Toolbar>
-        </AppBar>
-      </div>
-    )
-}
+  );
+};
 
 export default MainNavbar;

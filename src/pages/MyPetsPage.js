@@ -28,8 +28,12 @@ const MyPetsPage = () => {
               {!user && <CircularProgress />}
               {user && <PetList pets={user?.pets} />}
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={4} style={{ marginTop: "46px" }}>
               <h2>Próximos eventos </h2>
+              {!user && <CircularProgress />}
+              {user && (
+                <EventList records={getPetRecords(user.pets)} showPet={true} />
+              )}
             </Grid>
           </Grid>
         </Container>

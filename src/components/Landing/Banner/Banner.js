@@ -72,7 +72,7 @@ const Banner = (props) => {
               <Button
                 variant="outlined"
                 component={RouterLink}
-                to="/"
+                to="/login"
                 sx={{ color: "black.main", borderColor: "black.main", mb: 2 }}
               >
                 Iniciar Sesión

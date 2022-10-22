@@ -19,8 +19,13 @@ const MyAccount = () => {
         }}
       >
         <Container maxwidth="xl">
-        <Grid item>
+        <Grid sx={{backgroundColor: "grey.light"}} item xs={8}>
         <MyAccountHeader/>
+        </Grid>
+        </Container>
+        <Container maxwidth="xl">
+        <Grid item xs={4}>
+        {/*Aside*/}
         </Grid>
         </Container>
       </main>

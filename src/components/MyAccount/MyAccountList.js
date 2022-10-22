@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import useFetch from "../../../hooks/useFetch";
-import PostCard from "../PostCard/PostCard";
 import { Alert } from "@mui/material";
 import MyAccountHeader from "./MyAccountHeader";
 

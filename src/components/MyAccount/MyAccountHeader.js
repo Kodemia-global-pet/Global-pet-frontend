@@ -1,16 +1,15 @@
 import React from "react";
 import CustomButton from "../CustomButton/CustomButton";
-import { Grid, Box} from "@mui/material";
+import { Grid, Box } from "@mui/material";
 
 const MyAccountHeader = (users) => {
-
   return (
     <>
       <h1>Mi cuenta</h1>
       <h3>Foto de perfil</h3>
-      <Grid display="flex" justifyContent="space-between" alignItems="center">
+      <Grid display="flex" justifyContent="space-between" alignItems="center" sx={{ p: 2 }}>
         <Box>
-          <img src="" alt=""></img>
+          <img src={process.env.PUBLIC_URL + "/images/userDefault"} alt="UserDefault"></img>
         </Box>
         <Box display="flex" flexDirection="row">
           <Box sx={{ pr: 2 }}>
@@ -21,10 +20,22 @@ const MyAccountHeader = (users) => {
           </Box>
         </Box>
       </Grid>
-      <Grid item display="flex" flexDirection="colum">
-      <Grid><h3> Nombre</h3></Grid>
-      <Grid><p>nombre del usuario{users.name}</p></Grid>
+      <hr></hr>
+      <Grid item display="flex" flexDirection="column" alignItems="baseline" sx={{ p: 2 }}>
+        <h3>Nombre</h3>
+        <p>nombre del usuario{users.name}</p>
       </Grid>
+      <hr></hr>
+      <Grid item display="flex" flexDirection="column" alignItems="baseline" sx={{ p: 2 }}>
+        <h3>Correo electrónico</h3>
+        <p>correo{users.email}</p>
+      </Grid>
+      <hr></hr>
+      <Grid item display="flex" flexDirection="column" alignItems="baseline" sx={{ p: 2 }}>
+        <h3>Password</h3>
+        <p>Password{users.password}</p>
+      </Grid>
+      <hr></hr>
     </>
   );
 };

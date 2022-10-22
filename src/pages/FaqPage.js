@@ -92,7 +92,7 @@ const FaqPage = () => {
             </Grid>
           </main>
         </Grid>
-      </Grid>
+      </Grid> 
     </>
   );
 };

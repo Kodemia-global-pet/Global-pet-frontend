@@ -8,6 +8,7 @@ import Paper from "@mui/material/Paper";
 import PetData from "../components/PetData/PetData";
 import ActionButtons from "../components/PetData/ActionButtons/ActionButtons";
 
+
 const PetDetailPage = () => {
   const params = useParams();
   const { data, error } = useFetch(
@@ -20,7 +21,7 @@ const PetDetailPage = () => {
     <>
       <Grid container>
         <Grid item xs={12}>
-          {/* Header */}
+          
         </Grid>
         <Container
           maxwidth="xl"

@@ -1,46 +1,45 @@
 import { Grid, TextField } from "@mui/material";
 import React from "react";
+import CustomReadField from "../CustomReadField/CustomReadField";
 
 const PetData = ({ pet }) => {
   return (
-    <Grid item container xs={12}>
-      <Grid item xs={12} md={6} sx={{ borderBottom: 1 }}>
-        <TextField
-          id="specie"
-          label="Especie"
-          variant="standard"
-          defaultValue={pet.specie}
-          color="black"
-          InputProps={{
-            readOnly: true,
-            disableUnderline: true,
-          }}
-          sx={{
-            w: 1,
-            color: "black.main",
-          }}
+    <Grid item container xs={12} columnSpacing={3} rowSpacing={3}>
+      <Grid item xs={12} md={6}>
+        <CustomReadField value={pet.specie} id="especie" label="Especie" />
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <CustomReadField value={pet.breed} id="raza" label="Raza" />
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <CustomReadField
+          value={pet.birthdate}
+          id="fecha"
+          label="Fecha de Nacimiento"
         />
       </Grid>
       <Grid item xs={12} md={6}>
-        {pet.breed}
+        <CustomReadField value={pet.size} id="tamaño" label="Tamaño" />
       </Grid>
       <Grid item xs={12} md={6}>
-        {pet.birthdate}
+        <CustomReadField value={pet.feeding} id="alimento" label="Alimento" />
       </Grid>
       <Grid item xs={12} md={6}>
-        {pet.size}
+        <CustomReadField
+          value={pet.activity_level}
+          id="nivel_actividad"
+          label="Nivel de Actividad"
+        />
       </Grid>
       <Grid item xs={12} md={6}>
-        {pet.feeding}
+        <CustomReadField value={pet.allergies} id="alergias" label="Alergias" />
       </Grid>
       <Grid item xs={12} md={6}>
-        {pet.activity_level}
-      </Grid>
-      <Grid item xs={12} md={6}>
-        {pet.allergies}
-      </Grid>
-      <Grid item xs={12} md={6}>
-        {pet.other_info}
+        <CustomReadField
+          value={pet.other_info}
+          id="otra_info"
+          label="Otra Información"
+        />
       </Grid>
     </Grid>
   );

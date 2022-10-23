@@ -1,8 +1,8 @@
-import { Grid, Container} from "@mui/material";
+import { Grid, Container } from "@mui/material";
 import React from "react";
+import MyAccountAside from "../components/MyAccount/MyAccountAside";
 import MyAccountHeader from "../components/MyAccount/MyAccountHeader";
 
-  
 const MyAccount = () => {
   return (
     <Grid container>
@@ -18,16 +18,18 @@ const MyAccount = () => {
           height: "100vh",
         }}
       >
-        <Container maxwidth="xl">
-        <Grid sx={{backgroundColor: "grey.light"}} item xs={8}>
-        <MyAccountHeader/>
+        <Grid item maxwidth="xl" display="flex" sx={{ p: 2 }}>
+          <Container maxwidth="xl">
+            <Grid sx={{ backgroundColor: "grey.light" }}>
+              <MyAccountHeader />
+            </Grid>
+          </Container>
+          <Container maxwidth="xl">
+            <Grid item sx={{ backgroundColor: "grey.light" }}>
+              <MyAccountAside />
+            </Grid>
+          </Container>
         </Grid>
-        </Container>
-        <Container maxwidth="xl">
-        <Grid item xs={4}>
-        {/*Aside*/}
-        </Grid>
-        </Container>
       </main>
     </Grid>
   );

@@ -8,27 +8,24 @@ import Paper from "@mui/material/Paper";
 import PetData from "../components/PetData/PetData";
 import ActionButtons from "../components/PetData/ActionButtons/ActionButtons";
 
-
 const PetDetailPage = () => {
   const params = useParams();
   const { data, error } = useFetch(
     `${process.env.REACT_APP_BACKEND}pets/${params.petID}/records`
   );
-  console.log(data);
+
   if (error)
     return <Alert severity="error">Ocurrio un error, intente de nuevo</Alert>;
   return (
     <>
       <Grid container>
-        <Grid item xs={12}>
-          
-        </Grid>
+        <Grid item xs={12}></Grid>
         <Container
           maxwidth="xl"
           component={Paper}
           sx={{ backgroundColor: "grey.light" }}
         >
-          <Grid item container xs={12} padding={5}>
+          <Grid item container xs={12} padding={{ xs: 0, md: 5 }}>
             <Grid item xs={12}>
               {data && <h1>{data.name}</h1>}
             </Grid>
@@ -81,6 +78,14 @@ const PetDetailPage = () => {
               </Grid>
               <Grid item xs={12}>
                 <h2>Citas y Registros</h2>
+                {data && (
+                  <EventList
+                    records={data.records}
+                    showPet={false}
+                    showDescription={true}
+                    showActions={true}
+                  />
+                )}
               </Grid>
             </Grid>
           </Grid>

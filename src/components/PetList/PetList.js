@@ -50,9 +50,10 @@ const PetList = ({ pets }) => {
                 <TableCell
                   sx={{
                     display: "flex",
-                    justifyContent: "center",
                     alignItems: "center",
                     justifyContent: "space-evenly",
+                    gap: { xs: 2, md: 0 },
+                    flexDirection: { xs: "column", md: "row" },
                   }}
                 >
                   <CustomButton label="Codigo QR" color="secondary" icon="qr" />

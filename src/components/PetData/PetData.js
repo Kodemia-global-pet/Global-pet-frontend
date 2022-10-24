@@ -1,4 +1,4 @@
-import { Grid, TextField } from "@mui/material";
+import { Grid } from "@mui/material";
 import React from "react";
 import CustomReadField from "../CustomReadField/CustomReadField";
 
@@ -13,7 +13,11 @@ const PetData = ({ pet }) => {
       </Grid>
       <Grid item xs={12} md={6}>
         <CustomReadField
-          value={pet.birthdate}
+          value={new Date(pet.birthdate).toLocaleDateString("en-us", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          })}
           id="fecha"
           label="Fecha de Nacimiento"
         />

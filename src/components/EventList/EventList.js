@@ -1,40 +1,57 @@
+import { Grid } from "@mui/material";
 import React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import EventItem from "./EventItem/EventItem";
 
-const EventList = ({ records, showPet }) => {
+const EventList = ({
+  records,
+  showPet = false,
+  showDescription = false,
+  showActions = false,
+}) => {
   return (
-    <TableContainer component={Paper} sx={{ backgroundColor: "grey.light" }}>
-      <Table size="small">
-        <TableHead>
-          <TableRow sx={{ color: "grey.main" }}>
-            <TableCell>Fecha</TableCell>
-            {showPet && <TableCell>Mascota</TableCell>}
-            <TableCell>Evento</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody sx={{ color: "#545454" }}>
-          {records.map((record) => (
-            <TableRow key={record._id}>
-              <TableCell>
-                {new Date(record.date).toLocaleDateString("en-us", {
-                  month: "short",
-                  day: "numeric",
-                  year: "numeric",
-                })}
-              </TableCell>
-              {showPet && <TableCell>{record.name}</TableCell>}
-              <TableCell>{record.title}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <Grid container item sx={{ overflow: "hidden" }}>
+      <Grid
+        container
+        item
+        xs={12}
+        sx={{ backgroundColor: "grey.light", py: 2, px: 2 }}
+        columnSpacing={3}
+        display={{ xs: "none", md: "flex" }}
+      >
+        <Grid item xs={12} md>
+          Fecha
+        </Grid>
+        {showPet && (
+          <Grid item xs={6} md>
+            Mascota
+          </Grid>
+        )}
+        <Grid item xs={6} md>
+          Evento
+        </Grid>
+        {showDescription && (
+          <Grid item xs={6} md>
+            Descipción
+          </Grid>
+        )}
+        {showActions && (
+          <Grid item xs={12} md={4}>
+            Acciones
+          </Grid>
+        )}
+      </Grid>
+      <Grid container item xs={12} columnSpacing={3} rowSpacing={3} mt={0}>
+        {records.map((record) => (
+          <EventItem
+            key={record._id}
+            record={record}
+            showPet={showPet}
+            showDescription={showDescription}
+            showActions={showActions}
+          />
+        ))}
+      </Grid>
+    </Grid>
   );
 };
 

@@ -1,12 +1,15 @@
 import React from "react";
 import CustomButton from "../CustomButton/CustomButton";
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, Avatar } from "@mui/material";
 
-const MyAccountHeader = (users) => {
+const MyAccountHeader = ({ user }) => {
   return (
     <>
-      <h1>Mi cuenta</h1>
-      <h3>Foto de perfil</h3>
+      <Box sx={{ p: 2 }}>
+        <h1>Mi cuenta</h1>
+        <h3>Foto de perfil</h3>
+      </Box>
+
       <Grid
         display="flex"
         justifyContent="space-between"
@@ -14,18 +17,10 @@ const MyAccountHeader = (users) => {
         sx={{ p: 2 }}
       >
         <Box>
-          <img
-            src={process.env.PUBLIC_URL + "/images/userDefault"}
+          <Avatar
+            src={user.photo}
             alt="UserDefault"
-          ></img>
-        </Box>
-        <Box display="flex" flexDirection="row">
-          <Box sx={{ pr: 2 }}>
-            <CustomButton label="Eliminar foto" color="danger" icon="delete" />
-          </Box>
-          <Box>
-            <CustomButton label="Cambiar imagen" color="grey" />
-          </Box>
+          />
         </Box>
       </Grid>
       <hr></hr>
@@ -37,7 +32,7 @@ const MyAccountHeader = (users) => {
         sx={{ p: 2 }}
       >
         <h3>Nombre</h3>
-        <p>nombre del usuario{users.name}</p>
+        <p>{user.name}</p>
       </Grid>
       <hr></hr>
       <Grid
@@ -48,7 +43,7 @@ const MyAccountHeader = (users) => {
         sx={{ p: 2 }}
       >
         <h3>Correo electrónico</h3>
-        <p>correo{users.email}</p>
+        <p>{user.email}</p>
       </Grid>
       <hr></hr>
       <Grid
@@ -59,11 +54,11 @@ const MyAccountHeader = (users) => {
         sx={{ p: 2 }}
       >
         <h3>Password</h3>
-        <p>Password{users.password}</p>
+        <p>********</p>
       </Grid>
       <hr></hr>
-      <Box  sx={{ p: 2 }}>
-        <CustomButton label="Editar" color="grey" icon="edit"/>
+      <Box sx={{ p: 2 }}>
+        <CustomButton label="Editar" color="grey" icon="edit" />
       </Box>
     </>
   );

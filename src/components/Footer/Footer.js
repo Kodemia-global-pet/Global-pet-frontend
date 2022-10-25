@@ -40,7 +40,25 @@ const Footer = () => {
             <Box>Centro de ayuda</Box>
             <Box>Preguntas frecuentes</Box>
             </Grid>
+
+            <Grid item xs={4}>
+            <Box>Redes sociales</Box>
             
+            
+            </Grid>
+            <Box
+            sx={{
+              p: 1,
+              flexGrow: 1,
+              height: 80,
+              width: 80,
+              maxHeight: { xs: 80, md: 80 },
+              maxWidth: { xs: 80, md: 80 },
+            }}
+            component="img"
+            alt="Haky"
+            src={process.env.PUBLIC_URL + "/images/footerPets.png"}
+          />
           </Grid>
         </Container>
       </Box>

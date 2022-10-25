@@ -10,7 +10,7 @@ import {
   Autocomplete,
 } from "@mui/material";
 import { useLogedUser } from "../../context/UserContext";
-import UploadButton from "./uploadbutton";
+import UploadButton from "./UploadButton";
 
 const PetsNew = () => {
   let navigate = useNavigate();

@@ -16,6 +16,14 @@ export const createUser = async (name, email, password) =>
     body: JSON.stringify({ name, email, password }),
   });
 
+export const getUserService = async (userID) =>
+  fetch(`${process.env.REACT_APP_BACKEND}users/${userID}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
 export const PetsNew = async (
   name,
   breed,

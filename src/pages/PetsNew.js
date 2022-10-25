@@ -1,13 +1,13 @@
 import React from "react";
 import { Link, Typography, Box, Grid } from "@mui/material";
-
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import PetsNew from "../components/PetsNew/PetsNew";
+import Template from "../components/Template/Template";
 
 const PetsNewPage = () => {
   return (
-    <>
+    <Template>
       <main
         style={{
           backgroundImage: `url(${
@@ -45,7 +45,7 @@ const PetsNewPage = () => {
           <PetsNew />
         </Grid>
       </main>
-    </>
+    </Template>
   );
 };
 

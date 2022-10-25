@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, ThemeProvider } from "@mui/material";
-import LoginForm1 from "../components/LoginForm/LoginForm1";
+import LoginForm from "../components/LoginForm/LoginForm";
 import theme from "../theme/theme";
 import "../main.css";
 
@@ -19,7 +19,7 @@ const LoginPage = () => {
             }}
           >
             <ThemeProvider theme={theme}>
-              <LoginForm1 />
+              <LoginForm />
             </ThemeProvider>
           </main>
         </Grid>

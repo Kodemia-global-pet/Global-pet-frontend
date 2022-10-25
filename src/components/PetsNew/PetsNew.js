@@ -5,17 +5,18 @@ import {
   Grid,
   TextField,
   Button,
-  Link,
   Alert,
-  Typography,
-  Container,
   Box,
+  Autocomplete,
 } from "@mui/material";
-import { useLogedUser } from "../context/UserContext";
+import { useLogedUser } from "../../context/UserContext";
+import UploadButton from "./uploadbutton";
 
-const AddPets = () => {
+const PetsNew = () => {
   let navigate = useNavigate();
+  const countries = [{ label: "Baja" }, { label: "Media" }, { label: "Alta" }];
   const [error, setError] = useState(null);
+
   const { login } = useLogedUser();
   const {
     register,
@@ -25,9 +26,23 @@ const AddPets = () => {
   } = useForm();
 
   const onSubmit = async () => {
-    const email = getValues("name");
-    const password = getValues("breed");
-    const result = await login(email, password);
+    const name = getValues("name");
+    const breed = getValues("breed");
+    const date = getValues("date");
+    const size = getValues("size");
+    const feeding = getValues("feeding");
+    const allergies = getValues("allergies");
+    const species = getValues("specie");
+
+    const result = await login(
+      name,
+      breed,
+      date,
+      size,
+      feeding,
+      allergies,
+      species
+    );
     if (!result) setError("No ingresaste Correctamente los Datos");
     else {
       setError(null);
@@ -37,25 +52,26 @@ const AddPets = () => {
 
   return (
     <>
-      <main
-        style={{
-          backgroundImage: `url(${
-            process.env.PUBLIC_URL + "/images/landingbg.png"
-          })`,
-          width: "100vw",
+      <Grid
+        container
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "start",
+          justifyContent: "space-between",
         }}
       >
-        <Container
-          component="main"
+        <Grid
+          item
           sx={{
             backgroundColor: "grey.contrast",
             color: "#545454",
             borderRadius: "10px",
-            width: 506,
-            height: 531,
+            width: 700,
+            height: 750,
             display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            flexDirection: "row",
+            ml: 5,
           }}
         >
           {error && <Alert severity="error">{error} </Alert>}
@@ -63,14 +79,13 @@ const AddPets = () => {
           <Box
             sx={{
               marginTop: 5,
+              ml: 2,
+              mr: 2,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
           >
-            <Typography component="h1" variant="h5">
-              Agregar mascota
-            </Typography>
             <form onSubmit={handleSubmit(onSubmit)}>
               <TextField
                 margin="normal"
@@ -140,13 +155,34 @@ const AddPets = () => {
                 error={!!errors?.allergies}
                 helperText={errors.allergies?.message}
               />
+              <Autocomplete
+                id="country-select-demo"
+                options={countries}
+                autoHighlight
+                getOptionLabel={(option) => option.label}
+                renderOption={(props, option) => (
+                  <Box sx={{ flexShrink: 0 }} {...props}>
+                    {option.label}
+                  </Box>
+                )}
+                renderInput={(register) => (
+                  <TextField
+                    margin="normal"
+                    {...register}
+                    label="Actividad Fisica"
+                    inputProps={{
+                      ...register.inputProps,
+                      required: "Completa Este Campo",
+                    }}
+                  />
+                )}
+              />
               <TextField
                 margin="normal"
                 fullWidth
-                type="text"
-                label="Actividad fisica"
-                autoComplete="allergies"
-                {...register("allergies", {
+                label="Especie"
+                autoComplete="Especie"
+                {...register("specie", {
                   required: "Completa Este Campo",
                 })}
                 error={!!errors?.allergies}
@@ -171,26 +207,18 @@ const AddPets = () => {
                     mb: 2,
                   }}
                 >
-                  Continuar
+                  Guardar
                 </Button>
 
-                <Grid item sx={{ color: "black.main", marginTop: 5 }}>
-                  <Link href="#" underline="hover" sx={{ color: "black.main" }}>
-                    Olvidé mi contraseña
-                  </Link>
-                </Grid>
-                <Grid item sx={{ marginTop: 5 }}>
-                  <Link href="#" underline="hover" sx={{ color: "black.main" }}>
-                    {"¿Aún no tienes cuenta? Crear cuenta"}
-                  </Link>
-                </Grid>
+                <br></br>
               </Grid>
             </form>
           </Box>
-        </Container>
-      </main>
+        </Grid>
+        <UploadButton />
+      </Grid>
     </>
   );
 };
 
-export default AddPets;
+export default PetsNew;

@@ -7,7 +7,6 @@ import PetDetailPage from "./pages/PetDetailPage";
 import MyAccount from "./pages/MyAccount";
 import FaqPage from "./pages/FaqPage";
 
-
 function App() {
   return (
     <div>

@@ -4,7 +4,7 @@ import EventList from "../components/EventList/EventList";
 import PetList from "../components/PetList/PetList";
 import { useLogedUser } from "../context/UserContext";
 import { getPetRecords } from "../helpers/petHelper";
-import useFetch from "../hooks/useFetch";
+import CustomImage from "../components/CustomImage/CustomImage";
 
 const MyPetsPage = () => {
   let { user } = useLogedUser();
@@ -28,8 +28,28 @@ const MyPetsPage = () => {
               {!user && <CircularProgress />}
               {user && <PetList pets={user?.pets} />}
             </Grid>
-            <Grid item xs={12} md={4}>
-              <h2>Próximos eventos </h2>
+            <Grid item xs={12} md={4} style={{ marginTop: "46px" }}>
+              <Grid
+                item
+                xs={12}
+                display="flex"
+                flexDirection="row"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <h2>Próximos eventos </h2>
+                <CustomImage
+                  sx={{
+                    width: "60px",
+                  }}
+                  alt="Calendario"
+                  src={process.env.PUBLIC_URL + "/images/icons/calendar.png"}
+                />
+              </Grid>
+              {!user && <CircularProgress />}
+              {user && (
+                <EventList records={getPetRecords(user.pets)} showPet={true} />
+              )}
             </Grid>
           </Grid>
         </Container>

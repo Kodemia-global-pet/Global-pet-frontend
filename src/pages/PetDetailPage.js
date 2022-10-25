@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import EventList from "../components/EventList/EventList";
 import useFetch from "../hooks/useFetch";
 
+
 const PetDetailPage = () => {
   const params = useParams();
   const { data, error } = useFetch(
@@ -17,7 +18,7 @@ const PetDetailPage = () => {
     <>
       <Grid container>
         <Grid item xs={12}>
-          {/* Header */}
+          
         </Grid>
         <Container maxwidth="xl">
           <Grid item container xs={12}>

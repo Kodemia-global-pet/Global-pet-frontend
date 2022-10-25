@@ -57,6 +57,28 @@ const MyAccountHeader = ({ user }) => {
         <p>********</p>
       </Grid>
       <hr></hr>
+      <Grid
+        item
+        display="flex"
+        flexDirection="column"
+        alignItems="baseline"
+        sx={{ p: 2 }}
+      >
+        <h3>Teléfono</h3>
+        <p>{user.phone_number}</p>
+      </Grid>
+      <hr></hr>
+      <Grid
+        item
+        display="flex"
+        flexDirection="column"
+        alignItems="baseline"
+        sx={{ p: 2 }}
+      >
+        <h3>Dirección</h3>
+        <p>{user.address}</p>
+      </Grid>
+      <hr></hr>
       <Box sx={{ p: 2 }}>
         <CustomButton label="Editar" color="grey" icon="edit" />
       </Box>

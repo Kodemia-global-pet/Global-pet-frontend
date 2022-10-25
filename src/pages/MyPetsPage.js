@@ -1,4 +1,4 @@
-import { Alert, CircularProgress, Container, Grid } from "@mui/material";
+import { CircularProgress, Container, Grid } from "@mui/material";
 import React from "react";
 import EventList from "../components/EventList/EventList";
 import PetList from "../components/PetList/PetList";

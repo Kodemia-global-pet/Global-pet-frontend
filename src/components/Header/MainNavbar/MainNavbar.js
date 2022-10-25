@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, makeStyles, Toolbar, Typography } from "@mui/material";
+import { AppBar, Toolbar} from "@mui/material";
 import Box from "@mui/material/Box";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import HomeIcon from "@mui/icons-material/Home";
@@ -14,12 +14,11 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import Button from "@mui/material/Button";
 
 const MainNavbar = () => {
-  const [value, setValue] = React.useState(0);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -31,8 +30,15 @@ const MainNavbar = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: "header_primary.main" }}>
+    <Box sx={{ flexGrow: 1, mb: 2 }}>
+      <AppBar
+        position="static"
+        sx={{
+          backgroundColor: "header_primary.main",
+          borderBottom: "10px solid",
+          borderColor: "header_secondary.main",
+        }}
+      >
         <Toolbar>
           <Box
             sx={{
@@ -72,11 +78,11 @@ const MainNavbar = () => {
               icon={<HelpIcon />}
             />
           </Box>
-          <Box>
+          <Box sx={{ marginX: 2 }}>
             <Button
               href=""
               variant="outlined"
-              sx={{ color: "black.main", borderColor: "black.main", mb: 1 }}
+              sx={{ color: "black.main", borderColor: "black.main" }}
             >
               {" "}
               Iniciar sesion
@@ -86,7 +92,7 @@ const MainNavbar = () => {
             <Button
               href=""
               variant="outlined"
-              sx={{ color: "black.main", borderColor: "black.main", mb: 1 }}
+              sx={{ color: "black.main", borderColor: "black.main" }}
             >
               {" "}
               Crear cuenta

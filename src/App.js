@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage";
 import CreateAccount from "./pages/CreateAccount";
 import MyPetsPage from "./pages/MyPetsPage";
 import PetDetailPage from "./pages/PetDetailPage";
-import MyAccount from "./pages/MyAccount/MyAccount";
+import MyAccount from "./pages/MyAccount";
 import FaqPage from "./pages/FaqPage";
 import PetsNewPage from "./pages/PetsNewPage";
 

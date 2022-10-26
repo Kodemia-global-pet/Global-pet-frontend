@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import CustomButton from "../CustomButton/CustomButton";
+import { Link as RouterLink } from "react-router-dom";
 
 const PetList = ({ pets }) => {
   return (
@@ -34,13 +35,25 @@ const PetList = ({ pets }) => {
           <TableBody sx={{ color: "black.light" }}>
             {pets.map((pet) => (
               <TableRow key={pet._id}>
-                <TableCell>{pet.name}</TableCell>
+                <TableCell>
+                  <Button
+                    variant="text"
+                    component={RouterLink}
+                    to={"/pets/" + pet._id}
+                    sx={{
+                      color: "black.main",
+                    }}
+                  >
+                    {pet.name}
+                  </Button>
+                </TableCell>
                 <TableCell
                   sx={{
                     display: "flex",
-                    justifyContent: "center",
                     alignItems: "center",
                     justifyContent: "space-evenly",
+                    gap: { xs: 2, md: 0 },
+                    flexDirection: { xs: "column", md: "row" },
                   }}
                 >
                   <CustomButton label="Codigo QR" color="secondary" icon="qr" />

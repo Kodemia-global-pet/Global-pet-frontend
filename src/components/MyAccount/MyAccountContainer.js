@@ -3,7 +3,6 @@ import MyAccountHeader from "./MyAccountHeader";
 import { useLogedUser } from "../../context/UserContext";
 import { CircularProgress } from "@mui/material";
 import MyAccountAside from "./MyAccountAside";
-import MyAccountEditUser from "./MyAccountEditUser"
 import Grid from "@mui/material/Grid";
 
 const MyAccountContainer = () => {
@@ -19,9 +18,6 @@ console.log("user", user)
           </Grid>
           <Grid item xs={12} lg={9}>
             <MyAccountHeader user={user} />
-          </Grid>
-          <Grid item xs={12} lg={9}>
-            <MyAccountEditUser user={user} />
           </Grid>
         </Grid>
       )}

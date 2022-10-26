@@ -24,27 +24,11 @@ export const getUserService = async (userID) =>
     },
   });
 
-export const PetsNew = async (
-  name,
-  breed,
-  date,
-  size,
-  feeding,
-  allergies,
-  species
-) =>
-  fetch(`${process.env.REACT_APP_BACKEND}pets`, {
+export const createPet = async (userID, token, formData) =>
+  fetch(`${process.env.REACT_APP_BACKEND}users/${userID}/pet`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({
-      name,
-      breed,
-      date,
-      size,
-      feeding,
-      allergies,
-      species,
-    }),
+    body: formData,
   });

@@ -6,7 +6,7 @@ import MyPetsPage from "./pages/MyPetsPage";
 import PetDetailPage from "./pages/PetDetailPage";
 import MyAccount from "./pages/MyAccount/MyAccount";
 import FaqPage from "./pages/FaqPage";
-import PetsNewPage from "./pages/PetsNew";
+import PetsNewPage from "./pages/PetsNewPage";
 
 function App() {
   return (

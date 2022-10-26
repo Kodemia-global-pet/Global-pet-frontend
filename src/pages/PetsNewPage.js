@@ -1,21 +1,18 @@
 import React from "react";
-import { Link, Typography, Box, Grid } from "@mui/material";
+import { Link, Typography, Box, Grid, CircularProgress } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import PetsNew from "../components/PetsNew/PetsNew";
 import Template from "../components/Template/Template";
+import { Container } from "@mui/system";
+import { useLogedUser } from "../context/UserContext";
 
 const PetsNewPage = () => {
+  let { user } = useLogedUser();
+
   return (
     <Template>
-      <main
-        style={{
-          backgroundImage: `url(${
-            process.env.PUBLIC_URL + "/images/landingbg.png"
-          })`,
-          width: "100vw",
-        }}
-      >
+      <Container maxWidth="xl">
         <Box
           sx={{
             display: "flex",
@@ -41,10 +38,11 @@ const PetsNewPage = () => {
             Agregar mascota
           </Typography>
         </Box>
-        <Grid container>
-          <PetsNew />
+        <Grid container item xs={12}>
+          {!user && <CircularProgress />}
+          {user && <PetsNew userID={user._id} token={user.token} />}
         </Grid>
-      </main>
+      </Container>
     </Template>
   );
 };

@@ -1,23 +1,18 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import {
-  Grid,
-  TextField,
-  Button,
-  Alert,
-  Box,
-  Autocomplete,
-} from "@mui/material";
-import { useLogedUser } from "../../context/UserContext";
+import { Grid, TextField, Button, Alert, Box, MenuItem } from "@mui/material";
 import UploadButton from "./UploadButton";
+import { createPet } from "../../services/backend";
+import { const_activity, const_sizes } from "../../helpers/constants";
 
-const PetsNew = () => {
+const PetsNew = ({ userID, token }) => {
   let navigate = useNavigate();
-  const countries = [{ label: "Baja" }, { label: "Media" }, { label: "Alta" }];
-  const [error, setError] = useState(null);
 
-  const { login } = useLogedUser();
+  const [error, setError] = useState(null);
+  const [images, setImages] = useState([]);
+  const [imageFiles, setImageFiles] = useState([]);
+
   const {
     register,
     getValues,
@@ -26,27 +21,24 @@ const PetsNew = () => {
   } = useForm();
 
   const onSubmit = async () => {
-    const name = getValues("name");
-    const breed = getValues("breed");
-    const date = getValues("date");
-    const size = getValues("size");
-    const feeding = getValues("feeding");
-    const allergies = getValues("allergies");
-    const species = getValues("specie");
-
-    const result = await login(
-      name,
-      breed,
-      date,
-      size,
-      feeding,
-      allergies,
-      species
-    );
-    if (!result) setError("No ingresaste Correctamente los Datos");
+    const photo = imageFiles.length > 0 ? imageFiles[0] : null;
+    let formData = new FormData();
+    formData.append("name", getValues("name"));
+    formData.append("breed", getValues("breed"));
+    formData.append("birthdate", getValues("birthdate"));
+    formData.append("size", getValues("size"));
+    formData.append("feeding", getValues("feeding"));
+    formData.append("allergies", getValues("allergies"));
+    formData.append("specie", getValues("specie"));
+    formData.append("activity_level", getValues("activity_level"));
+    if (photo) formData.append("photo", photo);
+    console.log(token);
+    const response = await createPet(userID, token, formData);
+    const result = await response.json();
+    if (!result.success) setError("Ocurrió un error.");
     else {
       setError(null);
-      navigate("/");
+      navigate("/pets");
     }
   };
 
@@ -54,6 +46,8 @@ const PetsNew = () => {
     <>
       <Grid
         container
+        item
+        xs={12}
         sx={{
           display: "flex",
           flexDirection: "row",
@@ -61,21 +55,30 @@ const PetsNew = () => {
           justifyContent: "space-between",
         }}
       >
+        <Grid item xs={12}>
+          {error && (
+            <Alert
+              sx={{
+                mb: 3,
+              }}
+              severity="error"
+            >
+              {error}
+            </Alert>
+          )}
+        </Grid>
         <Grid
           item
+          xs={12}
+          md={8}
           sx={{
             backgroundColor: "grey.contrast",
             color: "#545454",
             borderRadius: "10px",
-            width: 700,
-            height: 750,
             display: "flex",
             flexDirection: "row",
-            ml: 5,
           }}
         >
-          {error && <Alert severity="error">{error} </Alert>}
-
           <Box
             sx={{
               marginTop: 5,
@@ -102,11 +105,18 @@ const PetsNew = () => {
               <TextField
                 margin="normal"
                 fullWidth
+                label="Especie"
+                autoComplete="Especie"
+                {...register("specie")}
+                error={!!errors?.allergies}
+                helperText={errors.allergies?.message}
+              />
+              <TextField
+                margin="normal"
+                fullWidth
                 label="Raza"
                 autoComplete="breed"
-                {...register("breed", {
-                  required: "Completa Este Campo",
-                })}
+                {...register("breed")}
                 error={!!errors?.breed}
                 helperText={errors.breed?.message}
               />
@@ -116,7 +126,7 @@ const PetsNew = () => {
                 fullWidth
                 type="date"
                 label="Fecha de nacimiento"
-                {...register("date", {
+                {...register("birthdate", {
                   required: "Completa Este Campo",
                 })}
                 error={!!errors?.date}
@@ -125,6 +135,7 @@ const PetsNew = () => {
               <TextField
                 margin="normal"
                 fullWidth
+                select
                 label="Tamaño"
                 autoComplete="current-password"
                 {...register("size", {
@@ -132,15 +143,19 @@ const PetsNew = () => {
                 })}
                 error={!!errors?.size}
                 helperText={errors.size?.message}
-              />
+              >
+                {const_sizes.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
               <TextField
                 margin="normal"
                 fullWidth
-                label="Alimentacion"
+                label="Alimento"
                 autoComplete="feeding"
-                {...register("feeding", {
-                  required: "Completa Este Campo",
-                })}
+                {...register("feeding")}
                 error={!!errors?.feeding}
                 helperText={errors.feeding?.message}
               />
@@ -149,45 +164,26 @@ const PetsNew = () => {
                 fullWidth
                 label="Alergias"
                 autoComplete="allergies"
-                {...register("allergies", {
-                  required: "Completa Este Campo",
-                })}
+                {...register("allergies")}
                 error={!!errors?.allergies}
                 helperText={errors.allergies?.message}
-              />
-              <Autocomplete
-                id="country-select-demo"
-                options={countries}
-                autoHighlight
-                getOptionLabel={(option) => option.label}
-                renderOption={(props, option) => (
-                  <Box sx={{ flexShrink: 0 }} {...props}>
-                    {option.label}
-                  </Box>
-                )}
-                renderInput={(register) => (
-                  <TextField
-                    margin="normal"
-                    {...register}
-                    label="Actividad Fisica"
-                    inputProps={{
-                      ...register.inputProps,
-                      required: "Completa Este Campo",
-                    }}
-                  />
-                )}
               />
               <TextField
                 margin="normal"
                 fullWidth
-                label="Especie"
-                autoComplete="Especie"
-                {...register("specie", {
-                  required: "Completa Este Campo",
-                })}
+                select
+                label="Actividad Fisica"
+                autoComplete=""
+                {...register("activity_level")}
                 error={!!errors?.allergies}
-                helperText={errors.allergies?.message}
-              />
+                helperText={errors.activity_level?.message}
+              >
+                {const_activity.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
               <Grid
                 container
                 sx={{
@@ -209,13 +205,18 @@ const PetsNew = () => {
                 >
                   Guardar
                 </Button>
-
-                <br></br>
               </Grid>
             </form>
           </Box>
         </Grid>
-        <UploadButton />
+        <Grid item xs={12} md={3}>
+          <UploadButton
+            images={images}
+            setImages={setImages}
+            imageFiles={imageFiles}
+            setImageFiles={setImageFiles}
+          />
+        </Grid>
       </Grid>
     </>
   );

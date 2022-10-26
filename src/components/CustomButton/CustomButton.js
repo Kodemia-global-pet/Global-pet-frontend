@@ -11,15 +11,9 @@ const iconMap = {
   qr: <QrCodeIcon />,
 };
 
-
 const CustomButton = ({ label, color, icon }) => {
-
   return (
-    <Button
-      variant="contained"
-      color= {color}
-      startIcon={iconMap[icon]}
-    >
+    <Button variant="contained" color={color} startIcon={iconMap[icon]}>
       {label}
     </Button>
   );

@@ -7,6 +7,7 @@ const CustomImage = ({ ...props }) => {
       component="img"
       sx={{
         width: 1,
+        borderRadius: 3,
       }}
       {...props}
     />

@@ -6,8 +6,7 @@ import MyPetsPage from "./pages/MyPetsPage";
 import PetDetailPage from "./pages/PetDetailPage";
 import MyAccount from "./pages/MyAccount/MyAccount";
 import FaqPage from "./pages/FaqPage";
-
-
+import NewEventPage from "./pages/NewEvent";
 
 function App() {
   return (
@@ -20,6 +19,7 @@ function App() {
         <Route path="/pets/:petID" element={<PetDetailPage />} />
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/my-account" element={<MyAccount />} />
+        <Route path="/new-event" element={<NewEventPage />} />
       </Routes>
     </div>
   );

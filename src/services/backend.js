@@ -23,3 +23,12 @@ export const getUserService = async (userID) =>
       "Content-Type": "application/json",
     },
   });
+
+export const createPet = async (userID, token, formData) =>
+  fetch(`${process.env.REACT_APP_BACKEND}users/${userID}/pet`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });

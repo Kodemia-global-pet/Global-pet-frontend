@@ -13,9 +13,20 @@ const iconMap = {
   user: <AccountCircleIcon />,
 };
 
-const CustomButton = ({ label, color, icon, variant = "contained" }) => {
+const CustomButton = ({
+  label,
+  color,
+  icon,
+  variant = "contained",
+  ...props
+}) => {
   return (
-    <Button variant={variant} color={color} startIcon={iconMap[icon]}>
+    <Button
+      variant={variant}
+      color={color}
+      startIcon={iconMap[icon]}
+      {...props}
+    >
       {label}
     </Button>
   );

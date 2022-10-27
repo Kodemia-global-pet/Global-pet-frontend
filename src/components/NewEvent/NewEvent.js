@@ -1,23 +1,17 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import {
-  Grid,
-  TextField,
-  Button,
-  Alert,
-  Box,
-  Autocomplete,
-} from "@mui/material";
+import { Grid, TextField, Button, Alert, Box, MenuItem } from "@mui/material";
 import { useLogedUser } from "../../context/UserContext";
-import DropFileInput from "./DropFileInput";
 
 const NewEvent = () => {
   let navigate = useNavigate();
-  const type = [
-    { label: "Estetico" },
-    { label: "Revicion" },
-    { label: "Vacunas" },
+  const const_sizes = [
+    { value: "xs", label: "Extra Chico" },
+    { value: "s", label: "Chico" },
+    { value: "m", label: "Mediana" },
+    { value: "lg", label: "Grande" },
+    { value: "xl", label: "Extra grande" },
   ];
   const [error, setError] = useState(null);
 
@@ -34,18 +28,20 @@ const NewEvent = () => {
     const breed = getValues("breed");
     const date = getValues("date");
     const size = getValues("size");
-    const feeding = getValues("feeding");
-    const allergies = getValues("allergies");
-    const species = getValues("specie");
+    const vet = getValues("vet");
+    const type = getValues("type");
+    const other_info = getValues("other_info");
+    const description = getValues("description");
 
     const result = await login(
       name,
       breed,
       date,
       size,
-      feeding,
-      allergies,
-      species
+      vet,
+      type,
+      other_info,
+      description
     );
     if (!result) setError("No ingresaste Correctamente los Datos");
     else {
@@ -57,156 +53,142 @@ const NewEvent = () => {
   return (
     <>
       <Grid
-        columns={3}
+        item
         container
         sx={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "start",
-          justifyContent: "space-between",
+          backgroundColor: "grey.contrast",
+          color: "#545454",
+          borderRadius: "10px",
+          width: 700,
+          height: 750,
+          ml: 2,
         }}
       >
-        <Grid
-          item
+        {error && <Alert severity="error">{error} </Alert>}
+
+        <Box
           sx={{
-            backgroundColor: "grey.contrast",
-            color: "#545454",
-            borderRadius: "10px",
-            width: 700,
-            height: 750,
+            marginTop: 5,
+            ml: 2,
+            mr: 2,
             display: "flex",
-            flexDirection: "row",
-            ml: 5,
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          {error && <Alert severity="error">{error} </Alert>}
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <TextField
+              InputLabelProps={{ shrink: true }}
+              margin="normal"
+              fullWidth
+              type="date"
+              label="Fecha"
+              {...register("date", {
+                required: "Completa Este Campo",
+              })}
+              error={!!errors?.date}
+              helperText={errors.date?.message}
+            />
+            <TextField
+              InputLabelProps={{ shrink: true }}
+              margin="normal"
+              fullWidth
+              type="time"
+              label="Hora"
+              {...register("time", {
+                required: "Completa Este Campo",
+              })}
+              error={!!errors?.date}
+              helperText={errors.date?.message}
+            />
+            <TextField
+              margin="normal"
+              fullWidth
+              label="Titulo"
+              autoComplete="titulo"
+              {...register("title", {
+                required: "Completa Este Campo",
+              })}
+              error={!!errors?.size}
+              helperText={errors.size?.message}
+            />
+            <TextField
+              margin="normal"
+              fullWidth
+              label="Veterinario"
+              autoComplete="veterinario"
+              {...register("vet", {
+                required: "Completa Este Campo",
+              })}
+              error={!!errors?.feeding}
+              helperText={errors.feeding?.message}
+            />
 
-          <Box
-            sx={{
-              marginTop: 5,
-              ml: 2,
-              mr: 2,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <TextField
-                InputLabelProps={{ shrink: true }}
-                margin="normal"
-                fullWidth
-                type="date"
-                label="Fecha"
-                {...register("date", {
-                  required: "Completa Este Campo",
-                })}
-                error={!!errors?.date}
-                helperText={errors.date?.message}
-              />
-              <TextField
-                InputLabelProps={{ shrink: true }}
-                margin="normal"
-                fullWidth
-                type="time"
-                label="Hora"
-                {...register("time", {
-                  required: "Completa Este Campo",
-                })}
-                error={!!errors?.date}
-                helperText={errors.date?.message}
-              />
-              <TextField
-                margin="normal"
-                fullWidth
-                label="Titulo"
-                autoComplete="titulo"
-                {...register("titulo", {
-                  required: "Completa Este Campo",
-                })}
-                error={!!errors?.size}
-                helperText={errors.size?.message}
-              />
-              <TextField
-                margin="normal"
-                fullWidth
-                label="Veterinario"
-                autoComplete="veterinario"
-                {...register("feeding", {
-                  required: "Completa Este Campo",
-                })}
-                error={!!errors?.feeding}
-                helperText={errors.feeding?.message}
-              />
-
-              <Autocomplete
-                disablePortal
-                id="Register"
-                options={type}
-                sx={{ flexShrink: 0 }}
-                renderInput={(register) => (
-                  <TextField
-                    margin="normal"
-                    {...register}
-                    label="Tipo"
-                    inputProps={{
-                      ...register.inputProps,
-                      required: "Completa Este Campo",
-                    }}
-                  />
-                )}
-              />
-              <TextField
-                margin="normal"
-                fullWidth
-                label="Otra informacion"
-                autoComplete="otherInformation"
-                {...register("otherInformation", {
-                  required: "Completa Este Campo",
-                })}
-                error={!!errors?.allergies}
-                helperText={errors.allergies?.message}
-              />
-              <TextField
-                margin="normal"
-                fullWidth
-                type="text"
-                label="Descripcion"
-                autoComplete="description"
-                {...register("description", {
-                  required: "Completa Este Campo",
-                })}
-                error={!!errors?.allergies}
-                helperText={errors.allergies?.message}
-              />
-              <Grid
-                container
+            <TextField
+              margin="normal"
+              fullWidth
+              select
+              label="Tipo"
+              autoComplete="Tipo"
+              {...register("type", {
+                required: "Completa Este Campo",
+              })}
+              error={!!errors?.size}
+              helperText={errors.size?.message}
+            >
+              {const_sizes.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              margin="normal"
+              fullWidth
+              label="Otra informacion"
+              autoComplete="otherInformation"
+              {...register("other_info", {
+                required: "Completa Este Campo",
+              })}
+              error={!!errors?.allergies}
+              helperText={errors.allergies?.message}
+            />
+            <TextField
+              margin="normal"
+              fullWidth
+              type="text"
+              label="Descripcion"
+              autoComplete="description"
+              {...register("description", {
+                required: "Completa Este Campo",
+              })}
+              error={!!errors?.allergies}
+              helperText={errors.allergies?.message}
+            />
+            <Grid
+              container
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Button
+                variant="contained"
+                type="submit"
                 sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
+                  width: 170,
+                  height: 43,
+                  backgroundColor: "grey.main",
+                  mt: 3,
+                  mb: 2,
                 }}
               >
-                <Button
-                  variant="contained"
-                  type="submit"
-                  sx={{
-                    width: 170,
-                    height: 43,
-                    backgroundColor: "grey.main",
-                    mt: 3,
-                    mb: 2,
-                  }}
-                >
-                  Guardar
-                </Button>
-
-                <br></br>
-              </Grid>
-            </form>
-            <DropFileInput />
-          </Box>
-        </Grid>
+                Guardar
+              </Button>
+            </Grid>
+          </form>
+        </Box>
       </Grid>
     </>
   );

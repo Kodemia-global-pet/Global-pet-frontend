@@ -1,8 +1,16 @@
 import React, { useState } from "react";
-import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import PropTypes from "prop-types";
 import CustomImage from "../CustomImage/CustomImage";
 import DeleteIcon from "@mui/icons-material/Delete";
+import "./DropFielInput.css";
 
 const DropFileInput = (props) => {
   const [images, setImages] = useState([]);
@@ -24,64 +32,81 @@ const DropFileInput = (props) => {
   };
   return (
     <>
-      <Grid container>
-        {images.length > 0 ? (
-          <Grid
-            item
-            xl={12}
-            sx={{
-              width: "1",
-              height: "1",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            {images.map((image, index) => (
-              <Box
-                key={index}
-                sx={{
-                  width: "200px",
-                  height: "80px",
-                  ml: 2,
-                }}
-              >
-                <CustomImage src={URL.createObjectURL(image)} alt="" />
+      <Container
+        xs={12}
+        xl={12}
+        sx={{
+          display: "flex",
+          flexDirection: "Column",
+          justifyContent: "center",
+          ml: 2,
+        }}
+      >
+        <Grid className="uploader" item>
+          {images.length > 0 ? (
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {images.map((image, index) => (
                 <Box
+                  md={6}
+                  key={index}
                   sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    flexDirection: "column",
-                    justifyContent: "center",
+                    ml: 2,
                   }}
                 >
-                  <Typography mt={1}>{image.name}</Typography>
-                  <Typography>{image.size / 1000}B</Typography>
-
-                  <IconButton
-                    aria-label="delete"
-                    onClick={() => fileRemove(image)}
+                  <CustomImage src={URL.createObjectURL(image)} alt="" />
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                    }}
                   >
-                    <DeleteIcon />
-                  </IconButton>
+                    <Typography mt={1}>{image.name}</Typography>
+                    <Typography>{image.size / 1000}Mb</Typography>
+
+                    <IconButton
+                      aria-label="delete"
+                      onClick={() => fileRemove(image)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </Box>
                 </Box>
-              </Box>
-            ))}
-          </Grid>
-        ) : null}
-        <Button component="label" variant="contained">
-          Subir Foto
-          <input
-            hidden
-            type="file"
-            value=""
-            onChange={onFileDrop}
-            accept="image/png, image/jpg, image/jpeg"
-            multiple
-          />
-        </Button>
-      </Grid>
+              ))}
+            </Box>
+          ) : null}
+        </Grid>
+        <Grid
+          item
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "stretch",
+            mt: 2,
+          }}
+        >
+          <Button component="label" variant="contained">
+            Subir Foto
+            <input
+              hidden
+              type="file"
+              value=""
+              onChange={onFileDrop}
+              accept="image/png, image/jpg, image/jpeg"
+              multiple
+            />
+          </Button>
+        </Grid>
+      </Container>
     </>
   );
 };

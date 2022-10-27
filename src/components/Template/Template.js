@@ -8,7 +8,7 @@ const Template = ({ children }) => {
 
   return (
     <>
-      <Grid container >
+      <Grid container>
         <Grid item xs={12}>
           <MainNavbar />
         </Grid>

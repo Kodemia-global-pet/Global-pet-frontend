@@ -20,6 +20,7 @@ function App() {
         <Route path="/pets/:petID" element={<PetDetailPage />} />
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/my-account" element={<MyAccount />} />
+        {/* <Route path="/public/pets/:petID" element={<MyAccount />} /> */}
       </Routes>
     </div>
   );

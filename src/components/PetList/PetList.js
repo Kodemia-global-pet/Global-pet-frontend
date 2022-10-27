@@ -21,7 +21,13 @@ const PetList = ({ pets }) => {
         justifyContent="flex-end"
         alignItems="flex-end"
       >
-        <CustomButton label="Agregar Mascota" color="secondary" icon="add" />
+        <CustomButton
+          component={RouterLink}
+          to="/pets/new"
+          label="Agregar Mascota"
+          color="secondary"
+          icon="add"
+        />
       </Box>
 
       <TableContainer component={Paper}>
@@ -57,7 +63,13 @@ const PetList = ({ pets }) => {
                   }}
                 >
                   <CustomButton label="Codigo QR" color="secondary" icon="qr" />
-                  <CustomButton label="Editar" color="primary" icon="edit" />
+                  <CustomButton
+                    component={RouterLink}
+                    to={"/pets/" + pet._id + "/edit"}
+                    label="Editar"
+                    color="primary"
+                    icon="edit"
+                  />
                   <CustomButton
                     label="Agregar Evento"
                     color="primary"

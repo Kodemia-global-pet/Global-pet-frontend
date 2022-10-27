@@ -59,8 +59,7 @@ const NewEvent = () => {
           backgroundColor: "grey.contrast",
           color: "#545454",
           borderRadius: "10px",
-          width: 700,
-          height: 750,
+          width: "100%",
           ml: 2,
         }}
       >

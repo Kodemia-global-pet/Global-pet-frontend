@@ -33,18 +33,16 @@ const DropFileInput = (props) => {
   return (
     <>
       <Container
-        xs={12}
-        xl={12}
         sx={{
           display: "flex",
           flexDirection: "Column",
           justifyContent: "center",
-          ml: 2,
         }}
       >
-        <Grid className="uploader" item>
+        <Box className="uploader">
           {images.length > 0 ? (
-            <Box
+            <Grid
+              container
               sx={{
                 display: "flex",
                 flexDirection: "row",
@@ -53,14 +51,19 @@ const DropFileInput = (props) => {
               }}
             >
               {images.map((image, index) => (
-                <Box
-                  md={6}
+                <Grid
+                  item
+                  xs={12}
+                  md={4}
+                  lg={6}
+                  xl={4}
                   key={index}
-                  sx={{
-                    ml: 2,
-                  }}
+                  justifyContent="center"
+                  alignItems="center"
                 >
-                  <CustomImage src={URL.createObjectURL(image)} alt="" />
+                  <Box sx={{ borderRadius: 3, overflow: "hidden" }}>
+                    <CustomImage src={URL.createObjectURL(image)} alt="" />
+                  </Box>
                   <Box
                     sx={{
                       display: "flex",
@@ -70,7 +73,7 @@ const DropFileInput = (props) => {
                     }}
                   >
                     <Typography mt={1}>{image.name}</Typography>
-                    <Typography>{image.size / 1000}Mb</Typography>
+                    <Typography>{image.size / 1000}KB</Typography>
 
                     <IconButton
                       aria-label="delete"
@@ -79,11 +82,11 @@ const DropFileInput = (props) => {
                       <DeleteIcon />
                     </IconButton>
                   </Box>
-                </Box>
+                </Grid>
               ))}
-            </Box>
+            </Grid>
           ) : null}
-        </Grid>
+        </Box>
         <Grid
           item
           sx={{
@@ -91,7 +94,7 @@ const DropFileInput = (props) => {
             flexDirection: "row",
             justifyContent: "center",
             alignItems: "stretch",
-            mt: 2,
+            mt: 5,
           }}
         >
           <Button component="label" variant="contained">

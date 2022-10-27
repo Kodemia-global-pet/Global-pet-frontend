@@ -1,8 +1,13 @@
 import { Grid } from "@mui/material";
 import React from "react";
+import { const_activity, const_sizes } from "../../helpers/constants";
 import CustomReadField from "../CustomReadField/CustomReadField";
 
 const PetData = ({ pet }) => {
+  let activity_level = const_activity.find(
+    (item) => item.value === pet.activity_level
+  );
+  let size = const_sizes.find((item) => item.value === pet.size);
   return (
     <Grid item container xs={12} columnSpacing={3} rowSpacing={3}>
       <Grid item xs={12} md={6}>
@@ -23,14 +28,18 @@ const PetData = ({ pet }) => {
         />
       </Grid>
       <Grid item xs={12} md={6}>
-        <CustomReadField value={pet.size} id="tamaño" label="Tamaño" />
+        <CustomReadField
+          value={size?.label || " "}
+          id="tamaño"
+          label="Tamaño"
+        />
       </Grid>
       <Grid item xs={12} md={6}>
         <CustomReadField value={pet.feeding} id="alimento" label="Alimento" />
       </Grid>
       <Grid item xs={12} md={6}>
         <CustomReadField
-          value={pet.activity_level}
+          value={activity_level?.label || " "}
           id="nivel_actividad"
           label="Nivel de Actividad"
         />

@@ -4,10 +4,7 @@ import CustomImage from "../CustomImage/CustomImage";
 
 const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
 
-function VistaImagen() {
-  const [imageFiles, setImageFiles] = useState([]);
-  const [images, setImages] = useState([]);
-
+function UploadButton({ images, setImages, imageFiles, setImageFiles }) {
   const changeHandler = (e) => {
     const { files } = e.target;
     const validImageFiles = [];
@@ -85,4 +82,4 @@ function VistaImagen() {
   );
 }
 
-export default VistaImagen;
+export default UploadButton;

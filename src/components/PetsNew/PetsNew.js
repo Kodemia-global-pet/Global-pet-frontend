@@ -1,44 +1,74 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, TextField, Button, Alert, Box, MenuItem } from "@mui/material";
 import UploadButton from "./UploadButton";
-import { createPet } from "../../services/backend";
+import { createPet, updatePet } from "../../services/backend";
 import { const_activity, const_sizes } from "../../helpers/constants";
+import moment from "moment";
+import Paper from "@mui/material/Paper";
 
-const PetsNew = ({ userID, token }) => {
+const PetsNew = ({ userID, token, pet = {} }) => {
   let navigate = useNavigate();
 
   const [error, setError] = useState(null);
   const [images, setImages] = useState([]);
   const [imageFiles, setImageFiles] = useState([]);
 
+  useEffect(() => {
+    if (pet.photo) {
+      setImages([pet.photo]);
+    }
+  }, []);
+
   const {
     register,
     getValues,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      ...pet,
+      birthdate: pet.birthdate
+        ? moment(pet.birthdate).format("yyyy-MM-DD")
+        : undefined,
+    },
+  });
 
   const onSubmit = async () => {
     const photo = imageFiles.length > 0 ? imageFiles[0] : null;
+
+    const petID = pet?._id;
     let formData = new FormData();
     formData.append("name", getValues("name"));
     formData.append("breed", getValues("breed"));
-    formData.append("birthdate", getValues("birthdate"));
+    formData.append("birthdate", moment(getValues("birthdate")).format());
     formData.append("size", getValues("size"));
     formData.append("feeding", getValues("feeding"));
     formData.append("allergies", getValues("allergies"));
     formData.append("specie", getValues("specie"));
     formData.append("activity_level", getValues("activity_level"));
     if (photo) formData.append("photo", photo);
-    console.log(token);
-    const response = await createPet(userID, token, formData);
-    const result = await response.json();
-    if (!result.success) setError("Ocurrió un error.");
-    else {
-      setError(null);
-      navigate("/pets");
+
+    console.log(petID);
+    if (petID) {
+      const response = await updatePet(petID, token, formData);
+      const result = await response.json();
+      console.log("result update", result);
+      if (!result.success) setError("Ocurrió un error.");
+      else {
+        setError(null);
+        navigate("/pets");
+      }
+    } else {
+      const response = await createPet(userID, token, formData);
+      const result = await response.json();
+      console.log("result create", result);
+      if (!result.success) setError("Ocurrió un error.");
+      else {
+        setError(null);
+        navigate("/pets");
+      }
     }
   };
 
@@ -71,19 +101,18 @@ const PetsNew = ({ userID, token }) => {
           item
           xs={12}
           md={8}
+          component={Paper}
           sx={{
-            backgroundColor: "grey.contrast",
+            backgroundColor: "grey.light",
             color: "#545454",
             borderRadius: "10px",
             display: "flex",
             flexDirection: "row",
+            p: 3,
           }}
         >
           <Box
             sx={{
-              marginTop: 5,
-              ml: 2,
-              mr: 2,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -143,6 +172,7 @@ const PetsNew = ({ userID, token }) => {
                 })}
                 error={!!errors?.size}
                 helperText={errors.size?.message}
+                defaultValue={getValues("size")}
               >
                 {const_sizes.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
@@ -177,6 +207,7 @@ const PetsNew = ({ userID, token }) => {
                 {...register("activity_level")}
                 error={!!errors?.allergies}
                 helperText={errors.activity_level?.message}
+                defaultValue={getValues("activity_level")}
               >
                 {const_activity.map((option) => (
                   <MenuItem key={option.value} value={option.value}>

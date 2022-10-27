@@ -7,6 +7,7 @@ import useFetch from "../hooks/useFetch";
 import Paper from "@mui/material/Paper";
 import PetData from "../components/PetData/PetData";
 import ActionButtons from "../components/PetData/ActionButtons/ActionButtons";
+import Template from "../components/Template/Template";
 
 const PetDetailPage = () => {
   const params = useParams();
@@ -17,7 +18,7 @@ const PetDetailPage = () => {
   if (error)
     return <Alert severity="error">Ocurrio un error, intente de nuevo</Alert>;
   return (
-    <>
+    <Template>
       <Grid container>
         <Grid item xs={12}></Grid>
         <Container
@@ -91,7 +92,7 @@ const PetDetailPage = () => {
           </Grid>
         </Container>
       </Grid>
-    </>
+    </Template>
   );
 };
 

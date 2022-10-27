@@ -1,18 +1,15 @@
-import {
-  Alert,
-  Avatar,
-  CircularProgress,
-  Container,
-  Divider,
-  Grid,
-} from "@mui/material";
+import { Alert, CircularProgress, Container, Grid } from "@mui/material";
 import React from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import Paper from "@mui/material/Paper";
+import Template from "../components/Template/Template";
+import PetsNew from "../components/PetsNew/PetsNew";
+import { useLogedUser } from "../context/UserContext";
 
 const PetEditPage = () => {
   const params = useParams();
+  let { user } = useLogedUser();
   const { data, error } = useFetch(
     `${process.env.REACT_APP_BACKEND}pets/${params.petID}/records`
   );
@@ -20,60 +17,20 @@ const PetEditPage = () => {
   if (error)
     return <Alert severity="error">Ocurrio un error, intente de nuevo</Alert>;
   return (
-    <>
+    <Template>
       <Grid container>
         <Grid item xs={12}></Grid>
-        <Container
-          maxwidth="xl"
-          component={Paper}
-          sx={{ backgroundColor: "grey.light" }}
-        >
+        <Container maxwidth="xl">
           <Grid item container xs={12} padding={{ xs: 0, md: 5 }}>
-            <Grid item container xs={12} columnSpacing={3} rowSpacing={3}>
-              <Grid item xs={12} md={8} order={{ xs: 2, md: 1 }}>
-                {!data && <CircularProgress />}
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                md={1}
-                display={{ xs: "none", sm: "block" }}
-                order={{ xs: 3, md: 2 }}
-              >
-                <Divider
-                  orientation="vertical"
-                  flexItem
-                  sx={{ height: "100%" }}
-                />
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                md={3}
-                order={{ xs: 1, md: 3 }}
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  p: 5,
-                }}
-              >
-                {!data && <CircularProgress />}
-                {data && (
-                  <Avatar
-                    src={data.photo}
-                    sx={{
-                      width: { xs: "100px", md: "160px", lg: "180px" },
-                      height: { xs: "100px", md: "160px", lg: "180px" },
-                    }}
-                  />
-                )}
-              </Grid>
-            </Grid>
+            <h2>Editar Mascota</h2>
+            {!data && !user && <CircularProgress />}
+            {data && user && (
+              <PetsNew userID={user._id} token={user.token} pet={data} />
+            )}
           </Grid>
         </Container>
       </Grid>
-    </>
+    </Template>
   );
 };
 

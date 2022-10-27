@@ -1,16 +1,27 @@
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { Grid, TextField, Button, Alert, Box, MenuItem } from "@mui/material";
+import {
+  Grid,
+  TextField,
+  Button,
+  Alert,
+  Box,
+  MenuItem,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+} from "@mui/material";
 import UploadButton from "./UploadButton";
 import { createPet, updatePet } from "../../services/backend";
 import { const_activity, const_sizes } from "../../helpers/constants";
 import moment from "moment";
-import Paper from "@mui/material/Paper";
 
 const PetsNew = ({ userID, token, pet = {} }) => {
   let navigate = useNavigate();
-
+  const petID = pet?._id;
   const [error, setError] = useState(null);
   const [images, setImages] = useState([]);
   const [imageFiles, setImageFiles] = useState([]);
@@ -25,6 +36,7 @@ const PetsNew = ({ userID, token, pet = {} }) => {
     register,
     getValues,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -37,8 +49,6 @@ const PetsNew = ({ userID, token, pet = {} }) => {
 
   const onSubmit = async () => {
     const photo = imageFiles.length > 0 ? imageFiles[0] : null;
-
-    const petID = pet?._id;
     let formData = new FormData();
     formData.append("name", getValues("name"));
     formData.append("breed", getValues("breed"));
@@ -49,8 +59,9 @@ const PetsNew = ({ userID, token, pet = {} }) => {
     formData.append("specie", getValues("specie"));
     formData.append("activity_level", getValues("activity_level"));
     if (photo) formData.append("photo", photo);
+    if (petID)
+      formData.append("visibility_status", getValues("visibility_status"));
 
-    console.log(petID);
     if (petID) {
       const response = await updatePet(petID, token, formData);
       const result = await response.json();
@@ -97,19 +108,50 @@ const PetsNew = ({ userID, token, pet = {} }) => {
             </Alert>
           )}
         </Grid>
+        {petID && (
+          <Grid xs={12}>
+            <FormControl component="fieldset">
+              <FormLabel component="legend">
+                Mostrar los siguientes datos:
+              </FormLabel>
+              <Controller
+                control={control}
+                name="visibility_status"
+                {...register("visibility_status")}
+                render={({ field: { onChange, value } }) => (
+                  <RadioGroup value={value} onChange={onChange} row>
+                    <FormControlLabel
+                      value="disabled"
+                      control={<Radio />}
+                      label="Información de la mascota"
+                    />
+                    <FormControlLabel
+                      value="contact"
+                      control={<Radio />}
+                      label="Información de contacto"
+                    />
+                    <FormControlLabel
+                      value="record"
+                      control={<Radio />}
+                      label="Cartilla"
+                    />
+                  </RadioGroup>
+                )}
+              />
+            </FormControl>
+          </Grid>
+        )}
         <Grid
           item
           xs={12}
           md={8}
-          component={Paper}
           sx={{
-            backgroundColor: "grey.light",
             color: "#545454",
-            borderRadius: "10px",
             display: "flex",
             flexDirection: "row",
             p: 3,
           }}
+          order={{ xs: 2, md: 1 }}
         >
           <Box
             sx={{
@@ -240,7 +282,7 @@ const PetsNew = ({ userID, token, pet = {} }) => {
             </form>
           </Box>
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={3} order={{ xs: 1, md: 2 }}>
           <UploadButton
             images={images}
             setImages={setImages}

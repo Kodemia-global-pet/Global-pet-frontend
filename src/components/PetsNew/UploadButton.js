@@ -1,4 +1,4 @@
-import { Button, Grid } from "@mui/material";
+import { Avatar, Button, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import CustomImage from "../CustomImage/CustomImage";
 
@@ -51,10 +51,21 @@ function UploadButton({ images, setImages, imageFiles, setImageFiles }) {
     };
   }, [imageFiles]);
   return (
-    <Grid className="ImagPet">
+    <Grid
+      xs={12}
+      sx={{
+        mb: { xs: 3 },
+        justifyContent: "center",
+      }}
+    >
       <form>
         <p>
-          <Button htmlFor="file" component="label" variant="contained">
+          <Button
+            htmlFor="file"
+            component="label"
+            variant="contained"
+            sx={{ mb: 3 }}
+          >
             Subir Foto
             <input
               hidden
@@ -68,15 +79,21 @@ function UploadButton({ images, setImages, imageFiles, setImageFiles }) {
         </p>
       </form>
       {images.length > 0 ? (
-        <Grid>
+        <>
           {images.map((image, idx) => {
             return (
               <p key={idx}>
-                <CustomImage src={image} alt="" />
+                <Avatar
+                  src={image}
+                  sx={{
+                    width: { xs: "100px", md: "160px", lg: "180px" },
+                    height: { xs: "100px", md: "160px", lg: "180px" },
+                  }}
+                />
               </p>
             );
           })}
-        </Grid>
+        </>
       ) : null}
     </Grid>
   );

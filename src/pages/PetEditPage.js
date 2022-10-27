@@ -21,7 +21,17 @@ const PetEditPage = () => {
       <Grid container>
         <Grid item xs={12}></Grid>
         <Container maxwidth="xl">
-          <Grid item container xs={12} padding={{ xs: 0, md: 5 }}>
+          <Grid
+            item
+            container
+            xs={12}
+            padding={{ xs: 0, md: 5 }}
+            component={Paper}
+            sx={{
+              backgroundColor: "grey.light",
+              borderRadius: "10px",
+            }}
+          >
             <h2>Editar Mascota</h2>
             {!data && !user && <CircularProgress />}
             {data && user && (

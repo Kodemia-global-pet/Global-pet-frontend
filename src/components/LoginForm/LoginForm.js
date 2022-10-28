@@ -33,7 +33,7 @@ const LoginForm = () => {
     if (!result) setError("No ingresaste Correctamente los Datos");
     else {
       setError(null);
-      navigate("/");
+      navigate("/pets");
     }
   };
 

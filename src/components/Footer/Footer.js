@@ -9,6 +9,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import Typography from "@mui/material/Typography";
+import Link from '@mui/material/Link';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -37,7 +38,9 @@ const Footer = () => {
         <Typography sx={{ fontWeight: "bold", color: "black.main" }}>
           Informacion util
         </Typography>
-        <Typography>Centro de ayuda</Typography>
+        <Typography>
+        <Link href="/faq">Centro de ayuda</Link>
+          </Typography>
         <Typography>Preguntas frecuentes</Typography>
       </Grid>
 

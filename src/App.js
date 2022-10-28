@@ -6,6 +6,7 @@ import MyPetsPage from "./pages/MyPetsPage";
 import PetDetailPage from "./pages/PetDetailPage";
 import MyAccount from "./pages/MyAccount";
 import FaqPage from "./pages/FaqPage";
+import PetEditPage from "./pages/PetEditPage";
 import PetsNewPage from "./pages/PetsNewPage";
 
 function App() {
@@ -18,9 +19,9 @@ function App() {
         <Route path="/create-account" element={<CreateAccount />} />
         <Route path="/pets" element={<MyPetsPage />} />
         <Route path="/pets/:petID" element={<PetDetailPage />} />
+        <Route path="/pets/:petID/edit" element={<PetEditPage />} />
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/my-account" element={<MyAccount />} />
-        {/* <Route path="/public/pets/:petID" element={<MyAccount />} /> */}
       </Routes>
     </div>
   );

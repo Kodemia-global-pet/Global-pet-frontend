@@ -1,13 +1,10 @@
-import { Button, Grid } from "@mui/material";
+import { Avatar, Button, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import CustomImage from "../CustomImage/CustomImage";
 
 const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
 
-function VistaImagen() {
-  const [imageFiles, setImageFiles] = useState([]);
-  const [images, setImages] = useState([]);
-
+function UploadButton({ images, setImages, imageFiles, setImageFiles }) {
   const changeHandler = (e) => {
     const { files } = e.target;
     const validImageFiles = [];
@@ -54,10 +51,21 @@ function VistaImagen() {
     };
   }, [imageFiles]);
   return (
-    <Grid className="ImagPet">
+    <Grid
+      xs={12}
+      sx={{
+        mb: { xs: 3 },
+        justifyContent: "center",
+      }}
+    >
       <form>
         <p>
-          <Button htmlFor="file" component="label" variant="contained">
+          <Button
+            htmlFor="file"
+            component="label"
+            variant="contained"
+            sx={{ mb: 3 }}
+          >
             Subir Foto
             <input
               hidden
@@ -71,18 +79,24 @@ function VistaImagen() {
         </p>
       </form>
       {images.length > 0 ? (
-        <Grid>
+        <>
           {images.map((image, idx) => {
             return (
               <p key={idx}>
-                <CustomImage src={image} alt="" />
+                <Avatar
+                  src={image}
+                  sx={{
+                    width: { xs: "100px", md: "160px", lg: "180px" },
+                    height: { xs: "100px", md: "160px", lg: "180px" },
+                  }}
+                />
               </p>
             );
           })}
-        </Grid>
+        </>
       ) : null}
     </Grid>
   );
 }
 
-export default VistaImagen;
+export default UploadButton;

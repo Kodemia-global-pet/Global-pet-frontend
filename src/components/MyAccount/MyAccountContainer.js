@@ -4,7 +4,7 @@ import { useLogedUser } from "../../context/UserContext";
 import { CircularProgress } from "@mui/material";
 import MyAccountAside from "./MyAccountAside";
 import Grid from "@mui/material/Grid";
-import QrDialog from "../Qr/QrDialog";
+
 
 const MyAccountContainer = () => {
   let { user } = useLogedUser();
@@ -19,9 +19,6 @@ console.log("user", user)
           </Grid>
           <Grid item xs={12} lg={9}>
             <MyAccountHeader user={user} />
-          </Grid>
-          <Grid item xs={12} lg={9}>
-            <QrDialog></QrDialog>
           </Grid>
         </Grid>
       )}

@@ -22,7 +22,7 @@ import { useLogedUser } from "../../../context/UserContext";
 
 const MainNavbar = () => {
   //const [user, setUser] = useState(null);
-  
+
   const { user } = useLogedUser();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -33,10 +33,10 @@ const MainNavbar = () => {
     setAnchorEl(null);
   };
 
-  const logout = () =>{
-    localStorage.clear()
-    window.location.href="/"
-  }
+  const logout = () => {
+    localStorage.clear();
+    window.location.href = "/";
+  };
   return (
     <Box sx={{ flexGrow: 1, mb: 2 }}>
       <AppBar
@@ -68,28 +68,32 @@ const MainNavbar = () => {
             <BottomNavigationAction
               showLabel
               label="Inicio"
-              LinkComponent={Link}
+              LinkComponent={RouterLink}
               to="/"
               icon={<HomeIcon />}
             />
-            <BottomNavigationAction
-              showLabel
-              label="Mis mascotas"
-              LinkComponent={Link}
-              to="/pets"
-              icon={<PetsIcon />}
-            />
-            <BottomNavigationAction
-              showLabel
-              label="Configuracion"
-              LinkComponent={Link}
-              to="/my-account"
-              icon={<SettingsIcon />}
-            />
+            {user && (
+              <>
+                <BottomNavigationAction
+                  showLabel
+                  label="Mis mascotas"
+                  LinkComponent={RouterLink}
+                  to="/pets"
+                  icon={<PetsIcon />}
+                />
+                <BottomNavigationAction
+                  showLabel
+                  label="Configuracion"
+                  LinkComponent={RouterLink}
+                  to="/my-account"
+                  icon={<SettingsIcon />}
+                />
+              </>
+            )}
             <BottomNavigationAction
               showLabel
               label="Ayuda"
-              LinkComponent={Link}
+              LinkComponent={RouterLink}
               to="/faq"
               icon={<HelpIcon />}
             />
@@ -178,11 +182,11 @@ const MainNavbar = () => {
                 transformOrigin={{ horizontal: "right", vertical: "top" }}
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
-                <MenuItem as={Link} to="/my-account">
+                <MenuItem as={RouterLink} to="/my-account">
                   <Avatar /> Mi cuenta
                 </MenuItem>
                 <Divider />
-                <MenuItem as={Link} to="/my-account">
+                <MenuItem as={RouterLink} to="/my-account">
                   <ListItemIcon>
                     <Settings fontSize="small" />
                   </ListItemIcon>

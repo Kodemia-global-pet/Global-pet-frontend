@@ -1,12 +1,11 @@
-import React from "react";
-import { AppBar, Toolbar} from "@mui/material";
+import React, { useState, useContext, useEffect } from "react";
+import { AppBar, Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import HomeIcon from "@mui/icons-material/Home";
 import PetsIcon from "@mui/icons-material/Pets";
 import SettingsIcon from "@mui/icons-material/Settings";
 import HelpIcon from "@mui/icons-material/Help";
-
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -17,9 +16,14 @@ import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import Button from "@mui/material/Button";
+import { Link as RouterLink, MemoryRouter } from "react-router-dom";
+import Link from "@mui/material/Link";
+import { useLogedUser } from "../../../context/UserContext";
 
 const MainNavbar = () => {
-
+  //const [user, setUser] = useState(null);
+  
+  const { user } = useLogedUser();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -29,6 +33,10 @@ const MainNavbar = () => {
     setAnchorEl(null);
   };
 
+  const logout = () =>{
+    localStorage.clear()
+    window.location.href="/"
+  }
   return (
     <Box sx={{ flexGrow: 1, mb: 2 }}>
       <AppBar
@@ -60,119 +68,135 @@ const MainNavbar = () => {
             <BottomNavigationAction
               showLabel
               label="Inicio"
+              LinkComponent={Link}
+              to="/"
               icon={<HomeIcon />}
             />
             <BottomNavigationAction
               showLabel
               label="Mis mascotas"
+              LinkComponent={Link}
+              to="/pets"
               icon={<PetsIcon />}
             />
             <BottomNavigationAction
               showLabel
               label="Configuracion"
+              LinkComponent={Link}
+              to="/my-account"
               icon={<SettingsIcon />}
             />
             <BottomNavigationAction
               showLabel
               label="Ayuda"
+              LinkComponent={Link}
+              to="/faq"
               icon={<HelpIcon />}
             />
           </Box>
-          <Box sx={{ marginX: 2 }}>
-            <Button
-              href=""
-              variant="outlined"
-              sx={{ color: "black.main", borderColor: "black.main" }}
-            >
-              {" "}
-              Iniciar sesion
-            </Button>
-          </Box>
-          <Box>
-            <Button
-              href=""
-              variant="outlined"
-              sx={{ color: "black.main", borderColor: "black.main" }}
-            >
-              {" "}
-              Crear cuenta
-            </Button>
-          </Box>
-
-          <React.Fragment>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                textAlign: "center",
-              }}
-            >
-              <Tooltip title="Account settings">
-                <IconButton
-                  onClick={handleClick}
-                  size="small"
-                  sx={{ ml: 2 }}
-                  aria-controls={open ? "account-menu" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={open ? "true" : undefined}
+          {!user && (
+            <>
+              <Box sx={{ marginX: 2 }}>
+                <Button
+                  LinkComponent={RouterLink}
+                  to="/login"
+                  variant="outlined"
+                  sx={{ color: "black.main", borderColor: "black.main" }}
                 >
-                  <Avatar sx={{ width: 40, height: 40 }}>M</Avatar>
-                </IconButton>
-              </Tooltip>
-            </Box>
-            <Menu
-              anchorEl={anchorEl}
-              id="account-menu"
-              open={open}
-              onClose={handleClose}
-              onClick={handleClose}
-              PaperProps={{
-                elevation: 0,
-                sx: {
-                  overflow: "visible",
-                  filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                  mt: 1.5,
-                  "& .MuiAvatar-root": {
-                    width: 32,
-                    height: 32,
-                    ml: -0.5,
-                    mr: 1,
+                  {" "}
+                  Iniciar sesion
+                </Button>
+              </Box>
+
+              <Box>
+                <Button
+                  LinkComponent={RouterLink}
+                  to="/create-account"
+                  variant="outlined"
+                  sx={{ color: "black.main", borderColor: "black.main" }}
+                >
+                  {" "}
+                  Crear cuenta
+                </Button>
+              </Box>
+            </>
+          )}
+          {user && (
+            <React.Fragment>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  textAlign: "center",
+                }}
+              >
+                <Tooltip title="Account settings">
+                  <IconButton
+                    onClick={handleClick}
+                    size="small"
+                    sx={{ ml: 2 }}
+                    aria-controls={open ? "account-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                  >
+                    <Avatar sx={{ width: 40, height: 40 }}>M</Avatar>
+                  </IconButton>
+                </Tooltip>
+              </Box>
+              <Menu
+                anchorEl={anchorEl}
+                id="account-menu"
+                open={open}
+                onClose={handleClose}
+                onClick={handleClose}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: "visible",
+                    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                    mt: 1.5,
+                    "& .MuiAvatar-root": {
+                      width: 32,
+                      height: 32,
+                      ml: -0.5,
+                      mr: 1,
+                    },
+                    "&:before": {
+                      content: '""',
+                      display: "block",
+                      position: "absolute",
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: "background.paper",
+                      transform: "translateY(-50%) rotate(45deg)",
+                      zIndex: 0,
+                    },
                   },
-                  "&:before": {
-                    content: '""',
-                    display: "block",
-                    position: "absolute",
-                    top: 0,
-                    right: 14,
-                    width: 10,
-                    height: 10,
-                    bgcolor: "background.paper",
-                    transform: "translateY(-50%) rotate(45deg)",
-                    zIndex: 0,
-                  },
-                },
-              }}
-              transformOrigin={{ horizontal: "right", vertical: "top" }}
-              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-            >
-              <MenuItem>
-                <Avatar /> Mi cuenta
-              </MenuItem>
-              <Divider />
-              <MenuItem>
-                <ListItemIcon>
-                  <Settings fontSize="small" />
-                </ListItemIcon>
-                Configuracion de la cuenta
-              </MenuItem>
-              <MenuItem>
-                <ListItemIcon>
-                  <Logout fontSize="small" />
-                </ListItemIcon>
-                Cerrar sesion
-              </MenuItem>
-            </Menu>
-          </React.Fragment>
+                }}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+              >
+                <MenuItem as={Link} to="/my-account">
+                  <Avatar /> Mi cuenta
+                </MenuItem>
+                <Divider />
+                <MenuItem as={Link} to="/my-account">
+                  <ListItemIcon>
+                    <Settings fontSize="small" />
+                  </ListItemIcon>
+                  Configuracion de la cuenta
+                </MenuItem>
+                <MenuItem onClick={logout}>
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
+                  Cerrar sesion
+                </MenuItem>
+              </Menu>
+            </React.Fragment>
+          )}
         </Toolbar>
       </AppBar>
     </Box>

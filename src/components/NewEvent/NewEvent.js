@@ -1,26 +1,37 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, TextField, Button, Alert, Box, MenuItem } from "@mui/material";
 import { const_event_types } from "../../helpers/constants";
 import DropFileInput from "./DropFileInput";
 import { createEvent } from "../../services/backend";
+import moment from "moment";
 
-const NewEvent = ({ petID, token, record = false }) => {
+const NewEvent = ({ petID, token, record = false, event = {} }) => {
   let navigate = useNavigate();
-  console.log(record);
+  const eventID = event?._id;
   const [error, setError] = useState(null);
   const [files, setFiles] = useState([]);
+  const [attachments, setAttachments] = useState(event?.attachments || []);
+  const [deleted, setDeleted] = useState([]);
+  const [previewFiles, setPreviewFiles] = useState([]);
 
   const {
     register,
     getValues,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      ...event,
+      date: event.date ? moment(event.date).format("yyyy-MM-DD") : undefined,
+    },
+  });
 
   const onSubmit = async () => {
     let formData = new FormData();
+    console.log(event);
+    console.log(files);
     formData.append("date", getValues("date"));
     formData.append("title", getValues("title"));
     formData.append("description", getValues("description"));
@@ -34,7 +45,7 @@ const NewEvent = ({ petID, token, record = false }) => {
     files.forEach((file) => {
       formData.append("file", file);
     });
-
+    return;
     const response = await createEvent(petID, token, formData);
     const result = await response.json();
     if (!result.success) setError("Ocurrió un error.");
@@ -186,7 +197,16 @@ const NewEvent = ({ petID, token, record = false }) => {
           </form>
         </Box>
       </Grid>
-      <DropFileInput files={files} setFiles={setFiles} />
+      <DropFileInput
+        files={files}
+        setFiles={setFiles}
+        previewFiles={previewFiles}
+        setPreviewFiles={setPreviewFiles}
+        attachments={attachments}
+        setAttachments={setAttachments}
+        deleted={deleted}
+        setDeleted={setDeleted}
+      />
     </>
   );
 };

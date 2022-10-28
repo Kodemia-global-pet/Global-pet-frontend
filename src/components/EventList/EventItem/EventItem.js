@@ -2,6 +2,7 @@ import { Grid } from "@mui/material";
 import React from "react";
 import CustomButton from "../../CustomButton/CustomButton";
 import CustomCaption from "../../CustomCaption/CustomCaption";
+import { Link as RouterLink } from "react-router-dom";
 
 const EventItem = ({
   record,
@@ -52,8 +53,13 @@ const EventItem = ({
             gap: 1,
           }}
         >
-          <CustomButton label="Ver Documentos" color="primary" />
-          <CustomButton label="Editar" color="primary" icon="edit" />
+          <CustomButton
+            label="Editar"
+            component={RouterLink}
+            to={"/events/" + record._id + "/edit"}
+            color="primary"
+            icon="edit"
+          />
           <CustomButton label="Eliminar" color="danger" icon="delete" />
         </Grid>
       )}

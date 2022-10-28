@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -12,7 +12,16 @@ import CustomImage from "../CustomImage/CustomImage";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./DropFielInput.css";
 
-const DropFileInput = ({ files, setFiles }) => {
+const DropFileInput = ({
+  files,
+  setFiles,
+  previewFiles,
+  setPreviewFiles,
+  attachments,
+  setAttachments,
+  deleted,
+  setDeleted,
+}) => {
   const onFileDrop = (e) => {
     const newFile = e.target.files[0];
     if (newFile) {
@@ -26,6 +35,41 @@ const DropFileInput = ({ files, setFiles }) => {
     updatedList.splice(files.indexOf(file), 1);
     setFiles(updatedList);
   };
+
+  useEffect(() => {
+    const images = [],
+      fileReaders = [];
+    let isCancel = false;
+    if (files.length) {
+      files.forEach((file) => {
+        const fileReader = new FileReader();
+        fileReaders.push(fileReader);
+        fileReader.onload = (e) => {
+          console.log("ee", e);
+          const { result } = e.target;
+          console.log("result", result);
+          if (result) {
+            images.push(result);
+          }
+          if (images.length === files.length && !isCancel) {
+            console.log("result", images);
+            setPreviewFiles(images);
+          }
+        };
+        //console.log(file);
+        fileReader.readAsDataURL(file);
+      });
+    }
+    return () => {
+      isCancel = true;
+      fileReaders.forEach((fileReader) => {
+        if (fileReader.readyState === 1) {
+          fileReader.abort();
+        }
+      });
+    };
+  }, [files]);
+
   return (
     <>
       <Container
@@ -36,7 +80,7 @@ const DropFileInput = ({ files, setFiles }) => {
         }}
       >
         <Box className="uploader">
-          {files.length > 0 ? (
+          {files.length > 0 || attachments.length > 0 ? (
             <Grid
               container
               sx={{
@@ -46,7 +90,45 @@ const DropFileInput = ({ files, setFiles }) => {
                 alignItems: "center",
               }}
             >
-              {files.map((image, index) => (
+              {attachments
+                .filter((a) => !deleted.includes(a._id))
+                .map((attachment, index) => {
+                  console.log(attachment);
+                  return (
+                    <Grid
+                      item
+                      xs={12}
+                      md={4}
+                      lg={6}
+                      xl={4}
+                      key={index}
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <Box sx={{ borderRadius: 3, overflow: "hidden" }}>
+                        <CustomImage src={attachment.url} alt="" />
+                      </Box>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          flexDirection: "column",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <IconButton
+                          aria-label="delete"
+                          onClick={() =>
+                            setDeleted([...deleted, attachment._id])
+                          }
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </Box>
+                    </Grid>
+                  );
+                })}
+              {previewFiles?.map((image, index) => (
                 <Grid
                   item
                   xs={12}
@@ -58,7 +140,7 @@ const DropFileInput = ({ files, setFiles }) => {
                   alignItems="center"
                 >
                   <Box sx={{ borderRadius: 3, overflow: "hidden" }}>
-                    <CustomImage src={URL.createObjectURL(image)} alt="" />
+                    <CustomImage src={image} alt="" />
                   </Box>
                   <Box
                     sx={{
@@ -69,7 +151,6 @@ const DropFileInput = ({ files, setFiles }) => {
                     }}
                   >
                     <Typography mt={1}>{image.name}</Typography>
-                    <Typography>{image.size / 1000}KB</Typography>
 
                     <IconButton
                       aria-label="delete"

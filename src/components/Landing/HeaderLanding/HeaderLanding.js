@@ -6,9 +6,7 @@ const HeaderLanding = () => {
     <header
       className="landing-header"
       style={{
-        backgroundImage: `url(${
-          process.env.PUBLIC_URL + "/images/header-landing.png"
-        })`,
+        backgroundImage: `url(${process.env.PUBLIC_URL}/images/header-landing.png)`,
       }}
     >
       <Box
@@ -20,7 +18,7 @@ const HeaderLanding = () => {
           maxWidth: { xs: 80, md: 120 },
         }}
         alt="Global Pet"
-        src={process.env.PUBLIC_URL + "/images/logo.png"}
+        src={`${process.env.PUBLIC_URL}/images/logoHaky.png`}
       />
     </header>
   );

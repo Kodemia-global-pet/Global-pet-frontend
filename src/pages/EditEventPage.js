@@ -1,15 +1,22 @@
 import React from "react";
-import { Link, Typography, Box, Grid } from "@mui/material";
+import { Link, Typography, Box, Grid, Alert } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import NewEvent from "../components/NewEvent/NewEvent";
 import Template from "../components/Template/Template";
 import { useParams } from "react-router-dom";
 import { useLogedUser } from "../context/UserContext";
+import useFetch from "../hooks/useFetch";
 
-const NewEventPage = ({ event }) => {
+const EditEventPage = () => {
   const params = useParams();
   let { user } = useLogedUser();
+  const { data, error } = useFetch(
+    `${process.env.REACT_APP_BACKEND}records/${params.eventID}`
+  );
+
+  if (error)
+    return <Alert severity="error">Ocurrio un error, intente de nuevo</Alert>;
   return (
     <Template>
       <Box
@@ -34,7 +41,7 @@ const NewEventPage = ({ event }) => {
             alignItems: "start",
           }}
         >
-          Agregar Cita
+          Editar Cita
         </Typography>
       </Box>
       <Grid
@@ -44,10 +51,16 @@ const NewEventPage = ({ event }) => {
           justifyContent: "space-between",
         }}
       >
-        {user && <NewEvent petID={params.petID} token={user.token} />}
+        {user && data && (
+          <NewEvent
+            petID={params.petID}
+            token={user.token}
+            event={data.record}
+          />
+        )}
       </Grid>
     </Template>
   );
 };
 
-export default NewEventPage;
+export default EditEventPage;

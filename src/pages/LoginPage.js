@@ -21,14 +21,12 @@ const LoginPage = () => {
               width: "100vw",
             }}
           >
-            <LoginForm1 />
+            <LoginForm />
           </main>
-         
         </Grid>
         <Grid item xs={12}>
-          <Footer/>
+          <Footer />
         </Grid>
-        
       </Grid>
     </>
   );

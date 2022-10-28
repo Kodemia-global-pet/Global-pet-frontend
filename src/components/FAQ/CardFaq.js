@@ -6,15 +6,14 @@ const CardFaq = ({ ...props }) => {
     <Grid
       item
       container
-      display={{ xs: "none", sm: "block" }}
       sx={{
-        width: 261,
-        height: 194,
         borderRadius: 7,
         backgroundColor: "grey.light",
-        display: "flex",
+        flexDirection: "row",
         justifyContent: "center",
-        alignItems: "center",
+        mt: 3,
+        width: "261px",
+        height: "350px",
       }}
       {...props}
     />

@@ -1,9 +1,9 @@
 import { Container, Grid } from "@mui/material";
 import React from "react";
 import CustomImage from "../components/CustomImage/CustomImage";
-import CardFaq from "../components/FAQ/CardFaq";
-import Questions from "../components/FAQ/Questions";
 import Template from "../components/Template/Template";
+import CardFaq from "../components/FaqForm/CardFaq";
+import Questions from "../components/FaqForm/Questions";
 
 const FaqPage = () => {
   return (

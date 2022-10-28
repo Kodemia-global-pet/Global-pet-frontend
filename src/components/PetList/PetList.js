@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import CustomButton from "../CustomButton/CustomButton";
+import { Link as RouterLink } from "react-router-dom";
 
 const PetList = ({ pets }) => {
   return (
@@ -20,7 +21,13 @@ const PetList = ({ pets }) => {
         justifyContent="flex-end"
         alignItems="flex-end"
       >
-        <CustomButton label="Agregar Mascota" color="secondary" icon="add" />
+        <CustomButton
+          component={RouterLink}
+          to="/pets/new"
+          label="Agregar Mascota"
+          color="secondary"
+          icon="add"
+        />
       </Box>
 
       <TableContainer component={Paper}>
@@ -34,17 +41,35 @@ const PetList = ({ pets }) => {
           <TableBody sx={{ color: "black.light" }}>
             {pets.map((pet) => (
               <TableRow key={pet._id}>
-                <TableCell>{pet.name}</TableCell>
+                <TableCell>
+                  <Button
+                    variant="text"
+                    component={RouterLink}
+                    to={"/pets/" + pet._id}
+                    sx={{
+                      color: "black.main",
+                    }}
+                  >
+                    {pet.name}
+                  </Button>
+                </TableCell>
                 <TableCell
                   sx={{
                     display: "flex",
-                    justifyContent: "center",
                     alignItems: "center",
                     justifyContent: "space-evenly",
+                    gap: { xs: 2, md: 0 },
+                    flexDirection: { xs: "column", md: "row" },
                   }}
                 >
                   <CustomButton label="Codigo QR" color="secondary" icon="qr" />
-                  <CustomButton label="Editar" color="primary" icon="edit" />
+                  <CustomButton
+                    component={RouterLink}
+                    to={"/pets/" + pet._id + "/edit"}
+                    label="Editar"
+                    color="primary"
+                    icon="edit"
+                  />
                   <CustomButton
                     label="Agregar Evento"
                     color="primary"

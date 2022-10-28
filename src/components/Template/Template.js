@@ -8,7 +8,7 @@ const Template = ({ children }) => {
 
   return (
     <>
-      <Grid container >
+      <Grid container>
         <Grid item xs={12}>
           <MainNavbar />
         </Grid>
@@ -16,7 +16,8 @@ const Template = ({ children }) => {
           <main
             style={{
               backgroundImage: `url(${backgroundImage})`,
-              width: "100vw",
+              width: "100%",
+              minHeight: "calc(100vh - 322px)",
             }}
           >
             {children}

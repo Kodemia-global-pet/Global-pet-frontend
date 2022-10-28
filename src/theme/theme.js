@@ -23,7 +23,7 @@ const theme = createTheme({
     grey: {
       main: "#737373",
       light: "rgba(211, 208, 195, .5)",
-      contrast: "rgba(240, 240, 240, .9)",
+      contrastText: "rgba(240, 240, 240, .9)",
     },
     header_primary: {
       main: "#FED74C",

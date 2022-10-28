@@ -9,6 +9,7 @@ import FaqPage from "./pages/FaqPage";
 import NewEventPage from "./pages/NewEventPage";
 import PetEditPage from "./pages/PetEditPage";
 import PetsNewPage from "./pages/PetsNewPage";
+import NewRegisterPage from "./pages/NewRegisterPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/my-account" element={<MyAccount />} />
         <Route path="/pets/:petID/new-event" element={<NewEventPage />} />
+        <Route path="/pets/:petID/new-record" element={<NewRegisterPage />} />
       </Routes>
     </div>
   );

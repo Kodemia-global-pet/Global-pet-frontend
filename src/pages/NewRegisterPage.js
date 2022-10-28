@@ -7,7 +7,7 @@ import Template from "../components/Template/Template";
 import { useParams } from "react-router-dom";
 import { useLogedUser } from "../context/UserContext";
 
-const NewEventPage = () => {
+const NewRegisterPage = () => {
   const params = useParams();
   let { user } = useLogedUser();
   return (
@@ -34,7 +34,7 @@ const NewEventPage = () => {
             alignItems: "start",
           }}
         >
-          Agregar Cita
+          Agregar Registro
         </Typography>
       </Box>
       <Grid
@@ -44,10 +44,12 @@ const NewEventPage = () => {
           justifyContent: "space-between",
         }}
       >
-        {user && <NewEvent petID={params.petID} token={user.token} />}
+        {user && (
+          <NewEvent petID={params.petID} token={user.token} record={true} />
+        )}
       </Grid>
     </Template>
   );
 };
 
-export default NewEventPage;
+export default NewRegisterPage;

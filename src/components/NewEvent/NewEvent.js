@@ -3,19 +3,15 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { Grid, TextField, Button, Alert, Box, MenuItem } from "@mui/material";
 import { useLogedUser } from "../../context/UserContext";
+import { const_event_types } from "../../helpers/constants";
+import DropFileInput from "./DropFileInput";
+import { createEvent } from "../../services/backend";
 
-const NewEvent = () => {
+const NewEvent = ({ petID, token }) => {
   let navigate = useNavigate();
-  const const_sizes = [
-    { value: "xs", label: "Extra Chico" },
-    { value: "s", label: "Chico" },
-    { value: "m", label: "Mediana" },
-    { value: "lg", label: "Grande" },
-    { value: "xl", label: "Extra grande" },
-  ];
   const [error, setError] = useState(null);
+  const [files, setFiles] = useState([]);
 
-  const { login } = useLogedUser();
   const {
     register,
     getValues,
@@ -24,29 +20,24 @@ const NewEvent = () => {
   } = useForm();
 
   const onSubmit = async () => {
-    const name = getValues("name");
-    const breed = getValues("breed");
-    const date = getValues("date");
-    const size = getValues("size");
-    const vet = getValues("vet");
-    const type = getValues("type");
-    const other_info = getValues("other_info");
-    const description = getValues("description");
+    let formData = new FormData();
+    formData.append("date", getValues("date"));
+    formData.append("time", getValues("time"));
+    formData.append("title", getValues("title"));
+    formData.append("vet", getValues("vet"));
+    formData.append("type", getValues("type"));
+    formData.append("description", getValues("description"));
+    formData.append("other_info", getValues("other_info"));
+    files.forEach((file) => {
+      formData.append("file", file);
+    });
 
-    const result = await login(
-      name,
-      breed,
-      date,
-      size,
-      vet,
-      type,
-      other_info,
-      description
-    );
-    if (!result) setError("No ingresaste Correctamente los Datos");
+    const response = await createEvent(petID, token, formData);
+    const result = await response.json();
+    if (!result.success) setError("Ocurrió un error.");
     else {
       setError(null);
-      navigate("/");
+      navigate(`/pets/${petID}`);
     }
   };
 
@@ -105,22 +96,9 @@ const NewEvent = () => {
               fullWidth
               label="Titulo"
               autoComplete="titulo"
-              {...register("title", {
-                required: "Completa Este Campo",
-              })}
-              error={!!errors?.size}
-              helperText={errors.size?.message}
-            />
-            <TextField
-              margin="normal"
-              fullWidth
-              label="Veterinario"
-              autoComplete="veterinario"
-              {...register("vet", {
-                required: "Completa Este Campo",
-              })}
-              error={!!errors?.feeding}
-              helperText={errors.feeding?.message}
+              {...register("title")}
+              error={!!errors?.title}
+              helperText={errors.title?.message}
             />
 
             <TextField
@@ -132,10 +110,10 @@ const NewEvent = () => {
               {...register("type", {
                 required: "Completa Este Campo",
               })}
-              error={!!errors?.size}
-              helperText={errors.size?.message}
+              error={!!errors?.type}
+              helperText={errors.type?.message}
             >
-              {const_sizes.map((option) => (
+              {const_event_types.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
@@ -144,25 +122,31 @@ const NewEvent = () => {
             <TextField
               margin="normal"
               fullWidth
-              label="Otra informacion"
-              autoComplete="otherInformation"
-              {...register("other_info", {
-                required: "Completa Este Campo",
-              })}
-              error={!!errors?.allergies}
-              helperText={errors.allergies?.message}
+              label="Veterinario"
+              autoComplete="veterinario"
+              {...register("vet")}
+              error={!!errors?.vet}
+              helperText={errors.vet?.message}
             />
+
             <TextField
               margin="normal"
               fullWidth
               type="text"
               label="Descripcion"
               autoComplete="description"
-              {...register("description", {
-                required: "Completa Este Campo",
-              })}
-              error={!!errors?.allergies}
-              helperText={errors.allergies?.message}
+              {...register("description")}
+              error={!!errors?.description}
+              helperText={errors.description?.message}
+            />
+            <TextField
+              margin="normal"
+              fullWidth
+              label="Otra informacion"
+              autoComplete="otherInformation"
+              {...register("other_info")}
+              error={!!errors?.other_info}
+              helperText={errors.other_info?.message}
             />
             <Grid
               container
@@ -189,6 +173,7 @@ const NewEvent = () => {
           </form>
         </Box>
       </Grid>
+      <DropFileInput files={files} setFiles={setFiles} />
     </>
   );
 };

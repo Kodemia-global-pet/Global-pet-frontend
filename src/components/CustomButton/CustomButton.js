@@ -2,6 +2,7 @@ import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import QrCodeIcon from "@mui/icons-material/QrCode";
 
 const iconMap = {
@@ -9,16 +10,22 @@ const iconMap = {
   add: <AddIcon />,
   edit: <EditIcon />,
   qr: <QrCodeIcon />,
+  user: <AccountCircleIcon />,
 };
 
-
-const CustomButton = ({ label, color, icon }) => {
-
+const CustomButton = ({
+  label,
+  color,
+  icon,
+  variant = "contained",
+  ...props
+}) => {
   return (
     <Button
-      variant="contained"
-      color= {color}
+      variant={variant}
+      color={color}
       startIcon={iconMap[icon]}
+      {...props}
     >
       {label}
     </Button>

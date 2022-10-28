@@ -23,3 +23,38 @@ export const getUserService = async (userID) =>
       "Content-Type": "application/json",
     },
   });
+
+export const createPet = async (userID, token, formData) =>
+  fetch(`${process.env.REACT_APP_BACKEND}users/${userID}/pet`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });
+
+export const updatePet = async (petID, token, formData) =>
+  fetch(`${process.env.REACT_APP_BACKEND}pets/${petID}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });
+
+export const deletePet = async (petID, token) =>
+  fetch(`${process.env.REACT_APP_BACKEND}pets/${petID}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+export const createEvent = async (petID, token, formData) =>
+  fetch(`${process.env.REACT_APP_BACKEND}pets/${petID}/records`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });

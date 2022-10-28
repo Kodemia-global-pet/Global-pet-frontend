@@ -12,23 +12,19 @@ import CustomImage from "../CustomImage/CustomImage";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./DropFielInput.css";
 
-const DropFileInput = (props) => {
-  const [images, setImages] = useState([]);
-
+const DropFileInput = ({ files, setFiles }) => {
   const onFileDrop = (e) => {
     const newFile = e.target.files[0];
     if (newFile) {
-      const updatedList = [...images, newFile];
-      setImages(updatedList);
-      props.onFileChange(updatedList);
+      const updatedList = [...files, newFile];
+      setFiles(updatedList);
     }
   };
 
   const fileRemove = (file) => {
-    const updatedList = [...images];
-    updatedList.splice(images.indexOf(file), 1);
-    setImages(updatedList);
-    props.onFileChange(updatedList);
+    const updatedList = [...files];
+    updatedList.splice(files.indexOf(file), 1);
+    setFiles(updatedList);
   };
   return (
     <>
@@ -40,7 +36,7 @@ const DropFileInput = (props) => {
         }}
       >
         <Box className="uploader">
-          {images.length > 0 ? (
+          {files.length > 0 ? (
             <Grid
               container
               sx={{
@@ -50,7 +46,7 @@ const DropFileInput = (props) => {
                 alignItems: "center",
               }}
             >
-              {images.map((image, index) => (
+              {files.map((image, index) => (
                 <Grid
                   item
                   xs={12}
@@ -104,7 +100,7 @@ const DropFileInput = (props) => {
               type="file"
               value=""
               onChange={onFileDrop}
-              accept="image/png, image/jpg, image/jpeg"
+              accept="image/png, image/jpg, image/jpeg, application/pdf, video/*"
               multiple
             />
           </Button>

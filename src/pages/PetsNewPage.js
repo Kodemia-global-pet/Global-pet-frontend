@@ -1,16 +1,18 @@
 import React from "react";
-import { Link, Typography, Box, Grid } from "@mui/material";
-
+import { Link, Typography, Box, Grid, CircularProgress } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
-import NewEvent from "../components/NewEvent/NewEvent";
-import DropFileInput from "../components/NewEvent/DropFileInput";
+import PetsNew from "../components/PetsNew/PetsNew";
 import Template from "../components/Template/Template";
+import { Container } from "@mui/system";
+import { useLogedUser } from "../context/UserContext";
 
-const NewEventPage = () => {
+const PetsNewPage = () => {
+  let { user } = useLogedUser();
+
   return (
-    <>
-      <Template>
+    <Template>
+      <Container maxWidth="xl">
         <Box
           sx={{
             display: "flex",
@@ -33,22 +35,16 @@ const NewEventPage = () => {
               alignItems: "start",
             }}
           >
-            Agregar Evento
+            Agregar mascota
           </Typography>
         </Box>
-        <Grid
-          item
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <NewEvent />
-          <DropFileInput />
+        <Grid container item xs={12}>
+          {!user && <CircularProgress />}
+          {user && <PetsNew userID={user._id} token={user.token} />}
         </Grid>
-      </Template>
-    </>
+      </Container>
+    </Template>
   );
 };
 
-export default NewEventPage;
+export default PetsNewPage;

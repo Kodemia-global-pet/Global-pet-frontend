@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import {
   getTokenLocalStorage,
   getUserData,
-  getUserLocalStorage,
+  // getUserLocalStorage,
   saveTokenLocalStorage,
 } from "../helpers/userHelper";
 import { loginService } from "../services/backend";

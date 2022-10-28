@@ -65,17 +65,21 @@ const PetList = ({ pets }) => {
                   <CustomButton label="Codigo QR" color="secondary" icon="qr" />
                   <CustomButton
                     component={RouterLink}
-                    to={"/pets/" + pet._id + "/edit"}
+                    to={`/pets/${pet._id}/edit`}
                     label="Editar"
                     color="primary"
                     icon="edit"
                   />
                   <CustomButton
-                    label="Agregar Evento"
+                    component={RouterLink}
+                    to={`/pets/${pet._id}/new-event`}
+                    label="Agregar Cita"
                     color="primary"
                     icon="add"
                   />
                   <CustomButton
+                    component={RouterLink}
+                    to={`/pets/${pet._id}/new-record`}
                     label="Agregar Registro"
                     color="primary"
                     icon="add"

@@ -45,7 +45,7 @@ const NewEvent = ({ petID, token, record = false, event = {} }) => {
     files.forEach((file) => {
       formData.append("file", file);
     });
-    return;
+
     const response = await createEvent(petID, token, formData);
     const result = await response.json();
     if (!result.success) setError("Ocurrió un error.");

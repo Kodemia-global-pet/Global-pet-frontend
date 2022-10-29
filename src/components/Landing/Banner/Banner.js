@@ -55,7 +55,7 @@ const Banner = (props) => {
               <Button
                 variant="outlined"
                 component={RouterLink}
-                to="/"
+                to="/create-account"
                 sx={{ color: "black.main", borderColor: "black.main", mb: 2 }}
               >
                 Registrarse

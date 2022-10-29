@@ -9,7 +9,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import Typography from "@mui/material/Typography";
-import Link from '@mui/material/Link';
+import Link from "@mui/material/Link";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -22,7 +22,13 @@ const Item = styled(Paper)(({ theme }) => ({
 const Footer = () => {
   return (
     <Grid
-      sx={{ mt: 7, py: 3, backgroundColor: "grey.light", px: 5, position:"relative"}}
+      sx={{
+        mt: 7,
+        py: 3,
+        backgroundColor: "grey.light",
+        px: 5,
+        position: "relative",
+      }}
       container
       spacing={2}
       justifyContent="space-around"
@@ -39,12 +45,19 @@ const Footer = () => {
           Informacion util
         </Typography>
         <Typography>
-        <Link href="/faq">Centro de ayuda</Link>
-          </Typography>
+          <Link href="/faq">Centro de ayuda</Link>
+        </Typography>
         <Typography>Preguntas frecuentes</Typography>
       </Grid>
 
-      <Grid item xs={6} md={3} direction="row" justifyContent="space-around">
+      <Grid
+        container
+        item
+        xs={6}
+        md={3}
+        direction="row"
+        justifyContent="space-around"
+      >
         <FacebookIcon />
         <YouTubeIcon />
         <InstagramIcon />
@@ -54,11 +67,11 @@ const Footer = () => {
         <Box
           sx={{
             position: "absolute",
-            bottom:"100px",
-            display:{
-              xs:"none", 
-              md:"block"
-            }
+            bottom: "100px",
+            display: {
+              xs: "none",
+              md: "block",
+            },
           }}
           component="img"
           alt="Haky"

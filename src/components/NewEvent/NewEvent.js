@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Grid, TextField, Button, Alert, Box, MenuItem } from "@mui/material";
 import { const_event_types } from "../../helpers/constants";
 import DropFileInput from "./DropFileInput";
-import { createEvent } from "../../services/backend";
+import { createEvent, updateEvent } from "../../services/backend";
 import moment from "moment";
 
 const NewEvent = ({ petID, token, record = false, event = {} }) => {
@@ -14,7 +14,6 @@ const NewEvent = ({ petID, token, record = false, event = {} }) => {
   const [files, setFiles] = useState([]);
   const [attachments, setAttachments] = useState(event?.attachments || []);
   const [deleted, setDeleted] = useState([]);
-  const [previewFiles, setPreviewFiles] = useState([]);
 
   const {
     register,
@@ -30,8 +29,7 @@ const NewEvent = ({ petID, token, record = false, event = {} }) => {
 
   const onSubmit = async () => {
     let formData = new FormData();
-    console.log(event);
-    console.log(files);
+
     formData.append("date", getValues("date"));
     formData.append("title", getValues("title"));
     formData.append("description", getValues("description"));
@@ -45,28 +43,45 @@ const NewEvent = ({ petID, token, record = false, event = {} }) => {
     files.forEach((file) => {
       formData.append("file", file);
     });
-    return;
-    const response = await createEvent(petID, token, formData);
-    const result = await response.json();
-    if (!result.success) setError("Ocurrió un error.");
-    else {
-      setError(null);
-      navigate(`/pets/${petID}`);
+    if (eventID) {
+      formData.append("deleted", deleted);
+      const response = await updateEvent(eventID, token, formData);
+      const result = await response.json();
+      if (!result.success) setError("Ocurrió un error.");
+      else {
+        setError(null);
+        navigate(`/pets`);
+      }
+    } else {
+      const response = await createEvent(petID, token, formData);
+      const result = await response.json();
+      if (!result.success) setError("Ocurrió un error.");
+      else {
+        setError(null);
+        navigate(`/pets/${petID}`);
+      }
     }
   };
 
   return (
-    <>
+    <Grid
+      container
+      xs={12}
+      sx={{
+        justifyContent: "space-between",
+      }}
+    >
       <Grid
         item
         container
         sx={{
-          backgroundColor: "grey.contrast",
+          backgroundColor: "grey.light",
           color: "#545454",
           borderRadius: "10px",
           width: "100%",
-          ml: 2,
         }}
+        xs={12}
+        md={6}
       >
         {error && <Alert severity="error">{error} </Alert>}
 
@@ -129,6 +144,7 @@ const NewEvent = ({ petID, token, record = false, event = {} }) => {
                 })}
                 error={!!errors?.type}
                 helperText={errors.type?.message}
+                defaultValue={getValues("type")}
               >
                 {const_event_types.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
@@ -197,17 +213,16 @@ const NewEvent = ({ petID, token, record = false, event = {} }) => {
           </form>
         </Box>
       </Grid>
-      <DropFileInput
-        files={files}
-        setFiles={setFiles}
-        previewFiles={previewFiles}
-        setPreviewFiles={setPreviewFiles}
-        attachments={attachments}
-        setAttachments={setAttachments}
-        deleted={deleted}
-        setDeleted={setDeleted}
-      />
-    </>
+      <Grid item container xs={12} md={5}>
+        <DropFileInput
+          files={files}
+          setFiles={setFiles}
+          attachments={attachments}
+          deleted={deleted}
+          setDeleted={setDeleted}
+        />
+      </Grid>
+    </Grid>
   );
 };
 

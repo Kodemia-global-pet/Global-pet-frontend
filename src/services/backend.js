@@ -58,3 +58,19 @@ export const createEvent = async (petID, token, formData) =>
     },
     body: formData,
   });
+export const updateEvent = async (eventID, token, formData) =>
+  fetch(`${process.env.REACT_APP_BACKEND}records/${eventID}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });
+
+export const deleteRecord = async (recordID, token) =>
+  fetch(`${process.env.REACT_APP_BACKEND}records/${recordID}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });

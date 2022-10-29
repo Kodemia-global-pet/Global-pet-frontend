@@ -11,6 +11,7 @@ import PetEditPage from "./pages/PetEditPage";
 import PetsNewPage from "./pages/PetsNewPage";
 import NewRegisterPage from "./pages/NewRegisterPage";
 import EditEventPage from "./pages/EditEventPage";
+import EditRegisterPage from "./pages/EditRegisterPage";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/pets/:petID/new-event" element={<NewEventPage />} />
         <Route path="/pets/:petID/new-record" element={<NewRegisterPage />} />
         <Route path="/events/:eventID/edit" element={<EditEventPage />} />
+        <Route path="/records/:eventID/edit" element={<EditRegisterPage />} />
       </Routes>
     </div>
   );

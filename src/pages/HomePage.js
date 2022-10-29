@@ -1,13 +1,22 @@
 import { Container, Grid } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import HeaderLanding from "../components/Landing/HeaderLanding/HeaderLanding";
 import Banner from "../components/Landing/Banner/Banner";
 import "../main.css";
 import AboutUs from "../components/Landing/AboutUs/AboutUs";
 import Service from "../components/Landing/Service/Service";
 import CustomImage from "../components/CustomImage/CustomImage";
+import { useLogedUser } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+  const {user} = useLogedUser();
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    if(user) navigate("/pets")
+  },[])
+
   return (
     <Grid container>
       <Grid item xs={12}>

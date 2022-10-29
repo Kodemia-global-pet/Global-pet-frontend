@@ -6,10 +6,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import CustomButton from "../CustomButton/CustomButton";
 import { Link as RouterLink } from "react-router-dom";
+import QrDialog from "../Qr/QrDialog";
 
 const PetList = ({ pets }) => {
   return (
@@ -62,20 +63,24 @@ const PetList = ({ pets }) => {
                     flexDirection: { xs: "column", md: "row" },
                   }}
                 >
-                  <CustomButton label="Codigo QR" color="secondary" icon="qr" />
+                  <QrDialog petId= {pet._id}/>
                   <CustomButton
                     component={RouterLink}
-                    to={"/pets/" + pet._id + "/edit"}
+                    to={`/pets/${pet._id}/edit`}
                     label="Editar"
                     color="primary"
                     icon="edit"
                   />
                   <CustomButton
-                    label="Agregar Evento"
+                    component={RouterLink}
+                    to={`/pets/${pet._id}/new-event`}
+                    label="Agregar Cita"
                     color="primary"
                     icon="add"
                   />
                   <CustomButton
+                    component={RouterLink}
+                    to={`/pets/${pet._id}/new-record`}
                     label="Agregar Registro"
                     color="primary"
                     icon="add"

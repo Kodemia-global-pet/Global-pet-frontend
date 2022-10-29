@@ -50,7 +50,7 @@ const LoginForm = () => {
         <Container
           component="main"
           sx={{
-            backgroundColor: "grey.contrast",
+            backgroundColor: "grey.contrastText",
             color: "#545454",
             borderRadius: "10px",
             width: 506,

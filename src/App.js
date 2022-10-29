@@ -8,6 +8,7 @@ import MyAccount from "./pages/MyAccount";
 import FaqPage from "./pages/FaqPage";
 import PetEditPage from "./pages/PetEditPage";
 import PetsNewPage from "./pages/PetsNewPage";
+import ViewCardQrPage from "./pages/ViewCardQrPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/pets/:petID/edit" element={<PetEditPage />} />
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/my-account" element={<MyAccount />} />
+        <Route path="/view-card-qr" element={<ViewCardQrPage />} />
       </Routes>
     </div>
   );

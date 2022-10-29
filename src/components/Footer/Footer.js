@@ -21,7 +21,13 @@ const Item = styled(Paper)(({ theme }) => ({
 const Footer = () => {
   return (
     <Grid
-      sx={{ mt: 7, py: 3, backgroundColor: "grey.light", px: 5, position:"relative"}}
+      sx={{
+        mt: 7,
+        py: 3,
+        backgroundColor: "grey.light",
+        px: 5,
+        position: "relative",
+      }}
       container
       spacing={2}
       justifyContent="space-around"
@@ -51,11 +57,11 @@ const Footer = () => {
         <Box
           sx={{
             position: "absolute",
-            bottom:"100px",
-            display:{
-              xs:"none", 
-              md:"block"
-            }
+            bottom: "100px",
+            display: {
+              xs: "none",
+              md: "block",
+            },
           }}
           component="img"
           alt="Haky"

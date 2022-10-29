@@ -1,6 +1,5 @@
 import { Avatar, Button, Grid } from "@mui/material";
-import { useEffect, useState } from "react";
-import CustomImage from "../CustomImage/CustomImage";
+import { useEffect } from "react";
 
 const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
 

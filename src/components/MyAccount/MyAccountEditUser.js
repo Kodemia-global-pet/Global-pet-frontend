@@ -8,7 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
-import { Grid, TextField, Box } from "@mui/material";
+import { Grid, TextField, Box, Avatar } from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
 import { updateUser } from "../../services/updateUser";
 
@@ -29,7 +29,7 @@ export default function EditUserDialog({ user }) {
     register,
     formState: { errors },
     handleSubmit,
-    setError
+    setError,
   } = useForm({
     defaultValues: {
       name: user.name,
@@ -42,24 +42,23 @@ export default function EditUserDialog({ user }) {
   const onSubmit = async (data) => {
     console.log(data);
     if (data.password !== data.confirmPassword) {
-        setError("confirmPassword", { message: "Las contraseñas no coinciden" });
-        return false;
-      }
-      try {
-        const body = { 
-            name : data.name,
-            email: data.email,
-            phone_number: data.phone_number,
-            password: data.password,
-            address: data.address
-         };
-         const newUser = await updateUser(user._id, body, user.token)
-         console.log("newUser", newUser)
-         window.location.reload();
-      } catch (error) {
-        console.log("error", error)
-      }
-
+      setError("confirmPassword", { message: "Las contraseñas no coinciden" });
+      return false;
+    }
+    try {
+      const body = {
+        name: data.name,
+        email: data.email,
+        phone_number: data.phone_number,
+        password: data.password,
+        address: data.address,
+      };
+      const newUser = await updateUser(user._id, body, user.token);
+      console.log("newUser", newUser);
+      window.location.reload();
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 
   return (
@@ -77,9 +76,31 @@ export default function EditUserDialog({ user }) {
           {"Edita tu información de usuario"}
         </DialogTitle>
         <form onSubmit={handleSubmit(onSubmit)}>
-        <DialogContent>
-          <DialogContentText>
+          <DialogContent>
+            <DialogContentText>
+              <Grid item
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
             
+              >
+                <Box sx={{ pb: 2 }}>
+                  <Avatar src={user.photo} alt="UserDefault" />
+                </Box>
+                <Box display="flex" flexDirection="row" justifyContent="space-between">
+                  <Box sx={{ pb: 2, pr: 1 }}>
+                    <CustomButton
+                      label="Eliminar"
+                      color="danger"
+                      icon="delete"
+                    />
+                  </Box>
+                  <Box sx={{ pb: 2 }}>
+                    <CustomButton label="Editar" color="grey" />
+                  </Box>
+                </Box>
+              </Grid>
+
               <Grid item sx={{ pb: 2 }}>
                 <TextField
                   fullWidth
@@ -189,26 +210,25 @@ export default function EditUserDialog({ user }) {
                   helperText={errors.address?.message}
                 />
               </Grid>
-         
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Box display="flex" flexDirection="row">
-            <Box sx={{ pr: 2 }}>
-              <Button
-                onClick={handleClose}
-                variant="contained"
-                sx={{ backgroundColor: "grey.main" }}
-                type="button"
-              >
-                Cancelar
-              </Button>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Box display="flex" flexDirection="row">
+              <Box sx={{ pr: 1 }}>
+                <Button
+                  onClick={handleClose}
+                  variant="contained"
+                  sx={{ backgroundColor: "grey.main" }}
+                  type="button"
+                >
+                  Cancelar
+                </Button>
+              </Box>
+              <Box>
+                <CustomButton type="submit" label="Guardar" color="secondary" />
+              </Box>
             </Box>
-            <Box>
-              <CustomButton type="submit" label="Guardar" color="secondary" />
-            </Box>
-          </Box>
-        </DialogActions>
+          </DialogActions>
         </form>
       </Dialog>
     </div>

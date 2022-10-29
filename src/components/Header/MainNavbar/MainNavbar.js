@@ -26,6 +26,7 @@ const MainNavbar = () => {
   const { user } = useLogedUser();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -38,7 +39,7 @@ const MainNavbar = () => {
     window.location.href = "/";
   };
   return (
-    <Box sx={{ flexGrow: 1, mb: 2 }}>
+    <Box sx={{ flexGrow: 1, mb:2}}>
       <AppBar
         position="static"
         sx={{

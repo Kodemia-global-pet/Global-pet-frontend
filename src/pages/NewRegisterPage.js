@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Typography, Box, Grid } from "@mui/material";
+import { Link, Typography, Box, Grid, Container } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import NewEvent from "../components/NewEvent/NewEvent";
@@ -12,42 +12,44 @@ const NewRegisterPage = () => {
   let { user } = useLogedUser();
   return (
     <Template>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          ml: 2,
-          mt: 5,
-        }}
-      >
-        <IconButton color="black" component="label">
-          <Link href="/">
-            <ArrowBackIcon color="black" />
-          </Link>
-        </IconButton>
-        <Typography
-          component="h1"
-          variant="h5"
+      <Container>
+        <Box
           sx={{
             display: "flex",
             flexDirection: "row",
-            alignItems: "start",
+            ml: 2,
+            mt: 5,
           }}
         >
-          Agregar Registro
-        </Typography>
-      </Box>
-      <Grid
-        item
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        {user && (
-          <NewEvent petID={params.petID} token={user.token} record={true} />
-        )}
-      </Grid>
+          <IconButton color="black" component="label">
+            <Link href="/">
+              <ArrowBackIcon color="black" />
+            </Link>
+          </IconButton>
+          <Typography
+            component="h1"
+            variant="h5"
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "start",
+            }}
+          >
+            Agregar Registro
+          </Typography>
+        </Box>
+        <Grid
+          item
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          {user && (
+            <NewEvent petID={params.petID} token={user.token} record={true} />
+          )}
+        </Grid>
+      </Container>
     </Template>
   );
 };

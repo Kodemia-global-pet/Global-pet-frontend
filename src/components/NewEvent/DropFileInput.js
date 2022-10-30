@@ -29,6 +29,8 @@ const DropFileInput = ({
 
   return (
     <Grid
+      container
+      item
       sx={{
         display: "flex",
         flexDirection: "column",

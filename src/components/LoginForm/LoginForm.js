@@ -40,12 +40,7 @@ const LoginForm = () => {
   return (
     <>
       <main
-        style={{
-          backgroundImage: `url(${
-            process.env.PUBLIC_URL + "/images/landingbg.png"
-          })`,
-          width: "100vw",
-        }}
+        
       >
         <Container
           component="main"

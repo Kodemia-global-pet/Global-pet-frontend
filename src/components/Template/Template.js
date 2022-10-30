@@ -17,7 +17,9 @@ const Template = ({ children }) => {
             style={{
               backgroundImage: `url(${backgroundImage})`,
               width: "100%",
-              minHeight: "calc(100vh - 322px)",
+              minHeight: "calc(100vh - 250px)",
+              zIndex: 0,
+              padding: "20px"
             }}
           >
             {children}

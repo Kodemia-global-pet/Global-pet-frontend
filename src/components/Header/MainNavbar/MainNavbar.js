@@ -38,8 +38,9 @@ const MainNavbar = () => {
     localStorage.clear();
     window.location.href = "/";
   };
+  
   return (
-    <Box sx={{ flexGrow: 1, mb:2}}>
+    <Box sx={{ flexGrow: 1}}>
       <AppBar
         position="static"
         sx={{

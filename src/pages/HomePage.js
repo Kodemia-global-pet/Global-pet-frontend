@@ -8,6 +8,7 @@ import Service from "../components/Landing/Service/Service";
 import CustomImage from "../components/CustomImage/CustomImage";
 import { useLogedUser } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer/Footer";
 
 const HomePage = () => {
   const {user} = useLogedUser();
@@ -15,6 +16,7 @@ const HomePage = () => {
 
   useEffect(()=>{
     if(user) navigate("/pets")
+    localStorage.clear();
   },[])
 
   return (
@@ -85,6 +87,9 @@ const HomePage = () => {
             </Grid>
           </Container>
         </main>
+        <Grid xs={12}>
+          <Footer />
+        </Grid>
       </Grid>
     </Grid>
   );

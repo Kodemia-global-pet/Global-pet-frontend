@@ -65,7 +65,6 @@ const PetsNew = ({ userID, token, pet = {} }) => {
     if (petID) {
       const response = await updatePet(petID, token, formData);
       const result = await response.json();
-      console.log("result update", result);
       if (!result.success) setError("Ocurrió un error.");
       else {
         setError(null);
@@ -74,7 +73,6 @@ const PetsNew = ({ userID, token, pet = {} }) => {
     } else {
       const response = await createPet(userID, token, formData);
       const result = await response.json();
-      console.log("result create", result);
       if (!result.success) setError("Ocurrió un error.");
       else {
         setError(null);

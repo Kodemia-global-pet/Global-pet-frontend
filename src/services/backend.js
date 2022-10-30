@@ -49,3 +49,12 @@ export const deletePet = async (petID, token) =>
       Authorization: `Bearer ${token}`,
     },
   });
+
+export const createEvent = async (petID, token, formData) =>
+  fetch(`${process.env.REACT_APP_BACKEND}pets/${petID}/records`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });

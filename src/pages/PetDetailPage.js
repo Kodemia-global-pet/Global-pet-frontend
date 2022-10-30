@@ -8,9 +8,12 @@ import Paper from "@mui/material/Paper";
 import PetData from "../components/PetData/PetData";
 import ActionButtons from "../components/PetData/ActionButtons/ActionButtons";
 import Template from "../components/Template/Template";
+import QRConfig from "../components/Qr/QRConfig/QRConfig";
+import { useLogedUser } from "../context/UserContext";
 
 const PetDetailPage = () => {
   const params = useParams();
+  let { user } = useLogedUser();
   const { data, error } = useFetch(
     `${process.env.REACT_APP_BACKEND}pets/${params.petID}/records`
   );
@@ -91,6 +94,15 @@ const PetDetailPage = () => {
                     petID={data._id}
                   />
                 )}
+              </Grid>
+            </Grid>
+            <Grid item container xs={12} columnSpacing={3} rowSpacing={3}>
+              <Grid item xs={12}>
+                <Divider sx={{ my: 3 }} />
+              </Grid>
+              <Grid item xs={12}>
+                <h2>Configuración de código QR</h2>
+                {data && user && <QRConfig pet={data} token={user.token} />}
               </Grid>
             </Grid>
           </Grid>

@@ -1,23 +1,12 @@
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import {
-  Grid,
-  TextField,
-  Button,
-  Alert,
-  Box,
-  MenuItem,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-} from "@mui/material";
+import { Grid, TextField, Button, Alert, Box, MenuItem } from "@mui/material";
 import UploadButton from "./UploadButton";
 import { createPet, updatePet } from "../../services/backend";
 import { const_activity, const_sizes } from "../../helpers/constants";
 import moment from "moment";
+import Paper from "@mui/material/Paper";
 
 const PetsNew = ({ userID, token, pet = {} }) => {
   let navigate = useNavigate();
@@ -59,8 +48,6 @@ const PetsNew = ({ userID, token, pet = {} }) => {
     formData.append("specie", getValues("specie"));
     formData.append("activity_level", getValues("activity_level"));
     if (photo) formData.append("photo", photo);
-    if (petID)
-      formData.append("visibility_status", getValues("visibility_status"));
 
     if (petID) {
       const response = await updatePet(petID, token, formData);
@@ -68,7 +55,7 @@ const PetsNew = ({ userID, token, pet = {} }) => {
       if (!result.success) setError("Ocurrió un error.");
       else {
         setError(null);
-        navigate("/pets");
+        navigate(`/pets/${petID}`);
       }
     } else {
       const response = await createPet(userID, token, formData);
@@ -76,7 +63,7 @@ const PetsNew = ({ userID, token, pet = {} }) => {
       if (!result.success) setError("Ocurrió un error.");
       else {
         setError(null);
-        navigate("/pets");
+        navigate(`/pets/${result.data.pet._id}`);
       }
     }
   };
@@ -92,7 +79,11 @@ const PetsNew = ({ userID, token, pet = {} }) => {
           flexDirection: "row",
           alignItems: "start",
           justifyContent: "space-between",
+          backgroundColor: "grey.light",
+          borderRadius: "10px",
         }}
+        padding={{ xs: 0, md: 5 }}
+        component={Paper}
       >
         <Grid item xs={12}>
           {error && (
@@ -106,39 +97,6 @@ const PetsNew = ({ userID, token, pet = {} }) => {
             </Alert>
           )}
         </Grid>
-        {petID && (
-          <Grid xs={12}>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">
-                Mostrar los siguientes datos:
-              </FormLabel>
-              <Controller
-                control={control}
-                name="visibility_status"
-                {...register("visibility_status")}
-                render={({ field: { onChange, value } }) => (
-                  <RadioGroup value={value} onChange={onChange} row>
-                    <FormControlLabel
-                      value="disabled"
-                      control={<Radio />}
-                      label="Información de la mascota"
-                    />
-                    <FormControlLabel
-                      value="contact"
-                      control={<Radio />}
-                      label="Información de contacto"
-                    />
-                    <FormControlLabel
-                      value="record"
-                      control={<Radio />}
-                      label="Cartilla"
-                    />
-                  </RadioGroup>
-                )}
-              />
-            </FormControl>
-          </Grid>
-        )}
         <Grid
           item
           xs={12}
@@ -195,6 +153,9 @@ const PetsNew = ({ userID, token, pet = {} }) => {
                 fullWidth
                 type="date"
                 label="Fecha de nacimiento"
+                inputProps={{
+                  max: new Date(),
+                }}
                 {...register("birthdate", {
                   required: "Completa Este Campo",
                 })}
@@ -280,7 +241,7 @@ const PetsNew = ({ userID, token, pet = {} }) => {
             </form>
           </Box>
         </Grid>
-        <Grid item xs={12} md={3} order={{ xs: 1, md: 2 }}>
+        <Grid item xs={12} md={3} order={{ xs: 1, md: 2 }} px={3} pt={3}>
           <UploadButton
             images={images}
             setImages={setImages}

@@ -11,6 +11,8 @@ import PetEditPage from "./pages/PetEditPage";
 import PetsNewPage from "./pages/PetsNewPage";
 import NewRegisterPage from "./pages/NewRegisterPage";
 import EditEventPage from "./pages/EditEventPage";
+import ViewCardQrPage from "./pages/ViewCardQrPage";
+import Prueba1 from "./pages/grid";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
       <Route path="/pets/:petID/new-event" element={<NewEventPage />} />
       <Route path="/pets/:petID/new-record" element={<NewRegisterPage />} />
       <Route path="/events/:eventID/edit" element={<EditEventPage />} />
+      <Route path="/public/pets/:petID" element={<ViewCardQrPage />} />
+      <Route path="/grid" element={<Prueba1 />} />
     </Routes>
   );
 }

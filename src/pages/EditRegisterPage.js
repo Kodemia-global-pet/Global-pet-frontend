@@ -9,7 +9,7 @@ import { useLogedUser } from "../context/UserContext";
 import useFetch from "../hooks/useFetch";
 import { Container } from "@mui/system";
 
-const EditEventPage = () => {
+const EditRegisterPage = () => {
   const params = useParams();
   let { user } = useLogedUser();
   const { data, error } = useFetch(
@@ -43,7 +43,7 @@ const EditEventPage = () => {
               alignItems: "start",
             }}
           >
-            Editar Cita
+            Editar Registro
           </Typography>
         </Box>
         {user && data && (
@@ -51,6 +51,7 @@ const EditEventPage = () => {
             petID={params.petID}
             token={user.token}
             event={data.record}
+            record={true}
           />
         )}
       </Container>
@@ -58,4 +59,4 @@ const EditEventPage = () => {
   );
 };
 
-export default EditEventPage;
+export default EditRegisterPage;

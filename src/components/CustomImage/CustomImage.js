@@ -7,7 +7,6 @@ const CustomImage = ({ ...props }) => {
       component="img"
       sx={{
         width: 1,
-        maxHeight: "100px",
         objectFit: "contain",
       }}
       {...props}

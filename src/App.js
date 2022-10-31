@@ -11,7 +11,12 @@ import PetEditPage from "./pages/PetEditPage";
 import PetsNewPage from "./pages/PetsNewPage";
 import NewRegisterPage from "./pages/NewRegisterPage";
 import EditEventPage from "./pages/EditEventPage";
+<<<<<<< HEAD
 import ViewCardQrPage from "./pages/ViewCardQrPage";
+=======
+import EditRegisterPage from "./pages/EditRegisterPage";
+import NotFound from "./pages/NotFound";
+>>>>>>> develop
 
 function App() {
   return (
@@ -28,7 +33,12 @@ function App() {
       <Route path="/pets/:petID/new-event" element={<NewEventPage />} />
       <Route path="/pets/:petID/new-record" element={<NewRegisterPage />} />
       <Route path="/events/:eventID/edit" element={<EditEventPage />} />
+<<<<<<< HEAD
       <Route path="/public/pets/:petID" element={<ViewCardQrPage />} />
+=======
+      <Route path="/records/:eventID/edit" element={<EditRegisterPage />} />
+      <Route path="*" element={<NotFound />} />
+>>>>>>> develop
     </Routes>
   );
 }

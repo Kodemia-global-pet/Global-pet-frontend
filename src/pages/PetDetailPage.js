@@ -1,4 +1,12 @@
-import { Alert, Avatar, CircularProgress, Divider, Grid } from "@mui/material";
+import {
+  Alert,
+  Avatar,
+  Card,
+  CardMedia,
+  CircularProgress,
+  Divider,
+  Grid,
+} from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
 import { useParams } from "react-router-dom";
@@ -8,9 +16,12 @@ import Paper from "@mui/material/Paper";
 import PetData from "../components/PetData/PetData";
 import ActionButtons from "../components/PetData/ActionButtons/ActionButtons";
 import Template from "../components/Template/Template";
+import QRConfig from "../components/Qr/QRConfig/QRConfig";
+import { useLogedUser } from "../context/UserContext";
 
 const PetDetailPage = () => {
   const params = useParams();
+  let { user } = useLogedUser();
   const { data, error } = useFetch(
     `${process.env.REACT_APP_BACKEND}pets/${params.petID}/records`
   );
@@ -21,12 +32,15 @@ const PetDetailPage = () => {
     <Template>
       <Grid container>
         <Grid item xs={12}></Grid>
-        <Container
-          maxwidth="xl"
-          component={Paper}
-          sx={{ backgroundColor: "grey.light" }}
-        >
-          <Grid item container xs={12} padding={{ xs: 0, md: 5 }}>
+        <Container maxwidth="xl">
+          <Grid
+            item
+            container
+            xs={12}
+            padding={{ xs: 3, md: 5 }}
+            component={Paper}
+            sx={{ backgroundColor: "grey.light" }}
+          >
             <Grid item xs={12}>
               {data && <h1>{data.name}</h1>}
             </Grid>
@@ -85,8 +99,18 @@ const PetDetailPage = () => {
                     showPet={false}
                     showDescription={true}
                     showActions={true}
+                    petID={data._id}
                   />
                 )}
+              </Grid>
+            </Grid>
+            <Grid item container xs={12} columnSpacing={3} rowSpacing={3}>
+              <Grid item xs={12}>
+                <Divider sx={{ my: 3 }} />
+              </Grid>
+              <Grid item xs={12}>
+                <h2>Configuración de código QR</h2>
+                {data && user && <QRConfig pet={data} token={user.token} />}
               </Grid>
             </Grid>
           </Grid>

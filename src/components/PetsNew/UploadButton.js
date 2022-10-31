@@ -51,6 +51,8 @@ function UploadButton({ images, setImages, imageFiles, setImageFiles }) {
   }, [imageFiles]);
   return (
     <Grid
+      container
+      item
       xs={12}
       sx={{
         mb: { xs: 3 },
@@ -58,38 +60,35 @@ function UploadButton({ images, setImages, imageFiles, setImageFiles }) {
       }}
     >
       <form>
-        <p>
-          <Button
-            htmlFor="file"
-            component="label"
-            variant="contained"
-            sx={{ mb: 3 }}
-          >
-            Subir Foto
-            <input
-              hidden
-              type="file"
-              id="file"
-              onChange={changeHandler}
-              accept="image/png, image/jpg, image/jpeg"
-              multiple
-            />
-          </Button>
-        </p>
+        <Button
+          htmlFor="file"
+          component="label"
+          variant="contained"
+          sx={{ mb: 3 }}
+        >
+          Subir Foto
+          <input
+            hidden
+            type="file"
+            id="file"
+            onChange={changeHandler}
+            accept="image/png, image/jpg, image/jpeg"
+            multiple
+          />
+        </Button>
       </form>
       {images.length > 0 ? (
         <>
           {images.map((image, idx) => {
             return (
-              <p key={idx}>
-                <Avatar
-                  src={image}
-                  sx={{
-                    width: { xs: "100px", md: "160px", lg: "180px" },
-                    height: { xs: "100px", md: "160px", lg: "180px" },
-                  }}
-                />
-              </p>
+              <Avatar
+                key={idx}
+                src={image}
+                sx={{
+                  width: { xs: "100px", md: "160px", lg: "180px" },
+                  height: { xs: "100px", md: "160px", lg: "180px" },
+                }}
+              />
             );
           })}
         </>

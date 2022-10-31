@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import CustomImage from "../CustomImage/CustomImage";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./DropFielInput.css";
-import pdf from "../../assets/file-pdf-solid-240.png";
 
 const DropFileInput = ({
   files,
@@ -75,8 +74,15 @@ const DropFileInput = ({
                       )}
                       {attachment.type === "application/pdf" && (
                         <CustomImage
-                          src={pdf}
+                          src={`${process.env.PUBLIC_URL}/images/pdf.png`}
                           alt={attachment.title}
+                          maxHeight="100px"
+                        />
+                      )}
+                      {attachment.type.split("/")[0] === "video" && (
+                        <CustomImage
+                          src={`${process.env.PUBLIC_URL}/images/video.png`}
+                          alt={attachment.name}
                           maxHeight="100px"
                         />
                       )}
@@ -122,7 +128,18 @@ const DropFileInput = ({
                     />
                   )}
                   {image.type === "application/pdf" && (
-                    <CustomImage src={pdf} alt={image.name} maxHeight="100px" />
+                    <CustomImage
+                      src={`${process.env.PUBLIC_URL}/images/pdf.png`}
+                      alt={image.name}
+                      maxHeight="100px"
+                    />
+                  )}
+                  {image.type.split("/")[0] === "video" && (
+                    <CustomImage
+                      src={`${process.env.PUBLIC_URL}/images/video.png`}
+                      alt={image.name}
+                      maxHeight="100px"
+                    />
                   )}
                 </Box>
                 <Box

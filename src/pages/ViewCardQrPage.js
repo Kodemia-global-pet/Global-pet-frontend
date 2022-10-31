@@ -5,7 +5,7 @@ import ViewCardPet from "../components/ViewCardQr/ViewCardpet";
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { useLogedUser } from "../context/UserContext";
-import ViewCardContactSchema from "../components/ViewCardQr/ViewCardContactSchema";
+import ViewCardContactSchema from "../components/ViewCardQr/ViewCardContactInfo";
 import ViewCardHistory from "../components/ViewCardQr/ViewCardHistory";
 
 const ViewCardQrPage = () => {

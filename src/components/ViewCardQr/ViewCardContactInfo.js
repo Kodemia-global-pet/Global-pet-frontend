@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Box } from "@mui/material";
 import CustomReadField from "../CustomReadField/CustomReadField";
 
-const ViewCardContactSchema = ({ user }) => {
+const ViewCardContactInfo = ({ user }) => {
   return (
     <>
       <Container
@@ -27,4 +27,4 @@ const ViewCardContactSchema = ({ user }) => {
   );
 };
 
-export default ViewCardContactSchema;
+export default ViewCardContactInfo;

@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import React from "react";
 import { useLogedUser } from "../../context/UserContext";
-import ViewCardContactSchema from "./ViewCardContactSchema";
+import ViewCardContactSchema from "./ViewCardContactInfo";
 
 const ViewCardContact = () => {
   const params = useParams();

@@ -6,7 +6,7 @@ import {
   Avatar,
 } from "@mui/material";
 import React from "react";
-import ViewCardPetSchema from "./ViewCardPetSchema";
+import ViewCardPetSchema from "./ViewCardPetInfo";
 import { useLogedUser } from "../../context/UserContext";
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
@@ -14,7 +14,7 @@ import useFetch from "../../hooks/useFetch";
 const ViewCardPet = () => {
   const params = useParams();
   let { user } = useLogedUser();
-  const { data, error } = useFetch(
+  const { data } = useFetch(
     `${process.env.REACT_APP_BACKEND}pets/${params.petID}/records`
   );
 

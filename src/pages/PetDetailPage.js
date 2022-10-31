@@ -21,12 +21,15 @@ const PetDetailPage = () => {
     <Template>
       <Grid container>
         <Grid item xs={12}></Grid>
-        <Container
-          maxwidth="xl"
-          component={Paper}
-          sx={{ backgroundColor: "grey.light" }}
-        >
-          <Grid item container xs={12} padding={{ xs: 0, md: 5 }}>
+        <Container maxwidth="xl">
+          <Grid
+            item
+            container
+            xs={12}
+            padding={{ xs: 3, md: 5 }}
+            component={Paper}
+            sx={{ backgroundColor: "grey.light" }}
+          >
             <Grid item xs={12}>
               {data && <h1>{data.name}</h1>}
             </Grid>
@@ -85,6 +88,7 @@ const PetDetailPage = () => {
                     showPet={false}
                     showDescription={true}
                     showActions={true}
+                    petID={data._id}
                   />
                 )}
               </Grid>

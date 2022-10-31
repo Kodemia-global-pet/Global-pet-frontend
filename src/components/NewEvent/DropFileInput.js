@@ -68,10 +68,15 @@ const DropFileInput = ({
                         <CustomImage
                           src={attachment.url}
                           alt={attachment.title}
+                          maxHeight="100px"
                         />
                       )}
                       {attachment.type === "application/pdf" && (
-                        <CustomImage src={pdf} alt={attachment.title} />
+                        <CustomImage
+                          src={pdf}
+                          alt={attachment.title}
+                          maxHeight="100px"
+                        />
                       )}
                     </Box>
                     <Box
@@ -111,10 +116,11 @@ const DropFileInput = ({
                     <CustomImage
                       src={URL.createObjectURL(image)}
                       alt={image.name}
+                      maxHeight="100px"
                     />
                   )}
                   {image.type === "application/pdf" && (
-                    <CustomImage src={pdf} alt={image.name} />
+                    <CustomImage src={pdf} alt={image.name} maxHeight="100px" />
                   )}
                 </Box>
                 <Box

@@ -7,9 +7,11 @@ import { createPet, updatePet } from "../../services/backend";
 import { const_activity, const_sizes } from "../../helpers/constants";
 import moment from "moment";
 import Paper from "@mui/material/Paper";
+import { useToast } from "../../context/ToastContext";
 
 const PetsNew = ({ userID, token, pet = {} }) => {
   let navigate = useNavigate();
+  const addToast = useToast();
   const petID = pet?._id;
   const [error, setError] = useState(null);
   const [images, setImages] = useState([]);
@@ -55,6 +57,8 @@ const PetsNew = ({ userID, token, pet = {} }) => {
       if (!result.success) setError("Ocurrió un error.");
       else {
         setError(null);
+        addToast("La mascota fue editada correctamente");
+        addToast("La mascota fue editada correctamente 223");
         navigate(`/pets/${petID}`);
       }
     } else {
@@ -63,6 +67,7 @@ const PetsNew = ({ userID, token, pet = {} }) => {
       if (!result.success) setError("Ocurrió un error.");
       else {
         setError(null);
+        addToast("La mascota fue agregada correctamente");
         navigate(`/pets/${result.data.pet._id}`);
       }
     }

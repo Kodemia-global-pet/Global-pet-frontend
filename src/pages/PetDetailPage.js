@@ -1,4 +1,12 @@
-import { Alert, Avatar, CircularProgress, Divider, Grid } from "@mui/material";
+import {
+  Alert,
+  Avatar,
+  Card,
+  CardMedia,
+  CircularProgress,
+  Divider,
+  Grid,
+} from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
 import { useParams } from "react-router-dom";

@@ -6,10 +6,12 @@ import { const_event_types } from "../../helpers/constants";
 import DropFileInput from "./DropFileInput";
 import { createEvent, updateEvent } from "../../services/backend";
 import moment from "moment";
+import { useToast } from "../../context/ToastContext";
 
 const NewEvent = ({ petID, token, record = false, event = {} }) => {
   let navigate = useNavigate();
   const eventID = event?._id;
+  const addToast = useToast();
   const [error, setError] = useState(null);
   const [files, setFiles] = useState([]);
   const [attachments, setAttachments] = useState(event?.attachments || []);
@@ -29,11 +31,13 @@ const NewEvent = ({ petID, token, record = false, event = {} }) => {
 
   const onSubmit = async () => {
     let formData = new FormData();
+    let typeOfRecord = "El registro fue ";
 
     formData.append("date", getValues("date"));
     formData.append("title", getValues("title"));
     formData.append("description", getValues("description"));
     if (!record) {
+      typeOfRecord = "La cita fue ";
       formData.append("time", getValues("time"));
       formData.append("vet", getValues("vet"));
       formData.append("type", getValues("type"));
@@ -45,19 +49,23 @@ const NewEvent = ({ petID, token, record = false, event = {} }) => {
     });
     if (eventID) {
       formData.append("deleted", deleted);
+      typeOfRecord += record ? "actualizado" : "actualizada";
       const response = await updateEvent(eventID, token, formData);
       const result = await response.json();
       if (!result.success) setError("Ocurrió un error.");
       else {
         setError(null);
+        addToast(`${typeOfRecord} correctamente`);
         navigate(`/pets`);
       }
     } else {
+      typeOfRecord += record ? "agregado" : "agregada";
       const response = await createEvent(petID, token, formData);
       const result = await response.json();
       if (!result.success) setError("Ocurrió un error.");
       else {
         setError(null);
+        addToast(`${typeOfRecord} correctamente`);
         navigate(`/pets/${petID}`);
       }
     }
@@ -66,6 +74,7 @@ const NewEvent = ({ petID, token, record = false, event = {} }) => {
   return (
     <Grid
       container
+      item
       xs={12}
       sx={{
         justifyContent: "space-between",

@@ -19,7 +19,7 @@ const QROptionCard = ({ children, title, changeOption, option, selected }) => {
           <Typography gutterBottom variant="h5" component="div">
             {title}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" color="text.secondary" component="div">
             {children}
           </Typography>
         </CardContent>

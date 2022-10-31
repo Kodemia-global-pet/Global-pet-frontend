@@ -1,12 +1,14 @@
 import { Alert, Grid } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "../../../context/ToastContext";
 import { updatePet } from "../../../services/backend";
 import QROptionCard from "./QROptionCard/QROptionCard";
 
 const QRConfig = ({ pet, token }) => {
   const [error, setError] = useState(null);
   let navigate = useNavigate();
+  const addToast = useToast();
 
   const changeOption = async (option) => {
     let formData = new FormData();
@@ -16,7 +18,8 @@ const QRConfig = ({ pet, token }) => {
     if (!result.success) setError("Ocurrió un error.");
     else {
       setError(null);
-      navigate(0);
+      addToast(`Configuración actualizada correctamente`);
+      navigate(`/pets/${pet._id}`, { replace: false });
     }
   };
   if (error) return <Alert severity="error">{error}</Alert>;
@@ -29,16 +32,14 @@ const QRConfig = ({ pet, token }) => {
           option="disabled"
           selected={pet.visibility_status === "disabled"}
         >
-          <p>
-            Se mostrarán los siguientes datos de la mascota:
-            <ul>
-              <li>Foto de perfil</li>
-              <li>Nombre</li>
-              <li>Especie</li>
-              <li>Alergias</li>
-              <li>Raza</li>
-            </ul>
-          </p>
+          <p>Se mostrarán los siguientes datos de la mascota:</p>
+          <ul>
+            <li>Foto de perfil</li>
+            <li>Nombre</li>
+            <li>Especie</li>
+            <li>Alergias</li>
+            <li>Raza</li>
+          </ul>
         </QROptionCard>
       </Grid>
       <Grid item xs={12} md={4}>
@@ -50,12 +51,12 @@ const QRConfig = ({ pet, token }) => {
         >
           <p>
             Se mostrará configuración básica y los siguientes datos de usuario:
-            <ul>
-              <li>Nombre</li>
-              <li>Teléfono</li>
-              <li>Dirección</li>
-            </ul>
           </p>
+          <ul>
+            <li>Nombre</li>
+            <li>Teléfono</li>
+            <li>Dirección</li>
+          </ul>
         </QROptionCard>
       </Grid>
       <Grid item xs={12} md={4}>

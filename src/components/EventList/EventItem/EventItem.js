@@ -5,6 +5,7 @@ import CustomCaption from "../../CustomCaption/CustomCaption";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useLogedUser } from "../../../context/UserContext";
 import { deleteRecord } from "../../../services/backend";
+import { useToast } from "../../../context/ToastContext";
 
 const EventItem = ({
   record,
@@ -15,6 +16,7 @@ const EventItem = ({
 }) => {
   const { user } = useLogedUser();
   let navigate = useNavigate();
+  const addToast = useToast();
   let record_type = record.type === "Registro" ? "records" : "events";
   let [error, setError] = useState(null);
 
@@ -30,6 +32,7 @@ const EventItem = ({
         if (!result.success) {
           setError("Ocurrió un error");
         } else {
+          addToast("El evento fue eliminado correctamente");
           navigate(0);
         }
       } catch (error) {

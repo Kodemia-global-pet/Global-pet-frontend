@@ -6,10 +6,14 @@ import NewEvent from "../components/NewEvent/NewEvent";
 import Template from "../components/Template/Template";
 import { useParams } from "react-router-dom";
 import { useLogedUser } from "../context/UserContext";
+import useFetch from "../hooks/useFetch";
 
 const NewRegisterPage = () => {
   const params = useParams();
   let { user } = useLogedUser();
+  const { data } = useFetch(
+    `${process.env.REACT_APP_BACKEND}pets/${params.petID}`
+  );
   return (
     <Template>
       <Container>
@@ -45,8 +49,13 @@ const NewRegisterPage = () => {
             justifyContent: "space-between",
           }}
         >
-          {user && (
-            <NewEvent petID={params.petID} token={user.token} record={true} />
+          {user && data && (
+            <NewEvent
+              petID={params.petID}
+              token={user.token}
+              record={true}
+              petName={data.name}
+            />
           )}
         </Grid>
       </Container>

@@ -7,10 +7,14 @@ import Template from "../components/Template/Template";
 import { useParams } from "react-router-dom";
 import { useLogedUser } from "../context/UserContext";
 import { Container } from "@mui/system";
+import useFetch from "../hooks/useFetch";
 
 const NewEventPage = ({ event }) => {
   const params = useParams();
   let { user } = useLogedUser();
+  const { data } = useFetch(
+    `${process.env.REACT_APP_BACKEND}pets/${params.petID}`
+  );
   return (
     <Template>
       <Container>
@@ -39,7 +43,13 @@ const NewEventPage = ({ event }) => {
             Agregar Cita
           </Typography>
         </Box>
-        {user && <NewEvent petID={params.petID} token={user.token} />}
+        {user && data && (
+          <NewEvent
+            petID={params.petID}
+            token={user.token}
+            petName={data.name}
+          />
+        )}
       </Container>
     </Template>
   );

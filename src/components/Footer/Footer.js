@@ -48,7 +48,14 @@ const Footer = () => {
         </Typography>
       </Grid>
 
-      <Grid item xs={6} md={3} direction="row" justifyContent="space-around">
+      <Grid
+        container
+        item
+        xs={6}
+        md={3}
+        direction="row"
+        justifyContent="space-around"
+      >
         <FacebookIcon />
         <YouTubeIcon />
         <InstagramIcon />

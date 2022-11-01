@@ -11,25 +11,27 @@ import PetEditPage from "./pages/PetEditPage";
 import PetsNewPage from "./pages/PetsNewPage";
 import NewRegisterPage from "./pages/NewRegisterPage";
 import EditEventPage from "./pages/EditEventPage";
+import EditRegisterPage from "./pages/EditRegisterPage";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/pets/new" element={<PetsNewPage />} />
-        <Route path="/create-account" element={<CreateAccount />} />
-        <Route path="/pets" element={<MyPetsPage />} />
-        <Route path="/pets/:petID" element={<PetDetailPage />} />
-        <Route path="/pets/:petID/edit" element={<PetEditPage />} />
-        <Route path="/faq" element={<FaqPage />} />
-        <Route path="/my-account" element={<MyAccount />} />
-        <Route path="/pets/:petID/new-event" element={<NewEventPage />} />
-        <Route path="/pets/:petID/new-record" element={<NewRegisterPage />} />
-        <Route path="/events/:eventID/edit" element={<EditEventPage />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/pets/new" element={<PetsNewPage />} />
+      <Route path="/create-account" element={<CreateAccount />} />
+      <Route path="/pets" element={<MyPetsPage />} />
+      <Route path="/pets/:petID" element={<PetDetailPage />} />
+      <Route path="/pets/:petID/edit" element={<PetEditPage />} />
+      <Route path="/faq" element={<FaqPage />} />
+      <Route path="/my-account" element={<MyAccount />} />
+      <Route path="/pets/:petID/new-event" element={<NewEventPage />} />
+      <Route path="/pets/:petID/new-record" element={<NewRegisterPage />} />
+      <Route path="/events/:eventID/edit" element={<EditEventPage />} />
+      <Route path="/records/:eventID/edit" element={<EditRegisterPage />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
 

@@ -7,6 +7,7 @@ const EventList = ({
   showPet = false,
   showDescription = false,
   showActions = false,
+  petID = null,
 }) => {
   return (
     <Grid container item sx={{ overflow: "hidden" }}>
@@ -48,6 +49,7 @@ const EventList = ({
             showPet={showPet}
             showDescription={showDescription}
             showActions={showActions}
+            petID={petID}
           />
         ))}
       </Grid>

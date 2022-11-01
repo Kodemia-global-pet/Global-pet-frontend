@@ -1,15 +1,45 @@
 import { Grid } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import CustomButton from "../../CustomButton/CustomButton";
 import CustomCaption from "../../CustomCaption/CustomCaption";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useLogedUser } from "../../../context/UserContext";
+import { deleteRecord } from "../../../services/backend";
+import { useToast } from "../../../context/ToastContext";
 
 const EventItem = ({
   record,
   showPet = false,
   showDescription = false,
   showActions = false,
+  petID = null,
 }) => {
+  const { user } = useLogedUser();
+  let navigate = useNavigate();
+  const addToast = useToast();
+  let record_type = record.type === "Registro" ? "records" : "events";
+  let [error, setError] = useState(null);
+
+  const actionDelete = async (recordID) => {
+    const confirmBox = window.confirm("Estas seguro de eliminar este evento?");
+    if (confirmBox === true) {
+      try {
+        if (!user) return;
+
+        const response = await deleteRecord(recordID, user.token);
+        const result = await response.json();
+        console.log(result);
+        if (!result.success) {
+          setError("Ocurrió un error");
+        } else {
+          addToast("El evento fue eliminado correctamente");
+          navigate(0);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
   return (
     <Grid container item xs={12} sx={{ py: 2, px: 2, borderBottom: 1 }}>
       <Grid item xs={12} md sx={{ px: 2 }}>
@@ -48,7 +78,6 @@ const EventItem = ({
             display: "flex",
             alignItems: "center",
             justifyContent: "space-evenly",
-            flexDirection: { xs: "column", sm: "row" },
             mt: { xs: 3, md: 0 },
             gap: 1,
           }}
@@ -56,11 +85,16 @@ const EventItem = ({
           <CustomButton
             label="Editar"
             component={RouterLink}
-            to={"/events/" + record._id + "/edit"}
+            to={`/${record_type}/${record._id}/edit`}
             color="primary"
             icon="edit"
           />
-          <CustomButton label="Eliminar" color="danger" icon="delete" />
+          <CustomButton
+            label="Eliminar"
+            onClick={() => actionDelete(record._id)}
+            color="danger"
+            icon="delete"
+          />
         </Grid>
       )}
     </Grid>

@@ -11,13 +11,12 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer/Footer";
 
 const HomePage = () => {
-  const {user} = useLogedUser();
+  const { user } = useLogedUser();
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    if(user) navigate("/pets")
-    localStorage.clear();
-  },[])
+  useEffect(() => {
+    if (user) navigate("/pets");
+  }, []);
 
   return (
     <Grid container>
@@ -37,12 +36,7 @@ const HomePage = () => {
             <Banner className="landing-banner" />
           </Grid>
           <Container maxwidth="xl">
-            <Grid
-              item
-              container
-              xs={12}
-              columnSpacing={{ xs: 1, sm: 2, md: 4 }}
-            >
+            <Grid item container columnSpacing={{ xs: 1, sm: 2, md: 4 }}>
               <Grid item xs={12} sm={6}>
                 <CustomImage
                   alt="Nosotros"
@@ -56,7 +50,6 @@ const HomePage = () => {
             <Grid
               item
               container
-              xs={12}
               rowSpacing={3}
               columnSpacing={{ xs: 1, sm: 2, md: 4 }}
             >

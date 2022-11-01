@@ -79,7 +79,7 @@ const DropFileInput = ({
                           maxHeight="100px"
                         />
                       )}
-                      {attachment.type.split("/")[0] === "video" && (
+                      {attachment.type?.split("/")[0] === "video" && (
                         <CustomImage
                           src={`${process.env.PUBLIC_URL}/images/video.png`}
                           alt={attachment.name}
@@ -120,7 +120,7 @@ const DropFileInput = ({
                 flexDirection="column"
               >
                 <Box sx={{ borderRadius: 3, overflow: "hidden" }}>
-                  {image.type.split("/")[0] === "image" && (
+                  {image.type?.split("/")[0] === "image" && (
                     <CustomImage
                       src={URL.createObjectURL(image)}
                       alt={image.name}

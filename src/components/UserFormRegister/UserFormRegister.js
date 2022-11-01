@@ -5,7 +5,6 @@ import { createUser } from "../../services/backend";
 import { useLogedUser } from "../../context/UserContext";
 import { useNavigate } from "react-router";
 
-
 const UserFormRegister = () => {
   const { login } = useLogedUser();
   const navigate = useNavigate();
@@ -28,7 +27,7 @@ const UserFormRegister = () => {
         data.password
       );
       const jsonData = await responseData.json();
-      console.log(jsonData);
+
       if (jsonData.success) {
         const result = await login(data.email, data.password);
         if (result) {

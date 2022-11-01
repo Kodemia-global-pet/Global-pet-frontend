@@ -34,11 +34,12 @@ const QRConfig = ({ pet, token }) => {
         >
           <p>Se mostrarán los siguientes datos de la mascota:</p>
           <ul>
-            <li>Foto de perfil</li>
+            <li>Foto de Perfil</li>
             <li>Nombre</li>
             <li>Especie</li>
             <li>Alergias</li>
             <li>Raza</li>
+            <li>Fecha de Nacimiento</li>
           </ul>
         </QROptionCard>
       </Grid>

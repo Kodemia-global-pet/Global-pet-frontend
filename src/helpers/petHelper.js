@@ -3,7 +3,7 @@ export const getPetRecords = (pets) => {
   pets.forEach((pet) => {
     pet.records.forEach((record) => {
       record.name = pet.name;
-      if (new Date(record.date) > new Date()) records.push(record);
+      if (new Date(record.date) >= new Date()) records.push(record);
     });
   });
 

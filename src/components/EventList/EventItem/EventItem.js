@@ -28,7 +28,7 @@ const EventItem = ({
 
         const response = await deleteRecord(recordID, user.token);
         const result = await response.json();
-        console.log(result);
+
         if (!result.success) {
           setError("Ocurrió un error");
         } else {

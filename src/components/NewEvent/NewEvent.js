@@ -47,15 +47,6 @@ const NewEvent = ({ petID, token, record = false, event = {} }) => {
     files.forEach((file) => {
       formData.append("file", file);
     });
-<<<<<<< HEAD
-
-    const response = await createEvent(petID, token, formData);
-    const result = await response.json();
-    if (!result.success) setError("Ocurrió un error.");
-    else {
-      setError(null);
-      navigate(`/pets/${petID}`);
-=======
     if (eventID) {
       formData.append("deleted", deleted);
       typeOfRecord += record ? "actualizado" : "actualizada";
@@ -77,7 +68,6 @@ const NewEvent = ({ petID, token, record = false, event = {} }) => {
         addToast(`${typeOfRecord} correctamente`);
         navigate(`/pets/${petID}`);
       }
->>>>>>> develop
     }
   };
 

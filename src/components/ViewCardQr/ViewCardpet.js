@@ -11,18 +11,13 @@ import { useLogedUser } from "../../context/UserContext";
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 
-const ViewCardPet = () => {
-  const params = useParams();
-  let { user } = useLogedUser();
-  const { data } = useFetch(
-    `${process.env.REACT_APP_BACKEND}pets/${params.petID}/records`
-  );
-
+const ViewCardPet = ({ pet }) => {
   return (
     <>
       <Container>
         <Grid>
           <Grid
+            item
             container
             xs={12}
             padding={{ xs: 0, md: 5 }}
@@ -34,17 +29,17 @@ const ViewCardPet = () => {
               alignItems: "center",
             }}
           >
-            {!data && !user && <CircularProgress />}
-            {data && (
+            {!pet && <CircularProgress />}
+            {pet && (
               <Avatar
-                src={data.photo}
+                src={pet.photo}
                 sx={{
                   width: { xs: "100px", md: "160px", lg: "180px" },
                   height: { xs: "100px", md: "160px", lg: "180px" },
                 }}
               />
             )}
-            {data && user && <ViewCardPetSchema pet={data} />}
+            {pet && <ViewCardPetSchema pet={pet} />}
           </Grid>
         </Grid>
       </Container>

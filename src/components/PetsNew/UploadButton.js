@@ -4,7 +4,13 @@ import CustomImage from "../CustomImage/CustomImage";
 
 const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
 
-function UploadButton({ images, setImages, imageFiles, setImageFiles }) {
+function UploadButton({
+  images,
+  setImages,
+  imageFiles,
+  setImageFiles,
+  maxImages = 100,
+}) {
   const changeHandler = (e) => {
     const { files } = e.target;
     const validImageFiles = [];
@@ -56,28 +62,11 @@ function UploadButton({ images, setImages, imageFiles, setImageFiles }) {
       sx={{
         mb: { xs: 3 },
         justifyContent: "center",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
       }}
     >
-      <form>
-        <p>
-          <Button
-            htmlFor="file"
-            component="label"
-            variant="contained"
-            sx={{ mb: 3 }}
-          >
-            Subir Foto
-            <input
-              hidden
-              type="file"
-              id="file"
-              onChange={changeHandler}
-              accept="image/png, image/jpg, image/jpeg"
-              multiple
-            />
-          </Button>
-        </p>
-      </form>
       {images.length > 0 ? (
         <>
           {images.map((image, idx) => {
@@ -95,6 +84,28 @@ function UploadButton({ images, setImages, imageFiles, setImageFiles }) {
           })}
         </>
       ) : null}
+      {images.length < maxImages && (
+        <form>
+          <p>
+            <Button
+              htmlFor="file"
+              component="label"
+              variant="contained"
+              sx={{ m: 2 }}
+            >
+              Subir Foto
+              <input
+                hidden
+                type="file"
+                id="file"
+                onChange={changeHandler}
+                accept="image/png, image/jpg, image/jpeg"
+                multiple
+              />
+            </Button>
+          </p>
+        </form>
+      )}
     </Grid>
   );
 }

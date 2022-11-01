@@ -1,4 +1,3 @@
-import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -11,9 +10,14 @@ import { useForm } from "react-hook-form";
 import { Grid, TextField, Box, Avatar } from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
 import { updateUser } from "../../services/updateUser";
+import UploadButton from "../PetsNew/UploadButton";
+import React, { useEffect, useState } from "react";
 
 export default function EditUserDialog({ user }) {
   const [open, setOpen] = React.useState(false);
+  const [images, setImages] = useState([]);
+  const [imageFiles, setImageFiles] = useState([]);
+
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -45,21 +49,28 @@ export default function EditUserDialog({ user }) {
       setError("confirmPassword", { message: "Las contraseñas no coinciden" });
       return false;
     }
+    const photo = imageFiles.length > 0 ? imageFiles[0] : null;
+    let formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("phone_number", data.phone_number);
+    formData.append("password", data.password);
+    formData.append("address", data.address);
+    if (photo) formData.append("photo", photo);
+
     try {
-      const body = {
-        name: data.name,
-        email: data.email,
-        phone_number: data.phone_number,
-        password: data.password,
-        address: data.address,
-      };
-      const newUser = await updateUser(user._id, body, user.token);
+      const newUser = await updateUser(user._id, formData, user.token);
       console.log("newUser", newUser);
       window.location.reload();
     } catch (error) {
       console.log("error", error);
     }
   };
+
+  useEffect(() => {
+    if (user.photo) {
+      setImages([user.photo]);
+    }
+  }, []);
 
   return (
     <div>
@@ -78,29 +89,14 @@ export default function EditUserDialog({ user }) {
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogContent>
             <DialogContentText>
-              <Grid item
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-            
-              >
-                <Box sx={{ pb: 2 }}>
-                  <Avatar src={user.photo} alt="UserDefault" />
-                </Box>
-                <Box display="flex" flexDirection="row" justifyContent="space-between">
-                  <Box sx={{ pb: 2, pr: 1 }}>
-                    <CustomButton
-                      label="Eliminar"
-                      color="danger"
-                      icon="delete"
-                    />
-                  </Box>
-                  <Box sx={{ pb: 2 }}>
-                    <CustomButton label="Editar" color="grey" />
-                  </Box>
-                </Box>
-              </Grid>
-
+              <Box sx={{ pb: 2 }}>
+                <UploadButton
+                  images={images}
+                  setImages={setImages}
+                  imageFiles={imageFiles}
+                  setImageFiles={setImageFiles}
+                />
+              </Box>
               <Grid item sx={{ pb: 2 }}>
                 <TextField
                   fullWidth
@@ -118,22 +114,6 @@ export default function EditUserDialog({ user }) {
                   helperText={errors.name?.message}
                 />
               </Grid>
-
-              <Grid item sx={{ pb: 2 }}>
-                <TextField
-                  fullWidth
-                  {...register("email", {
-                    required: "true",
-                  })}
-                  label="Correo"
-                  type="email"
-                  size="small"
-                  required
-                  error={!!errors.email}
-                  helperText={errors.email?.message}
-                />
-              </Grid>
-
               <Grid item sx={{ pb: 2 }}>
                 <TextField
                   fullWidth

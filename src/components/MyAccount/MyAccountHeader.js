@@ -17,7 +17,14 @@ const MyAccountHeader = ({ user }) => {
         sx={{ p: 2 }}
       >
         <Box>
-          <Avatar src={user.photo} alt="UserDefault" />
+          <Avatar
+            src={user.photo}
+            alt="UserDefault"
+            sx={{
+              width: { xs: "100px", md: "160px", lg: "180px" },
+              height: { xs: "100px", md: "160px", lg: "180px" },
+            }}
+          />
         </Box>
       </Grid>
       <hr></hr>

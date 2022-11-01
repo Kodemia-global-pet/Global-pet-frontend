@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React from "react";
 import { AppBar, Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
@@ -16,9 +16,9 @@ import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import Button from "@mui/material/Button";
-import { Link as RouterLink, MemoryRouter } from "react-router-dom";
-import Link from "@mui/material/Link";
+import { Link as RouterLink} from "react-router-dom";
 import { useLogedUser } from "../../../context/UserContext";
+import MenuMobile from "../../MenuMobile/MenuMobile";
 
 const MainNavbar = () => {
   //const [user, setUser] = useState(null);
@@ -50,6 +50,9 @@ const MainNavbar = () => {
         }}
       >
         <Toolbar>
+          <Box>
+          <MenuMobile/>
+          </Box>
           <Box
             sx={{
               p: 1,
@@ -73,6 +76,7 @@ const MainNavbar = () => {
               LinkComponent={RouterLink}
               to="/"
               icon={<HomeIcon />}
+              sx={{display:{ xs: "none" , md: "inline-flex"} }}
             />
             {user && (
               <>
@@ -98,6 +102,7 @@ const MainNavbar = () => {
               LinkComponent={RouterLink}
               to="/faq"
               icon={<HelpIcon />}
+              sx={{display:{ xs: "none" , md: "inline-flex"} }}
             />
           </Box>
           {!user && (

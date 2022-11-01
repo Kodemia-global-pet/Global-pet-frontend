@@ -3,8 +3,6 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import { Container } from "@mui/system";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -22,7 +20,7 @@ const Item = styled(Paper)(({ theme }) => ({
 const Footer = () => {
   return (
     <Grid
-      sx={{ py: 3, backgroundColor: "grey.light", px: 5, position: "relative" }}
+      sx={{ py: 3, backgroundColor: "grey.main", px: 5, position: "relative" }}
       container
       spacing={2}
       justifyContent="space-around"

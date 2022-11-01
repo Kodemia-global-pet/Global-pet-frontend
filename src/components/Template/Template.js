@@ -3,6 +3,7 @@ import Footer from "../Footer/Footer";
 import MainNavbar from "../Header/MainNavbar/MainNavbar";
 import { Grid } from "@mui/material";
 
+
 const Template = ({ children }) => {
   const backgroundImage = process.env.PUBLIC_URL + "/images/landingbg.png";
 
@@ -11,6 +12,7 @@ const Template = ({ children }) => {
       <Grid container>
         <Grid item xs={12}>
           <MainNavbar />
+          
         </Grid>
         <Grid item xs={12}>
           <main

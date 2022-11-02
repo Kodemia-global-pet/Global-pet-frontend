@@ -7,6 +7,7 @@ import QROptionCard from "./QROptionCard/QROptionCard";
 
 const QRConfig = ({ pet, token }) => {
   const [error, setError] = useState(null);
+  const [selected, setSelected] = useState(pet.visibility_status);
   let navigate = useNavigate();
   const addToast = useToast();
 
@@ -19,7 +20,7 @@ const QRConfig = ({ pet, token }) => {
     else {
       setError(null);
       addToast(`Configuración actualizada correctamente`);
-      navigate(`/pets/${pet._id}`, { replace: false });
+      setSelected(option);
     }
   };
   if (error) return <Alert severity="error">{error}</Alert>;
@@ -30,7 +31,7 @@ const QRConfig = ({ pet, token }) => {
           title="Básico"
           changeOption={changeOption}
           option="disabled"
-          selected={pet.visibility_status === "disabled"}
+          selected={selected === "disabled"}
         >
           <p>Se mostrarán los siguientes datos de la mascota:</p>
           <ul>
@@ -48,7 +49,7 @@ const QRConfig = ({ pet, token }) => {
           title="Datos de contacto"
           changeOption={changeOption}
           option="contact"
-          selected={pet.visibility_status === "contact"}
+          selected={selected === "contact"}
         >
           <p>
             Se mostrará configuración básica y los siguientes datos de usuario:
@@ -65,7 +66,7 @@ const QRConfig = ({ pet, token }) => {
           title="Historial Clínico"
           changeOption={changeOption}
           option="record"
-          selected={pet.visibility_status === "record"}
+          selected={selected === "record"}
         >
           <p>
             Se mostrará configuración Datos de contacto y el historial de

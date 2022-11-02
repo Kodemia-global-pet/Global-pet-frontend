@@ -50,9 +50,10 @@ const EditEventPage = () => {
           </Box>
           {user && data && (
             <NewEvent
-              petID={params.petID}
+              petID={data.petID}
               token={user.token}
               event={data.record}
+              petName={data.name}
             />
           )}
         </Container>

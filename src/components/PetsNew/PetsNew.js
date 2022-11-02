@@ -159,7 +159,7 @@ const PetsNew = ({ userID, token, pet = {} }) => {
                 type="date"
                 label="Fecha de nacimiento"
                 inputProps={{
-                  max: new Date(),
+                  max: moment(new Date()).format("yyyy-MM-DD"),
                 }}
                 {...register("birthdate", {
                   required: "Completa Este Campo",

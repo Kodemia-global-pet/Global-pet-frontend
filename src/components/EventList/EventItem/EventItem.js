@@ -83,6 +83,12 @@ const EventItem = ({
           }}
         >
           <CustomButton
+            label="Ver Documentos"
+            component={RouterLink}
+            to={`/events/${record._id}/attachments`}
+            color="primary"
+          />
+          <CustomButton
             label="Editar"
             component={RouterLink}
             to={`/${record_type}/${record._id}/edit`}

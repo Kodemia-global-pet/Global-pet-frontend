@@ -14,6 +14,7 @@ import EditEventPage from "./pages/EditEventPage";
 import ViewCardQrPage from "./pages/ViewCardQrPage";
 import EditRegisterPage from "./pages/EditRegisterPage";
 import NotFound from "./pages/NotFound";
+import AttachmentsPage from "./pages/AttachmentsPage";
 
 function App() {
   return (
@@ -33,6 +34,10 @@ function App() {
       <Route path="/public/pets/:petID" element={<ViewCardQrPage />} />
       <Route path="/records/:eventID/edit" element={<EditRegisterPage />} />
       <Route path="*" element={<NotFound />} />
+      <Route
+        path="/events/:eventID/attachments"
+        element={<AttachmentsPage />}
+      />
     </Routes>
   );
 }

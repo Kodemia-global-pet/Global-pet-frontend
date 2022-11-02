@@ -52,8 +52,8 @@ const MyPetsPage = () => {
       </Grid>
       <Grid container item={12} sx={{ w: 1, justifyContent: "center", mt: 3 }}>
         <AdSense.Google
-          client={process.env.AD_CLIENT}
-          slot={process.env.AD_SLOT}
+          client="ca-pub-3386732816019910"
+          slot="3516249853"
           style={{ display: "block", width: "300px" }}
           format="fluid"
         />

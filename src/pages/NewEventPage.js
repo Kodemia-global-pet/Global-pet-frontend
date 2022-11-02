@@ -7,11 +7,8 @@ import Template from "../components/Template/Template";
 import { useParams } from "react-router-dom";
 import { useLogedUser } from "../context/UserContext";
 import { Container } from "@mui/system";
-<<<<<<< HEAD
 import AuthValidation from "../components/AuthValidation/AuthValidation";
-=======
 import useFetch from "../hooks/useFetch";
->>>>>>> 0f6e6dd6fe898bf536fbc961ff59e5b2d2de2d37
 
 const NewEventPage = ({ event }) => {
   const params = useParams();
@@ -31,7 +28,6 @@ const NewEventPage = ({ event }) => {
               mt: 5,
             }}
           >
-<<<<<<< HEAD
             <IconButton color="black" component="label">
               <Link href="/">
                 <ArrowBackIcon color="black" />
@@ -49,24 +45,16 @@ const NewEventPage = ({ event }) => {
               Agregar Cita
             </Typography>
           </Box>
-          {user && <NewEvent petID={params.petID} token={user.token} />}
+          {user && data && (
+            <NewEvent
+              petID={params.petID}
+              token={user.token}
+              petName={data.name}
+            />
+          )}
         </Container>
       </Template>
     </AuthValidation>
-=======
-            Agregar Cita
-          </Typography>
-        </Box>
-        {user && data && (
-          <NewEvent
-            petID={params.petID}
-            token={user.token}
-            petName={data.name}
-          />
-        )}
-      </Container>
-    </Template>
->>>>>>> 0f6e6dd6fe898bf536fbc961ff59e5b2d2de2d37
   );
 };
 

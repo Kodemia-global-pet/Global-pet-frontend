@@ -1,21 +1,11 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
 
 const Footer = () => {
   return (
@@ -30,11 +20,11 @@ const Footer = () => {
         <Typography sx={{ fontWeight: "bold", color: "black.main" }}>
           Servicios adicionales
         </Typography>
-        <Typography>Proximamente...</Typography>
+        <Typography>Próximamente...</Typography>
       </Grid>
       <Grid item xs={6} md={3}>
         <Typography sx={{ fontWeight: "bold", color: "black.main" }}>
-          Informacion util
+          Información útil
         </Typography>
         <Typography>
           <Link href="/faq" sx={{ color: "black.main" }}>
@@ -43,8 +33,8 @@ const Footer = () => {
         </Typography>
         <Typography>
           <Link href="/faq" sx={{ color: "black.main" }}>
-          Preguntas frecuentes
-            </Link>
+            Preguntas frecuentes
+          </Link>
         </Typography>
       </Grid>
 
@@ -82,7 +72,7 @@ const Footer = () => {
         justifyContent="flex-end"
         alignItems="flex-end"
       >
-        <Typography sx={{ fontWeight: "bold", color: "black.main" }}>
+        <Typography sx={{ color: "black.main" }}>
           Aviso de privacidad | Todos los derechos reservados
         </Typography>
       </Grid>

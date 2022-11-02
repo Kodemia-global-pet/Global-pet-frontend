@@ -14,6 +14,7 @@ import PetsIcon from "@mui/icons-material/Pets";
 import SettingsIcon from "@mui/icons-material/Settings";
 import HelpIcon from "@mui/icons-material/Help";
 import { Link } from "react-router-dom";
+import { useLogedUser } from "../../context/UserContext";
 
 const drawerWidth = 300;
 const logout = () => {
@@ -22,6 +23,7 @@ const logout = () => {
 };
 
 const MenuMobile = (props) => {
+  const { user } = useLogedUser();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -40,26 +42,38 @@ const MenuMobile = (props) => {
           <BottomNavigationAction icon={<HomeIcon />} sx={{ padding: 2 }} />
           <Typography sx={{ flexGrow: 5 }}>Inicio</Typography>
         </ListItem>
-        <ListItem disablePadding button component={Link} to="/pets">
-          <BottomNavigationAction icon={<PetsIcon />} sx={{ padding: 2 }} />
-          <Typography sx={{ flexGrow: 5 }}>Mis mascotas</Typography>
-        </ListItem>
-        <ListItem disablePadding button component={Link} to="/my-account">
-          <BottomNavigationAction icon={<SettingsIcon />} sx={{ padding: 2 }} />
-          <Typography sx={{ flexGrow: 5 }}>
-            Configuración de la cuenta
-          </Typography>
-        </ListItem>
+        {user && (
+          <>
+            <ListItem disablePadding button component={Link} to="/pets">
+              <BottomNavigationAction icon={<PetsIcon />} sx={{ padding: 2 }} />
+              <Typography sx={{ flexGrow: 5 }}>Mis mascotas</Typography>
+            </ListItem>
+            <ListItem disablePadding button component={Link} to="/my-account">
+              <BottomNavigationAction
+                icon={<SettingsIcon />}
+                sx={{ padding: 2 }}
+              />
+              <Typography sx={{ flexGrow: 5 }}>
+                Configuración de la cuenta
+              </Typography>
+            </ListItem>
+          </>
+        )}
+
         <ListItem disablePadding button component={Link} to="/faq">
           <BottomNavigationAction icon={<HelpIcon />} sx={{ padding: 2 }} />
           <Typography sx={{ flexGrow: 5 }}>Ayuda</Typography>
         </ListItem>
         <Divider />
-        <ListItem disablePadding button component={Link} onClick={logout}>
-          <Typography sx={{ flexGrow: 10, padding: 3 }}>
-            Cerrar sesión
-          </Typography>
-        </ListItem>
+        {user && (
+          <>
+            <ListItem disablePadding button component={Link} onClick={logout}>
+              <Typography sx={{ flexGrow: 10, padding: 3 }}>
+                Cerrar sesión
+              </Typography>
+            </ListItem>
+          </>
+        )}
       </List>
     </Box>
   );
@@ -76,7 +90,7 @@ const MenuMobile = (props) => {
         onClick={handleDrawerToggle}
         sx={{ mr: 2, display: { sm: "none" } }}
       >
-        <MenuIcon style={{color:"black"}}/>
+        <MenuIcon style={{ color: "black" }} />
       </IconButton>
 
       <Box component="nav">

@@ -10,8 +10,10 @@ const AuthValidation = ({ children }) => {
 
   if (loading) {
     return <h1>Loading..</h1>;
+  } else {
+    if (!isAuth) navigate("/");
   }
-  return isAuth ? <>{children}</> : navigate("/");
+  return isAuth ? <>{children}</> : null;
 };
 
 export default AuthValidation;

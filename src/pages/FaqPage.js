@@ -8,14 +8,24 @@ import Questions from "../components/FaqForm/Questions";
 const FaqPage = () => {
   return (
     <Template>
-      <Container maxwidth="xl">
+      <Container
+        xs={12}
+        sx={{
+          display: "flex",
+          textAlign: "center",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
         <Grid
-          tem
-          container
+          item
+          xs={12}
           sx={{
-            borderRadius: 7,
+            borderRadius: "10px",
             backgroundColor: "grey.contrast",
             textAlign: "center",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <CustomImage
@@ -27,14 +37,10 @@ const FaqPage = () => {
         <Grid
           item
           container
-          xs={12}
-          sm={12}
-          lg={12}
           sx={{
-            mt: 2,
             display: "flex",
             flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent: "space-evenly",
             alignItems: "center",
             textAlign: "center",
           }}

@@ -72,6 +72,7 @@ const MainNavbar = () => {
               to="/"
               icon={<HomeIcon />}
             />
+
             {user && (
               <>
                 <BottomNavigationAction

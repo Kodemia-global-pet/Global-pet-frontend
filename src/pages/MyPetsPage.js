@@ -7,50 +7,56 @@ import { getPetRecords } from "../helpers/petHelper";
 import CustomImage from "../components/CustomImage/CustomImage";
 import Template from "../components/Template/Template";
 import Paper from "@mui/material/Paper";
+import AuthValidation from "../components/AuthValidation/AuthValidation";
 
 const MyPetsPage = () => {
   let { user } = useLogedUser();
 
   return (
-    <Template>
-      <Grid container>
-        <Container
-          maxwidth="xl"
-          component={Paper}
-          sx={{ backgroundColor: "grey.light" }}
-        >
-          <Grid item container xs={12} columnSpacing={4} sx={{ py: 5 }}>
-            <Grid item xs={12} md={8}>
-              {!user && <CircularProgress />}
-              {user && <PetList pets={user?.pets} />}
-            </Grid>
-            <Grid item xs={12} md={4} style={{ marginTop: "46px" }}>
-              <Grid
-                item
-                xs={12}
-                display="flex"
-                flexDirection="row"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <h2>Próximos eventos </h2>
-                <CustomImage
-                  sx={{
-                    width: "60px",
-                  }}
-                  alt="Calendario"
-                  src={process.env.PUBLIC_URL + "/images/icons/calendar.png"}
-                />
+    <AuthValidation>
+      <Template>
+        <Grid container>
+          <Container
+            maxwidth="xl"
+            component={Paper}
+            sx={{ backgroundColor: "grey.light" }}
+          >
+            <Grid item container xs={12} columnSpacing={4} sx={{ py: 5 }}>
+              <Grid item xs={12} md={8}>
+                {!user && <CircularProgress />}
+                {user && <PetList pets={user?.pets} />}
               </Grid>
-              {!user && <CircularProgress />}
-              {user && (
-                <EventList records={getPetRecords(user.pets)} showPet={true} />
-              )}
+              <Grid item xs={12} md={4} style={{ marginTop: "46px" }}>
+                <Grid
+                  item
+                  xs={12}
+                  display="flex"
+                  flexDirection="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <h2>Próximos eventos </h2>
+                  <CustomImage
+                    sx={{
+                      width: "60px",
+                    }}
+                    alt="Calendario"
+                    src={process.env.PUBLIC_URL + "/images/icons/calendar.png"}
+                  />
+                </Grid>
+                {!user && <CircularProgress />}
+                {user && (
+                  <EventList
+                    records={getPetRecords(user.pets)}
+                    showPet={true}
+                  />
+                )}
+              </Grid>
             </Grid>
-          </Grid>
-        </Container>
-      </Grid>
-    </Template>
+          </Container>
+        </Grid>
+      </Template>
+    </AuthValidation>
   );
 };
 

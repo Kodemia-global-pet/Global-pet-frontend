@@ -7,10 +7,10 @@ import { getPetRecords } from "../helpers/petHelper";
 import CustomImage from "../components/CustomImage/CustomImage";
 import Template from "../components/Template/Template";
 import Paper from "@mui/material/Paper";
+import AdSense from "react-adsense";
 
 const MyPetsPage = () => {
   let { user } = useLogedUser();
-
   return (
     <Template>
       <Grid container>
@@ -49,6 +49,14 @@ const MyPetsPage = () => {
             </Grid>
           </Grid>
         </Container>
+      </Grid>
+      <Grid container item={12} sx={{ w: 1, justifyContent: "center", mt: 3 }}>
+        <AdSense.Google
+          client={process.env.AD_CLIENT}
+          slot={process.env.AD_SLOT}
+          style={{ display: "block", width: "300px" }}
+          format="fluid"
+        />
       </Grid>
     </Template>
   );

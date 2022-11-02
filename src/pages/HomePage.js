@@ -15,7 +15,7 @@ const HomePage = () => {
 
   useEffect(() => {
     if (user) navigate("/pets");
-  }, []);
+  }, [user]);
 
   return (
     <Grid container>

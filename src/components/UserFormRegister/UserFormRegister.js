@@ -5,7 +5,6 @@ import { createUser } from "../../services/backend";
 import { useLogedUser } from "../../context/UserContext";
 import { useNavigate } from "react-router";
 
-
 const UserFormRegister = () => {
   const { login } = useLogedUser();
   const navigate = useNavigate();
@@ -28,7 +27,7 @@ const UserFormRegister = () => {
         data.password
       );
       const jsonData = await responseData.json();
-      console.log(jsonData);
+
       if (jsonData.success) {
         const result = await login(data.email, data.password);
         if (result) {
@@ -43,7 +42,12 @@ const UserFormRegister = () => {
 
   return (
     <Box
-      sx={{ backgroundColor: "#F0F0F0", color: "#545454", p: 5 }}
+      sx={{
+        backgroundColor: "#F0F0F0",
+        color: "#545454",
+        p: 5,
+        borderRadius: "4px",
+      }}
       xs={4}
       md={4}
     >

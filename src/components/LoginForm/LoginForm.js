@@ -45,7 +45,7 @@ const LoginForm = () => {
         <Container
           component="main"
           sx={{
-            backgroundColor: "grey.contrast",
+            backgroundColor: "grey.contrastText",
             color: "#545454",
             borderRadius: "10px",
             width: 506,
@@ -131,7 +131,11 @@ const LoginForm = () => {
                   </Link>
                 </Grid>
                 <Grid item sx={{ marginTop: 5 }}>
-                  <Link href="#" underline="hover" sx={{ color: "black.main" }}>
+                  <Link
+                    href="/create-account"
+                    underline="hover"
+                    sx={{ color: "black.main" }}
+                  >
                     {"¿Aún no tienes cuenta? Crear cuenta"}
                   </Link>
                 </Grid>

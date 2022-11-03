@@ -78,6 +78,7 @@ const MainNavbar = () => {
               icon={<HomeIcon />}
               sx={{ display: { xs: "none", md: "inline-flex" } }}
             />
+
             {user && (
               <>
                 <BottomNavigationAction
@@ -152,7 +153,7 @@ const MainNavbar = () => {
                     aria-haspopup="true"
                     aria-expanded={open ? "true" : undefined}
                   >
-                    <Avatar sx={{ width: 40, height: 40 }}>M</Avatar>
+                    <Avatar sx={{ width: 40, height: 40 }} src={user.photo}></Avatar>
                   </IconButton>
                 </Tooltip>
               </Box>

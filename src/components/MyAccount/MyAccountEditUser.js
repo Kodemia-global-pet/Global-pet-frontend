@@ -1,4 +1,3 @@
-import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -8,12 +7,17 @@ import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
-import { Grid, TextField, Box } from "@mui/material";
+import { Grid, TextField, Box} from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
 import { updateUser } from "../../services/updateUser";
+import UploadButton from "../PetsNew/UploadButton";
+import React, { useEffect, useState } from "react";
 
 export default function EditUserDialog({ user }) {
   const [open, setOpen] = React.useState(false);
+  const [images, setImages] = useState([]);
+  const [imageFiles, setImageFiles] = useState([]);
+
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -29,7 +33,7 @@ export default function EditUserDialog({ user }) {
     register,
     formState: { errors },
     handleSubmit,
-    setError
+    setError,
   } = useForm({
     defaultValues: {
       name: user.name,
@@ -40,27 +44,31 @@ export default function EditUserDialog({ user }) {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
     if (data.password !== data.confirmPassword) {
-        setError("confirmPassword", { message: "Las contraseñas no coinciden" });
-        return false;
-      }
-      try {
-        const body = { 
-            name : data.name,
-            email: data.email,
-            phone_number: data.phone_number,
-            password: data.password,
-            address: data.address
-         };
-         const newUser = await updateUser(user._id, body, user.token)
-         console.log("newUser", newUser)
-         window.location.reload();
-      } catch (error) {
-        console.log("error", error)
-      }
+      setError("confirmPassword", { message: "Las contraseñas no coinciden" });
+      return false;
+    }
+    const photo = imageFiles.length > 0 ? imageFiles[0] : null;
+    let formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("phone_number", data.phone_number);
+    formData.append("password", data.password);
+    formData.append("address", data.address);
+    if (photo) formData.append("photo", photo);
 
+    try {
+      const newUser = await updateUser(user._id, formData, user.token);
+      window.location.reload();
+    } catch (error) {
+      console.log("error", error);
+    }
   };
+
+  useEffect(() => {
+    if (user.photo) {
+      setImages([user.photo]);
+    }
+  }, []);
 
   return (
     <div>
@@ -77,9 +85,16 @@ export default function EditUserDialog({ user }) {
           {"Edita tu información de usuario"}
         </DialogTitle>
         <form onSubmit={handleSubmit(onSubmit)}>
-        <DialogContent>
-          <DialogContentText>
-            
+          <DialogContent>
+            <DialogContentText>
+              <Box sx={{ pb: 2 }}>
+                <UploadButton
+                  images={images}
+                  setImages={setImages}
+                  imageFiles={imageFiles}
+                  setImageFiles={setImageFiles}
+                />
+              </Box>
               <Grid item sx={{ pb: 2 }}>
                 <TextField
                   fullWidth
@@ -97,29 +112,13 @@ export default function EditUserDialog({ user }) {
                   helperText={errors.name?.message}
                 />
               </Grid>
-
-              <Grid item sx={{ pb: 2 }}>
-                <TextField
-                  fullWidth
-                  {...register("email", {
-                    required: "true",
-                  })}
-                  label="Correo"
-                  type="email"
-                  size="small"
-                  required
-                  error={!!errors.email}
-                  helperText={errors.email?.message}
-                />
-              </Grid>
-
               <Grid item sx={{ pb: 2 }}>
                 <TextField
                   fullWidth
                   {...register("password", {
                     required: "Ingresa tu contraseña",
                     minLength: {
-                      value: 3,
+                      value: 8,
                       message:
                         "La contraseña debe contener al menos 8 caracteres",
                     },
@@ -138,7 +137,7 @@ export default function EditUserDialog({ user }) {
                   {...register("confirmPassword", {
                     required: "Confirma tu contraseña",
                     minLength: {
-                      value: 3,
+                      value: 8,
                       message:
                         "La contraseña debe contener al menos 8 caracteres",
                     },
@@ -189,26 +188,25 @@ export default function EditUserDialog({ user }) {
                   helperText={errors.address?.message}
                 />
               </Grid>
-         
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Box display="flex" flexDirection="row">
-            <Box sx={{ pr: 2 }}>
-              <Button
-                onClick={handleClose}
-                variant="contained"
-                sx={{ backgroundColor: "grey.main" }}
-                type="button"
-              >
-                Cancelar
-              </Button>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Box display="flex" flexDirection="row">
+              <Box sx={{ pr: 1 }}>
+                <Button
+                  onClick={handleClose}
+                  variant="contained"
+                  sx={{ backgroundColor: "grey.main" }}
+                  type="button"
+                >
+                  Cancelar
+                </Button>
+              </Box>
+              <Box>
+                <CustomButton type="submit" label="Guardar" color="secondary" />
+              </Box>
             </Box>
-            <Box>
-              <CustomButton type="submit" label="Guardar" color="secondary" />
-            </Box>
-          </Box>
-        </DialogActions>
+          </DialogActions>
         </form>
       </Dialog>
     </div>

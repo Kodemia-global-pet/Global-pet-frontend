@@ -8,7 +8,7 @@ import { createEvent, updateEvent } from "../../services/backend";
 import moment from "moment";
 import { useToast } from "../../context/ToastContext";
 
-const NewEvent = ({ petID, token, record = false, event = {} }) => {
+const NewEvent = ({ petID, token, record = false, event = {}, petName }) => {
   let navigate = useNavigate();
   const eventID = event?._id;
   const addToast = useToast();
@@ -56,7 +56,7 @@ const NewEvent = ({ petID, token, record = false, event = {} }) => {
       else {
         setError(null);
         addToast(`${typeOfRecord} correctamente`);
-        navigate(`/pets`);
+        navigate(`/pets/${petID}`);
       }
     } else {
       typeOfRecord += record ? "agregado" : "agregada";
@@ -88,17 +88,15 @@ const NewEvent = ({ petID, token, record = false, event = {} }) => {
           color: "#545454",
           borderRadius: "10px",
           width: "100%",
+          p: 3,
         }}
         xs={12}
         md={6}
       >
         {error && <Alert severity="error">{error} </Alert>}
-
+        <h2>{petName}</h2>
         <Box
           sx={{
-            marginTop: 5,
-            ml: 2,
-            mr: 2,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -136,7 +134,9 @@ const NewEvent = ({ petID, token, record = false, event = {} }) => {
               fullWidth
               label="Titulo"
               autoComplete="titulo"
-              {...register("title")}
+              {...register("title", {
+                required: "Completa Este Campo",
+              })}
               error={!!errors?.title}
               helperText={errors.title?.message}
             />
@@ -178,7 +178,7 @@ const NewEvent = ({ petID, token, record = false, event = {} }) => {
               margin="normal"
               fullWidth
               type="text"
-              label="Descripcion"
+              label="Descripción"
               multiline
               rows={4}
               autoComplete="description"

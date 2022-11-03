@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Button, Grid } from "@mui/material";
+import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import CustomButton from "../CustomButton/CustomButton";
 import { Link as RouterLink } from "react-router-dom";
@@ -63,7 +63,7 @@ const PetList = ({ pets }) => {
                     flexDirection: { xs: "column", md: "row" },
                   }}
                 >
-                  <QrDialog petId= {pet._id}/>
+                  <QrDialog petId={pet._id} />
                   <CustomButton
                     component={RouterLink}
                     to={`/pets/${pet._id}/edit`}

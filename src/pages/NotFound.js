@@ -7,10 +7,12 @@ const NotFound = () => {
   return (
     <Template>
       <Container>
-        <h1>Oops! La página que estás buscando no existe.</h1>
-        <p>Te dejamos unos links que podrían ser de ayuda:</p>
-        <Link to="/">Home</Link>
-        <Link to="/pets">Mis Mascotas</Link>
+        <Grid container item>
+          <h1>Oops! La página que estás buscando no existe.</h1>
+          <p>Te dejamos unos links que podrían ser de ayuda:</p>
+          <Link to="/">Home</Link>
+          <Link to="/pets">Mis Mascotas</Link>
+        </Grid>
       </Container>
     </Template>
   );

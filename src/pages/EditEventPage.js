@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { useLogedUser } from "../context/UserContext";
 import useFetch from "../hooks/useFetch";
 import { Container } from "@mui/system";
+import AuthValidation from "../components/AuthValidation/AuthValidation";
 
 const EditEventPage = () => {
   const params = useParams();
@@ -19,42 +20,45 @@ const EditEventPage = () => {
   if (error)
     return <Alert severity="error">Ocurrio un error, intente de nuevo</Alert>;
   return (
-    <Template>
-      <Container>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            ml: 2,
-            mt: 5,
-          }}
-        >
-          <IconButton color="black" component="label">
-            <Link href="/">
-              <ArrowBackIcon color="black" />
-            </Link>
-          </IconButton>
-          <Typography
-            component="h1"
-            variant="h5"
+    <AuthValidation>
+      <Template>
+        <Container>
+          <Box
             sx={{
               display: "flex",
               flexDirection: "row",
-              alignItems: "start",
+              ml: 2,
+              mt: 5,
             }}
           >
-            Editar Cita
-          </Typography>
-        </Box>
-        {user && data && (
-          <NewEvent
-            petID={params.petID}
-            token={user.token}
-            event={data.record}
-          />
-        )}
-      </Container>
-    </Template>
+            <IconButton color="black" component="label">
+              <Link href="/">
+                <ArrowBackIcon color="black" />
+              </Link>
+            </IconButton>
+            <Typography
+              component="h1"
+              variant="h5"
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "start",
+              }}
+            >
+              Editar Cita
+            </Typography>
+          </Box>
+          {user && data && (
+            <NewEvent
+              petID={data.petID}
+              token={user.token}
+              event={data.record}
+              petName={data.name}
+            />
+          )}
+        </Container>
+      </Template>
+    </AuthValidation>
   );
 };
 

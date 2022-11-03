@@ -7,7 +7,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
-import { Grid, TextField, Box, Avatar } from "@mui/material";
+import { Grid, TextField, Box,} from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
 import { updateUser } from "../../services/updateUser";
 import UploadButton from "../PetsNew/UploadButton";
@@ -59,7 +59,6 @@ export default function EditUserDialog({ user }) {
 
     try {
       const newUser = await updateUser(user._id, formData, user.token);
-      console.log("newUser", newUser);
       window.location.reload();
     } catch (error) {
       console.log("error", error);
@@ -120,7 +119,7 @@ export default function EditUserDialog({ user }) {
                   {...register("password", {
                     required: "Ingresa tu contraseña",
                     minLength: {
-                      value: 3,
+                      value: 8,
                       message:
                         "La contraseña debe contener al menos 8 caracteres",
                     },
@@ -139,7 +138,7 @@ export default function EditUserDialog({ user }) {
                   {...register("confirmPassword", {
                     required: "Confirma tu contraseña",
                     minLength: {
-                      value: 3,
+                      value: 8,
                       message:
                         "La contraseña debe contener al menos 8 caracteres",
                     },

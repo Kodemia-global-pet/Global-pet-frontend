@@ -17,7 +17,7 @@ const createAccount = () => {
           height: "100vh",
         }}
       >
-        <Container maxwidth="xl">
+        <Container maxwidth="xl" sx={{ borderRadius: 10}}>
           <Grid
             item
             container

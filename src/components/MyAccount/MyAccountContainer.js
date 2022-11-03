@@ -5,15 +5,21 @@ import { CircularProgress } from "@mui/material";
 import MyAccountAside from "./MyAccountAside";
 import Grid from "@mui/material/Grid";
 
-
 const MyAccountContainer = () => {
   let { user } = useLogedUser();
-console.log("user", user)
+  console.log("user", user);
   return (
     <>
       {!user && <CircularProgress />}
       {user && (
-        <Grid container sx={{ backgroundColor: "grey.light", padding: "40px" }}>
+        <Grid
+          container
+          sx={{
+            backgroundColor: "grey.light",
+            padding: "40px",
+            borderRadius: "4px",
+          }}
+        >
           <Grid item xs={12} lg={3}>
             <MyAccountAside user={user} />
           </Grid>

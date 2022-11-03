@@ -7,7 +7,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
-import { Grid, TextField, Box,} from "@mui/material";
+import { Grid, TextField, Box} from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
 import { updateUser } from "../../services/updateUser";
 import UploadButton from "../PetsNew/UploadButton";

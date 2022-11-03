@@ -12,6 +12,8 @@ const UserContext = React.createContext();
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const loadData = async () => {
       const token = getTokenLocalStorage();
@@ -21,6 +23,7 @@ const UserProvider = ({ children }) => {
       }
     };
     loadData();
+    setLoading(false);
   }, []);
 
   const login = async (email, password) => {
@@ -45,7 +48,7 @@ const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ login, user }}>
+    <UserContext.Provider value={{ login, user, loading }}>
       {children}
     </UserContext.Provider>
   );

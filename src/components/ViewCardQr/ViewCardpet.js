@@ -1,15 +1,6 @@
-import {
-  Grid,
-  Container,
-  CircularProgress,
-  Alert,
-  Avatar,
-} from "@mui/material";
+import { Grid, Container, CircularProgress, Avatar } from "@mui/material";
 import React from "react";
 import ViewCardPetSchema from "./ViewCardPetInfo";
-import { useLogedUser } from "../../context/UserContext";
-import { useParams } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
 
 const ViewCardPet = ({ pet }) => {
   return (

@@ -13,13 +13,14 @@ const EventItem = ({
   showDescription = false,
   showActions = false,
   petID = null,
+  isPublic = false,
 }) => {
   const { user } = useLogedUser();
   let navigate = useNavigate();
   const addToast = useToast();
+  const url = isPublic ? "/public/events" : "/events";
   let record_type = record.type === "Registro" ? "records" : "events";
   let [error, setError] = useState(null);
-
   const actionDelete = async (recordID) => {
     const confirmBox = window.confirm("Estas seguro de eliminar este evento?");
     if (confirmBox === true) {
@@ -63,13 +64,13 @@ const EventItem = ({
       {showDescription && (
         <Grid item xs={6} md sx={{ px: 2 }}>
           <CustomCaption
-            label="Descipción"
+            label="Descripción"
             display={{ xs: "block", md: "none" }}
           />
           {record.description}
         </Grid>
       )}
-      {showActions && (
+      {(showActions || isPublic) && (
         <Grid
           item
           xs={12}
@@ -83,18 +84,29 @@ const EventItem = ({
           }}
         >
           <CustomButton
-            label="Editar"
+            label="Ver Documentos"
             component={RouterLink}
-            to={`/${record_type}/${record._id}/edit`}
+            to={`${url}/${record._id}/attachments`}
             color="primary"
-            icon="edit"
+            disabled={!record.attachments.length > 0}
           />
-          <CustomButton
-            label="Eliminar"
-            onClick={() => actionDelete(record._id)}
-            color="danger"
-            icon="delete"
-          />
+          {showActions && (
+            <CustomButton
+              label="Editar"
+              component={RouterLink}
+              to={`/${record_type}/${record._id}/edit`}
+              color="primary"
+              icon="edit"
+            />
+          )}
+          {showActions && (
+            <CustomButton
+              label="Eliminar"
+              onClick={() => actionDelete(record._id)}
+              color="danger"
+              icon="delete"
+            />
+          )}
         </Grid>
       )}
     </Grid>

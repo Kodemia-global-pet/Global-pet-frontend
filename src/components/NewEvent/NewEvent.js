@@ -211,7 +211,7 @@ const NewEvent = ({ petID, token, record = false, event = {}, petName }) => {
                 sx={{
                   width: 170,
                   height: 43,
-                  backgroundColor: "grey.main",
+                  backgroundColor: "primary",
                   mt: 3,
                   mb: 2,
                 }}

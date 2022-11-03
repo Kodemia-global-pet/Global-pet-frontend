@@ -42,11 +42,8 @@ const LoginForm = () => {
       <Container
         component="main"
         sx={{
-          backgroundColor: "grey.contrastText",
           color: "#545454",
           borderRadius: "10px",
-          maxWidth: 506,
-          paddingBottom:"40px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -56,10 +53,13 @@ const LoginForm = () => {
 
         <Box
           sx={{
+            backgroundColor: "grey.contrastText",
             marginTop: 5,
+            borderRadius: "10px",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            padding: 5,
           }}
         >
           <Typography component="h1" variant="h5">
@@ -114,7 +114,7 @@ const LoginForm = () => {
                 sx={{
                   width: 170,
                   height: 43,
-                  backgroundColor: "grey.main",
+                  backgroundColor: "primary",
                   mt: 3,
                   mb: 2,
                 }}

@@ -1,6 +1,5 @@
 import { Alert, Grid } from "@mui/material";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useToast } from "../../../context/ToastContext";
 import { updatePet } from "../../../services/backend";
 import QROptionCard from "./QROptionCard/QROptionCard";
@@ -8,7 +7,6 @@ import QROptionCard from "./QROptionCard/QROptionCard";
 const QRConfig = ({ pet, token }) => {
   const [error, setError] = useState(null);
   const [selected, setSelected] = useState(pet.visibility_status);
-  let navigate = useNavigate();
   const addToast = useToast();
 
   const changeOption = async (option) => {

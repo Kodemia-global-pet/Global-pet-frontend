@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Typography, Box, Alert } from "@mui/material";
+import { Typography, Box, Alert } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import NewEvent from "../components/NewEvent/NewEvent";

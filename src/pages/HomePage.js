@@ -1,5 +1,5 @@
 import { Container, Grid } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import HeaderLanding from "../components/Landing/HeaderLanding/HeaderLanding";
 import Banner from "../components/Landing/Banner/Banner";
 import "../main.css";
@@ -11,15 +11,19 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer/Footer";
 
 const HomePage = () => {
-  const { user } = useLogedUser();
+  const { user, loading } = useLogedUser();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (user) navigate("/pets");
-  }, [user]);
+  const isAuth = user?.token;
+
+  if (loading) {
+    return <h1>Loading..</h1>;
+  } else {
+    if (isAuth) navigate("/pets");
+  }
 
   return (
-    <Grid container>
+    <Grid item container>
       <Grid item xs={12}>
         <HeaderLanding />
       </Grid>
@@ -80,7 +84,7 @@ const HomePage = () => {
             </Grid>
           </Container>
         </main>
-        <Grid xs={12}>
+        <Grid item xs={12}>
           <Footer />
         </Grid>
       </Grid>

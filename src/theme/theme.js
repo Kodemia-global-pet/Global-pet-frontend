@@ -22,7 +22,7 @@ const theme = createTheme({
     },
     grey: {
       main: "#C6C6C6",
-      light: "rgba(211, 208, 195, .5)",
+      light: "#f3f3f3",
       contrastText: "rgba(240, 240, 240, .9)",
     },
     header_primary: {

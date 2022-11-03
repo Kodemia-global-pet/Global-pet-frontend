@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Box } from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
 
-const MyAccountAside = ({user}) => {
+const MyAccountAside = ({ user }) => {
   return (
     <Grid item>
       <Grid
@@ -11,13 +11,7 @@ const MyAccountAside = ({user}) => {
         alignItems="center"
         sx={{ p: 2 }}
       >
-        <Grid
-          item
-          display="flex"
-          flexDirection="column"
-          alignItems="baseline"
-        
-        >
+        <Grid item display="flex" flexDirection="column" alignItems="baseline">
           <h3>{user.name}</h3>
           <p>{user.email}</p>
         </Grid>
@@ -26,7 +20,7 @@ const MyAccountAside = ({user}) => {
         <CustomButton
           href="#contained-buttons"
           label="Mi cuenta"
-          color="grey"
+          color="primary"
           icon="user"
         />
       </Box>

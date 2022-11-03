@@ -7,7 +7,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
-import { Grid, TextField, Box} from "@mui/material";
+import { Grid, TextField, Box } from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
 import { updateUser } from "../../services/updateUser";
 import UploadButton from "../PetsNew/UploadButton";
@@ -73,7 +73,7 @@ export default function EditUserDialog({ user }) {
   return (
     <div>
       <Box sx={{ p: 2 }} onClick={handleClickOpen}>
-        <CustomButton label="Editar" color="grey" icon="edit" />
+        <CustomButton label="Editar" color="primary" icon="edit" />
       </Box>
       <Dialog
         fullScreen={fullScreen}
@@ -196,7 +196,7 @@ export default function EditUserDialog({ user }) {
                 <Button
                   onClick={handleClose}
                   variant="contained"
-                  sx={{ backgroundColor: "grey.main" }}
+                  sx={{ backgroundColor: "primary" }}
                   type="button"
                 >
                   Cancelar

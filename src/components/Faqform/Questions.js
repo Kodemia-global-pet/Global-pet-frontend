@@ -4,46 +4,55 @@ import CustomImage from "../CustomImage/CustomImage";
 
 const Questions = ({ title, src, color, description }) => {
   return (
-    <Box
+    <Grid
+      item
+      container
+      xs={12}
       sx={{
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        fontWeight: "bold",
-        color: "black.main",
       }}
     >
       <Box
+        xs={12}
         sx={{
           display: "flex",
+          flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: color,
-          p: "36px",
-          borderRadius: "50%",
-          width: 68,
-          height: 65,
-          m: "15px",
+          fontWeight: "bold",
+          color: "black.main",
         }}
       >
-        <CustomImage alt={title} src={src} sx={{ width: 68, height: 65 }} />
-      </Box>
-      <p>{title}</p>
-      <Grid item xs>
-        <Typography
+        <Box
           sx={{
-            mt: 1,
-            ml: 1,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            backgroundColor: color,
+            borderRadius: "50%",
           }}
         >
-          {description}
-        </Typography>
-      </Grid>
-    </Box>
+          <CustomImage alt={title} src={src} sx={{ width: 68, height: 65 }} />
+        </Box>
+        <p>{title}</p>
+        <Grid item xs>
+          <Typography
+            sx={{
+              mt: 1,
+              ml: 1,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {description}
+          </Typography>
+        </Grid>
+      </Box>
+    </Grid>
   );
 };
 

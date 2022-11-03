@@ -25,7 +25,7 @@ const Banner = (props) => {
             md={4}
             display={{ xs: "none", sm: "block" }}
           >
-            <h3>Lleva el expediente clinico de tu mascota en linea.</h3>
+            <h3>Lleva el expediente clínico de tu mascota en linea.</h3>
             <CustomImage
               alt="Global Pet"
               src={process.env.PUBLIC_URL + "/images/banner-info.png"}

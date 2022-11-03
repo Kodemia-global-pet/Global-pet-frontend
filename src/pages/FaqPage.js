@@ -8,14 +8,24 @@ import Questions from "../components/FaqForm/Questions";
 const FaqPage = () => {
   return (
     <Template>
-      <Container maxwidth="xl">
+      <Container
+        xs={12}
+        sx={{
+          display: "flex",
+          textAlign: "center",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
         <Grid
-          tem
-          container
+          item
+          xs={12}
           sx={{
-            borderRadius: 7,
+            borderRadius: "10px",
             backgroundColor: "grey.contrast",
             textAlign: "center",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <CustomImage
@@ -27,14 +37,10 @@ const FaqPage = () => {
         <Grid
           item
           container
-          xs={12}
-          sm={12}
-          lg={12}
           sx={{
-            mt: 2,
             display: "flex",
             flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent: "space-evenly",
             alignItems: "center",
             textAlign: "center",
           }}
@@ -52,7 +58,7 @@ const FaqPage = () => {
               src={process.env.PUBLIC_URL + "/images/icons/dog&cat.png"}
               title="Registro de mascotas"
               color="header_secondary.main"
-              description="Puedes agregar nuevas mascotas para que ninguna se quede sin su cartilla virtual Tu cuenta puede tener hasta tres mascotas en la prueba gratuita y tendrás la posibilidad de incrementar la capacidad de registros al tener una suscripcion."
+              description="Puedes agregar nuevas mascotas para que ninguna se quede sin su cartilla virtual Tu cuenta puede tener hasta tres mascotas en la prueba gratuita y tendrás la posibilidad de incrementar la capacidad de registros al tener una suscripción."
             />
           </CardFaq>
           <CardFaq>
@@ -60,7 +66,7 @@ const FaqPage = () => {
               src={process.env.PUBLIC_URL + "/images/icons/calendar.png"}
               title="Citas personalizadas"
               color="header_secondary.main"
-              description="Podras administrar y personalizar todas tus citas con el veterinario subiendo fotografias del diagnostico que te facilitara la vida"
+              description="Podrás administrar y personalizar todas tus citas con el veterinario subiendo fotografías del diagnóstico que te facilitara la vida"
             />
           </CardFaq>
           <CardFaq>
@@ -68,7 +74,7 @@ const FaqPage = () => {
               src={process.env.PUBLIC_URL + "/images/icons/QR.png"}
               title="¿Como funciona el código QR?"
               color="header_secondary.main"
-              description="En cada registro de mascota tiene la funcion de generar un Codigo QR que podras habilitar, el tipo de informacion que puedan ver las demas personas sin exponer tus datos personales si asi lo deseas."
+              description="En cada registro de mascota tiene la función de generar un Código QR que podrás habilitar, el tipo de información que puedan ver las demás personas sin exponer tus datos personales si así lo deseas."
             />
           </CardFaq>
         </Grid>

@@ -72,7 +72,7 @@ const HomePage = () => {
               <Grid item xs={12} sm={4}>
                 <Service
                   src={process.env.PUBLIC_URL + "/images/services/document.png"}
-                  title="Sube documentos clinicos de tu mascota"
+                  title="Sube documentos clínicos de tu mascota"
                   color="header_secondary.main"
                 />
               </Grid>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Alert } from "@mui/material";
+import { Grid, Alert, Container } from "@mui/material";
 import Template from "../components/Template/Template";
 import ViewCardPet from "../components/ViewCardQr/ViewCardpet";
 import { useParams } from "react-router-dom";
@@ -18,35 +18,37 @@ const ViewCardQrPage = () => {
 
   return (
     <Template>
-      <Grid container>
-        <Grid
-          item
-          md={4}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "row",
-          }}
-        >
-          {data && <ViewCardPet pet={data} />}
-        </Grid>
-        <Grid item md={8}>
-          <Grid item md={12}>
-            {data && data.visibility_status != "disabled" && (
-              <ViewCardContactInfo petID={params.petID} />
-            )}
+      <Container>
+        <Grid container>
+          <Grid
+            item
+            md={4}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "row",
+            }}
+          >
+            {data && <ViewCardPet pet={data} />}
+          </Grid>
+          <Grid item md={8}>
+            <Grid item md={12}>
+              {data && data.visibility_status !== "disabled" && (
+                <ViewCardContactInfo petID={params.petID} />
+              )}
 
-            {data && data.visibility_status == "record" && (
-              <ViewCardHistory
-                records={data.records}
-                showPet={false}
-                showDescription={true}
-                showActions={false}
-              />
-            )}
+              {data && data.visibility_status === "record" && (
+                <ViewCardHistory
+                  records={data.records}
+                  showPet={false}
+                  showDescription={true}
+                  showActions={false}
+                />
+              )}
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </Container>
     </Template>
   );
 };

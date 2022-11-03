@@ -30,13 +30,6 @@ const MyAccountAside = ({user}) => {
           icon="user"
         />
       </Box>
-      <Box sx={{ p: 1 }}>
-        <CustomButton
-          href="#contained-buttons"
-          label="Acceso y seguridad"
-          variant="outlined"
-        />
-      </Box>
     </Grid>
   );
 };

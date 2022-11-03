@@ -21,7 +21,7 @@ const theme = createTheme({
       contrastText: "#FFF",
     },
     grey: {
-      main: "#737373",
+      main: "#C6C6C6",
       light: "rgba(211, 208, 195, .5)",
       contrastText: "rgba(240, 240, 240, .9)",
     },

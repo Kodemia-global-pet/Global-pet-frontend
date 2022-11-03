@@ -1,34 +1,16 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import { Container } from "@mui/system";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
-
 const Footer = () => {
   return (
     <Grid
-      sx={{
-        mt: 7,
-        py: 3,
-        backgroundColor: "grey.light",
-        px: 5,
-        position: "relative",
-      }}
+      sx={{ py: 3, backgroundColor: "grey.main", px: 5, position: "relative" }}
       container
       spacing={2}
       justifyContent="space-around"
@@ -38,16 +20,22 @@ const Footer = () => {
         <Typography sx={{ fontWeight: "bold", color: "black.main" }}>
           Servicios adicionales
         </Typography>
-        <Typography>Proximamente...</Typography>
+        <Typography>Próximamente...</Typography>
       </Grid>
       <Grid item xs={6} md={3}>
         <Typography sx={{ fontWeight: "bold", color: "black.main" }}>
-          Informacion util
+          Información útil
         </Typography>
         <Typography>
-          <Link href="/faq">Centro de ayuda</Link>
+          <Link href="/faq" sx={{ color: "black.main" }}>
+            Centro de ayuda
+          </Link>
         </Typography>
-        <Typography>Preguntas frecuentes</Typography>
+        <Typography>
+          <Link href="/faq" sx={{ color: "black.main" }}>
+            Preguntas frecuentes
+          </Link>
+        </Typography>
       </Grid>
 
       <Grid
@@ -84,7 +72,7 @@ const Footer = () => {
         justifyContent="flex-end"
         alignItems="flex-end"
       >
-        <Typography sx={{ fontWeight: "bold", color: "black.main" }}>
+        <Typography sx={{ color: "black.main" }}>
           Aviso de privacidad | Todos los derechos reservados
         </Typography>
       </Grid>

@@ -39,111 +39,107 @@ const LoginForm = () => {
 
   return (
     <>
-      <main
-        
+      <Container
+        component="main"
+        sx={{
+          backgroundColor: "grey.contrastText",
+          color: "#545454",
+          borderRadius: "10px",
+          maxWidth: 506,
+          paddingBottom:"40px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
       >
-        <Container
-          component="main"
+        {error && <Alert severity="error">{error} </Alert>}
+
+        <Box
           sx={{
-            backgroundColor: "grey.contrastText",
-            color: "#545454",
-            borderRadius: "10px",
-            width: 506,
-            height: 531,
+            marginTop: 5,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
-          {error && <Alert severity="error">{error} </Alert>}
-
-          <Box
-            sx={{
-              marginTop: 5,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Typography component="h1" variant="h5">
-              Inicia Sesion ó Registrate
-            </Typography>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                type="email"
-                label="Correo Electronico"
-                autoComplete="email"
-                {...register("email", {
-                  required: "Completa Este Campo",
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Correo Invalido",
-                  },
-                })}
-                error={!!errors?.email}
-                helperText={errors.email?.message}
-              />
-              <TextField
-                margin="normal"
-                fullWidth
-                type="password"
-                label="Contraseña"
-                autoComplete="current-password"
-                {...register("password", {
-                  required: "Completa Este Campo",
-                  minLength: { value: 3, message: "Minimo 3 caracteres" },
-                })}
-                error={!!errors?.password}
-                helperText={errors.password?.message}
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Recuerdame"
-              />
-              <Grid
-                container
+          <Typography component="h1" variant="h5">
+            Inicia Sesion ó Registrate
+          </Typography>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              type="email"
+              label="Correo Electronico"
+              autoComplete="email"
+              {...register("email", {
+                required: "Completa Este Campo",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Correo Invalido",
+                },
+              })}
+              error={!!errors?.email}
+              helperText={errors.email?.message}
+            />
+            <TextField
+              margin="normal"
+              fullWidth
+              type="password"
+              label="Contraseña"
+              autoComplete="current-password"
+              {...register("password", {
+                required: "Completa Este Campo",
+                minLength: { value: 3, message: "Minimo 3 caracteres" },
+              })}
+              error={!!errors?.password}
+              helperText={errors.password?.message}
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Recuerdame"
+            />
+            <Grid
+              container
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Button
+                variant="contained"
+                type="submit"
                 sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
+                  width: 170,
+                  height: 43,
+                  backgroundColor: "grey.main",
+                  mt: 3,
+                  mb: 2,
                 }}
               >
-                <Button
-                  variant="contained"
-                  type="submit"
-                  sx={{
-                    width: 170,
-                    height: 43,
-                    backgroundColor: "grey.main",
-                    mt: 3,
-                    mb: 2,
-                  }}
-                >
-                  Continuar
-                </Button>
+                Continuar
+              </Button>
 
-                <Grid item sx={{ color: "black.main", marginTop: 5 }}>
-                  <Link href="#" underline="hover" sx={{ color: "black.main" }}>
-                    Olvidé mi contraseña
-                  </Link>
-                </Grid>
-                <Grid item sx={{ marginTop: 5 }}>
-                  <Link
-                    href="/create-account"
-                    underline="hover"
-                    sx={{ color: "black.main" }}
-                  >
-                    {"¿Aún no tienes cuenta? Crear cuenta"}
-                  </Link>
-                </Grid>
+              <Grid item sx={{ color: "black.main", marginTop: 5 }}>
+                <Link href="#" underline="hover" sx={{ color: "black.main" }}>
+                  Olvidé mi contraseña
+                </Link>
               </Grid>
-            </form>
-          </Box>
-        </Container>
-      </main>
+              <Grid item sx={{ marginTop: 5 }}>
+                <Link
+                  href="/create-account"
+                  underline="hover"
+                  sx={{ color: "black.main" }}
+                >
+                  {"¿Aún no tienes cuenta? Crear cuenta"}
+                </Link>
+              </Grid>
+            </Grid>
+          </form>
+        </Box>
+      </Container>
     </>
   );
 };

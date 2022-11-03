@@ -78,9 +78,6 @@ const MenuMobile = (props) => {
     </Box>
   );
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
-
   return (
     <Box sx={{ display: "flex" }}>
       <IconButton
@@ -95,7 +92,6 @@ const MenuMobile = (props) => {
 
       <Box component="nav">
         <Drawer
-          container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}

@@ -55,15 +55,19 @@ const MyPetsPage = () => {
             </Grid>
           </Container>
         </Grid>
+        <Grid
+          container
+          item={12}
+          sx={{ w: 1, justifyContent: "center", mt: 3 }}
+        >
+          <AdSense.Google
+            client="ca-pub-3386732816019910"
+            slot="3516249853"
+            style={{ display: "block", width: "300px" }}
+            format="fluid"
+          />
+        </Grid>
       </Template>
-      <Grid container item={12} sx={{ w: 1, justifyContent: "center", mt: 3 }}>
-        <AdSense.Google
-          client="ca-pub-3386732816019910"
-          slot="3516249853"
-          style={{ display: "block", width: "300px" }}
-          format="fluid"
-        />
-      </Grid>
     </AuthValidation>
   );
 };

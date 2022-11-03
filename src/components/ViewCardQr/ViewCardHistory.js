@@ -40,14 +40,12 @@ const ViewCardHistory = ({
           </Grid>
           {showDescription && (
             <Grid item xs={6} md>
-              Descipción
+              Descripción
             </Grid>
           )}
-          {showActions && (
-            <Grid item xs={12} md={4}>
-              Acciones
-            </Grid>
-          )}
+          <Grid item xs={12} md={4}>
+            Acciones
+          </Grid>
         </Grid>
         <Grid container>
           {records.map((record) => (
@@ -57,6 +55,7 @@ const ViewCardHistory = ({
               showPet={showPet}
               showDescription={showDescription}
               showActions={showActions}
+              isPublic={true}
             />
           ))}
         </Grid>

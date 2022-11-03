@@ -19,6 +19,7 @@ import Button from "@mui/material/Button";
 import { Link as RouterLink, MemoryRouter } from "react-router-dom";
 import Link from "@mui/material/Link";
 import { useLogedUser } from "../../../context/UserContext";
+import { deleteTokenLocalStorage } from "../../../helpers/userHelper";
 
 const MainNavbar = () => {
   //const [user, setUser] = useState(null);
@@ -37,6 +38,7 @@ const MainNavbar = () => {
     localStorage.clear();
     window.location.href = "/";
   };
+
   return (
     <Box sx={{ flexGrow: 1, mb: 2 }}>
       <AppBar

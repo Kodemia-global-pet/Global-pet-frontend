@@ -12,6 +12,7 @@ import AdSense from "react-adsense";
 
 const MyPetsPage = () => {
   let { user } = useLogedUser();
+  // window.location.reload();
   return (
     <AuthValidation>
       <Template>

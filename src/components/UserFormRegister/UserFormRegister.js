@@ -52,7 +52,11 @@ const UserFormRegister = () => {
       xs={12}
       md={6}
     >
-      <Grid sx={{ pb: 2 }}>
+      <Grid
+        item
+        container
+        sx={{ pb: 2, justifyContent: "center", alignItems: "center" }}
+      >
         <h3>¡Bienvenido a Global Pet!</h3>
       </Grid>
       <form onSubmit={handleSubmit(onSubmit)}>

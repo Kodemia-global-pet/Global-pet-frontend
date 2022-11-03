@@ -19,7 +19,9 @@ const HomePage = () => {
   if (loading) {
     return <h1>Loading..</h1>;
   } else {
-    if (isAuth) navigate("/pets");
+    if (isAuth) {
+      navigate("/pets");
+    }
   }
 
   return (

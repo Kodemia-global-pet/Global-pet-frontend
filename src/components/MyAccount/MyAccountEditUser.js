@@ -44,7 +44,6 @@ export default function EditUserDialog({ user }) {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
     if (data.password !== data.confirmPassword) {
       setError("confirmPassword", { message: "Las contraseñas no coinciden" });
       return false;

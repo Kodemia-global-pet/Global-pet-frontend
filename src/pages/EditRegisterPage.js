@@ -1,20 +1,23 @@
 import React from "react";
-import { Link, Typography, Box } from "@mui/material";
+import { Link, Typography, Box, Alert } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import NewEvent from "../components/NewEvent/NewEvent";
 import Template from "../components/Template/Template";
 import { useParams } from "react-router-dom";
 import { useLogedUser } from "../context/UserContext";
-import { Container } from "@mui/system";
 import useFetch from "../hooks/useFetch";
+import { Container } from "@mui/system";
 
-const NewEventPage = ({ event }) => {
+const EditRegisterPage = () => {
   const params = useParams();
   let { user } = useLogedUser();
-  const { data } = useFetch(
-    `${process.env.REACT_APP_BACKEND}pets/${params.petID}`
+  const { data, error } = useFetch(
+    `${process.env.REACT_APP_BACKEND}records/${params.eventID}`
   );
+
+  if (error)
+    return <Alert severity="error">Ocurrio un error, intente de nuevo</Alert>;
   return (
     <Template>
       <Container>
@@ -40,13 +43,15 @@ const NewEventPage = ({ event }) => {
               alignItems: "start",
             }}
           >
-            Agregar Cita
+            Editar Registro
           </Typography>
         </Box>
         {user && data && (
           <NewEvent
-            petID={params.petID}
+            petID={data.petID}
             token={user.token}
+            event={data.record}
+            record={true}
             petName={data.name}
           />
         )}
@@ -55,4 +60,4 @@ const NewEventPage = ({ event }) => {
   );
 };
 
-export default NewEventPage;
+export default EditRegisterPage;

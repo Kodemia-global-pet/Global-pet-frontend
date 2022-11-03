@@ -27,7 +27,7 @@ const UserFormRegister = () => {
         data.password
       );
       const jsonData = await responseData.json();
-      console.log(jsonData);
+
       if (jsonData.success) {
         const result = await login(data.email, data.password);
         if (result) {

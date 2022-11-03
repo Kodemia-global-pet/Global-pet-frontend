@@ -1,22 +1,12 @@
 import { Grid, Container } from "@mui/material";
 import React from "react";
+import Template from "../components/Template/Template";
 import UserFormRegister from "../components/UserFormRegister/UserFormRegister";
 
 const createAccount = () => {
   return (
-    <Grid container>
-      <Grid item xs={12}>
-        Header
-      </Grid>
-      <main
-        style={{
-          backgroundImage: `url(${
-            process.env.PUBLIC_URL + "/images/landingbg.png"
-          })`,
-          width: "100vw",
-          height: "100vh",
-        }}
-      >
+    <Template>
+      <Grid container>
         <Container maxwidth="xl">
           <Grid
             item
@@ -29,8 +19,8 @@ const createAccount = () => {
             <UserFormRegister />
           </Grid>
         </Container>
-      </main>
-    </Grid>
+      </Grid>
+    </Template>
   );
 };
 

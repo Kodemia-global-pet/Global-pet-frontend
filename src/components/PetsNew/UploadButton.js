@@ -1,6 +1,5 @@
 import { Avatar, Button, Grid } from "@mui/material";
-import { useEffect, useState } from "react";
-import CustomImage from "../CustomImage/CustomImage";
+import { useEffect } from "react";
 
 const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
 
@@ -58,6 +57,8 @@ function UploadButton({
   }, [imageFiles]);
   return (
     <Grid
+      container
+      item
       xs={12}
       sx={{
         mb: { xs: 3 },
@@ -71,15 +72,14 @@ function UploadButton({
         <>
           {images.map((image, idx) => {
             return (
-              <p key={idx}>
-                <Avatar
-                  src={image}
-                  sx={{
-                    width: { xs: "100px", md: "160px", lg: "180px" },
-                    height: { xs: "100px", md: "160px", lg: "180px" },
-                  }}
-                />
-              </p>
+              <Avatar
+                key={idx}
+                src={image}
+                sx={{
+                  width: { xs: "100px", md: "160px", lg: "180px" },
+                  height: { xs: "100px", md: "160px", lg: "180px" },
+                }}
+              />
             );
           })}
         </>

@@ -1,0 +1,12 @@
+.cardOption{
+    ul{
+        padding-top: 10px;
+        list-style: square;
+        list-style-position: inside;
+    }
+}
+.selectedCard{
+    border: 4px solid #00e676;
+    border-radius: 4px;
+    background-color: #f7fdfa !important;
+}

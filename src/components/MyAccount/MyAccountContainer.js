@@ -11,7 +11,14 @@ const MyAccountContainer = () => {
     <>
       {!user && <CircularProgress />}
       {user && (
-        <Grid container sx={{ backgroundColor: "grey.light", padding: "40px" }}>
+        <Grid
+          container
+          sx={{
+            backgroundColor: "grey.light",
+            padding: "40px",
+            borderRadius: "4px",
+          }}
+        >
           <Grid item xs={12} lg={3}>
             <MyAccountAside user={user} />
           </Grid>

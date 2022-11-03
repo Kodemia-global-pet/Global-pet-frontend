@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React from "react";
 import { AppBar, Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
@@ -16,10 +16,9 @@ import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import Button from "@mui/material/Button";
-import { Link as RouterLink, MemoryRouter } from "react-router-dom";
-import Link from "@mui/material/Link";
+import { Link as RouterLink } from "react-router-dom";
 import { useLogedUser } from "../../../context/UserContext";
-import { deleteTokenLocalStorage } from "../../../helpers/userHelper";
+import MenuMobile from "../../MenuMobile/MenuMobile";
 
 const MainNavbar = () => {
   //const [user, setUser] = useState(null);
@@ -27,6 +26,7 @@ const MainNavbar = () => {
   const { user } = useLogedUser();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -40,7 +40,7 @@ const MainNavbar = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, mb: 2 }}>
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar
         position="static"
         sx={{
@@ -50,6 +50,9 @@ const MainNavbar = () => {
         }}
       >
         <Toolbar>
+          <Box>
+            <MenuMobile />
+          </Box>
           <Box
             sx={{
               p: 1,
@@ -73,6 +76,7 @@ const MainNavbar = () => {
               LinkComponent={RouterLink}
               to="/"
               icon={<HomeIcon />}
+              sx={{ display: { xs: "none", md: "inline-flex" } }}
             />
 
             {user && (
@@ -83,13 +87,15 @@ const MainNavbar = () => {
                   LinkComponent={RouterLink}
                   to="/pets"
                   icon={<PetsIcon />}
+                  sx={{ display: { xs: "none", md: "inline-flex" } }}
                 />
                 <BottomNavigationAction
                   showLabel
-                  label="Configuracion"
+                  label="Configuración"
                   LinkComponent={RouterLink}
                   to="/my-account"
                   icon={<SettingsIcon />}
+                  sx={{ display: { xs: "none", md: "inline-flex" } }}
                 />
               </>
             )}
@@ -99,6 +105,7 @@ const MainNavbar = () => {
               LinkComponent={RouterLink}
               to="/faq"
               icon={<HelpIcon />}
+              sx={{ display: { xs: "none", md: "inline-flex" } }}
             />
           </Box>
           {!user && (
@@ -111,7 +118,7 @@ const MainNavbar = () => {
                   sx={{ color: "black.main", borderColor: "black.main" }}
                 >
                   {" "}
-                  Iniciar sesion
+                  Iniciar sesión
                 </Button>
               </Box>
 
@@ -146,7 +153,10 @@ const MainNavbar = () => {
                     aria-haspopup="true"
                     aria-expanded={open ? "true" : undefined}
                   >
-                    <Avatar sx={{ width: 40, height: 40 }}>M</Avatar>
+                    <Avatar
+                      sx={{ width: 40, height: 40 }}
+                      src={user.photo}
+                    ></Avatar>
                   </IconButton>
                 </Tooltip>
               </Box>
@@ -193,13 +203,13 @@ const MainNavbar = () => {
                   <ListItemIcon>
                     <Settings fontSize="small" />
                   </ListItemIcon>
-                  Configuracion de la cuenta
+                  Configuración de la cuenta
                 </MenuItem>
                 <MenuItem onClick={logout}>
                   <ListItemIcon>
                     <Logout fontSize="small" />
                   </ListItemIcon>
-                  Cerrar sesion
+                  Cerrar sesión
                 </MenuItem>
               </Menu>
             </React.Fragment>

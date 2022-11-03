@@ -42,7 +42,12 @@ const UserFormRegister = () => {
 
   return (
     <Box
-      sx={{ backgroundColor: "#F0F0F0", color: "#545454", p: 5 }}
+      sx={{
+        backgroundColor: "#F0F0F0",
+        color: "#545454",
+        p: 5,
+        borderRadius: "4px",
+      }}
       xs={4}
       md={4}
     >

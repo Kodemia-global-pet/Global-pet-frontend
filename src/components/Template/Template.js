@@ -7,25 +7,29 @@ const Template = ({ children }) => {
   const backgroundImage = process.env.PUBLIC_URL + "/images/landingbg.png";
 
   return (
-    <Grid container>
-      <Grid item xs={12}>
-        <MainNavbar />
+    <>
+      <Grid container>
+        <Grid item xs={12}>
+          <MainNavbar />
+        </Grid>
+        <Grid item xs={12}>
+          <main
+            style={{
+              backgroundImage: `url(${backgroundImage})`,
+              width: "100%",
+              minHeight: "calc(100vh - 250px)",
+              zIndex: 0,
+              padding: "20px",
+            }}
+          >
+            {children}
+          </main>
+        </Grid>
+        <Grid xs={12}>
+          <Footer />
+        </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <main
-          style={{
-            backgroundImage: `url(${backgroundImage})`,
-            width: "100%",
-            minHeight: "calc(100vh - 322px)",
-          }}
-        >
-          {children}
-        </main>
-      </Grid>
-      <Grid item xs={12}>
-        <Footer />
-      </Grid>
-    </Grid>
+    </>
   );
 };
 

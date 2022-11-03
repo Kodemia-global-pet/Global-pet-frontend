@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import CustomImage from "../CustomImage/CustomImage";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./DropFielInput.css";
+import { Link } from "react-router-dom";
 
 const DropFileInput = ({
   files,
@@ -73,18 +74,22 @@ const DropFileInput = ({
                         />
                       )}
                       {attachment.type === "application/pdf" && (
-                        <CustomImage
-                          src={`${process.env.PUBLIC_URL}/images/pdf.png`}
-                          alt={attachment.title}
-                          maxHeight="100px"
-                        />
+                        <Link to={attachment.url} target="_blank" download>
+                          <CustomImage
+                            src={`${process.env.PUBLIC_URL}/images/pdf.png`}
+                            alt={attachment.title}
+                            maxHeight="100px"
+                          />
+                        </Link>
                       )}
                       {attachment.type?.split("/")[0] === "video" && (
-                        <CustomImage
-                          src={`${process.env.PUBLIC_URL}/images/video.png`}
-                          alt={attachment.name}
-                          maxHeight="100px"
-                        />
+                        <Link to={attachment.url} target="_blank" download>
+                          <CustomImage
+                            src={`${process.env.PUBLIC_URL}/images/video.png`}
+                            alt={attachment.name}
+                            maxHeight="100px"
+                          />
+                        </Link>
                       )}
                     </Box>
                     <Box

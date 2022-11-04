@@ -100,7 +100,6 @@ function UploadButton({
                 id="file"
                 onChange={changeHandler}
                 accept="image/png, image/jpg, image/jpeg"
-                multiple
               />
             </Button>
           </p>

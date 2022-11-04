@@ -13,7 +13,7 @@
 
 # Crea una cita y sube imágenes o archivos.
 
-![Crea una cita] (./public/images/README/Creaunacita.png)
+![Crea una cita] (https://github.com/Kodemia-global-pet/Global-pet-frontend/blob/README/public/images/README/Crea%20una%20cita.png)
 
 # Obtén un código QR para imprimirlo en el collar de tu mascota.
 

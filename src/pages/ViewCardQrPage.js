@@ -19,7 +19,7 @@ const ViewCardQrPage = () => {
   return (
     <Template>
       <Container>
-        <Grid container>
+        <Grid container rowSpacing={{ xs: 3, md: 2 }}>
           <Grid
             item
             md={4}

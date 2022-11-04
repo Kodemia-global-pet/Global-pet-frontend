@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import React from "react";
 import EventItem from "../EventList/EventItem/EventItem";
 const ViewCardHistory = ({
@@ -8,7 +8,7 @@ const ViewCardHistory = ({
   showActions = false,
 }) => {
   return (
-    <>
+    <Container>
       <Grid
         container
         sx={{
@@ -60,7 +60,7 @@ const ViewCardHistory = ({
           ))}
         </Grid>
       </Grid>
-    </>
+    </Container>
   );
 };
 

@@ -2,8 +2,11 @@ import { Box, Button, Container, Grid } from "@mui/material";
 import React from "react";
 import CustomImage from "../../CustomImage/CustomImage";
 import { Link as RouterLink } from "react-router-dom";
+import { useLogedUser } from "../../../context/UserContext";
 
 const Banner = (props) => {
+  const { user, loading } = useLogedUser();
+
   return (
     <Box
       {...props}
@@ -15,7 +18,7 @@ const Banner = (props) => {
     >
       <Container maxwidth="xl">
         <Grid item container xs={12}>
-          <h1>Bienvenido a Global Pet</h1>
+          <h1>Bienvenido a Haky</h1>
         </Grid>
         <Grid item container xs={12}>
           <Grid
@@ -44,40 +47,63 @@ const Banner = (props) => {
               alignItems: "center",
             }}
           >
-            <Grid
-              container
-              item
-              xs={12}
-              sm={6}
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Button
-                variant="outlined"
-                component={RouterLink}
-                to="/create-account"
-                sx={{ color: "black.main", borderColor: "black.main", mb: 2 }}
+            {!user && (
+              <Grid
+                container
+                item
+                xs={12}
+                sm={6}
+                justifyContent="center"
+                alignItems="center"
               >
-                Registrarse
-              </Button>
-            </Grid>
-            <Grid
-              container
-              item
-              xs={12}
-              sm={6}
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Button
-                variant="outlined"
-                component={RouterLink}
-                to="/login"
-                sx={{ color: "black.main", borderColor: "black.main", mb: 2 }}
+                <Button
+                  variant="outlined"
+                  component={RouterLink}
+                  to="/create-account"
+                  sx={{ color: "black.main", borderColor: "black.main", mb: 2 }}
+                >
+                  Registrarse
+                </Button>
+              </Grid>
+            )}
+            {!user && (
+              <Grid
+                container
+                item
+                xs={12}
+                sm={6}
+                justifyContent="center"
+                alignItems="center"
               >
-                Iniciar Sesión
-              </Button>
-            </Grid>
+                <Button
+                  variant="outlined"
+                  component={RouterLink}
+                  to="/login"
+                  sx={{ color: "black.main", borderColor: "black.main", mb: 2 }}
+                >
+                  Iniciar Sesión
+                </Button>
+              </Grid>
+            )}
+            {user && (
+              <Grid
+                container
+                item
+                xs={12}
+                sm={6}
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Button
+                  variant="outlined"
+                  component={RouterLink}
+                  to="/pets"
+                  sx={{ color: "primary", borderColor: "primary", mb: 2 }}
+                >
+                  Mis Mascotas
+                </Button>
+              </Grid>
+            )}
           </Grid>
           <Grid
             item

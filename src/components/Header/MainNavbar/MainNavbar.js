@@ -153,7 +153,10 @@ const MainNavbar = () => {
                     aria-haspopup="true"
                     aria-expanded={open ? "true" : undefined}
                   >
-                    <Avatar sx={{ width: 40, height: 40 }} src={user.photo}></Avatar>
+                    <Avatar
+                      sx={{ width: 40, height: 40 }}
+                      src={user.photo}
+                    ></Avatar>
                   </IconButton>
                 </Tooltip>
               </Box>

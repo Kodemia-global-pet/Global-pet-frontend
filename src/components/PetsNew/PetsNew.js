@@ -58,7 +58,6 @@ const PetsNew = ({ userID, token, pet = {} }) => {
       else {
         setError(null);
         addToast("La mascota fue editada correctamente");
-        addToast("La mascota fue editada correctamente 223");
         navigate(`/pets/${petID}`);
       }
     } else {
@@ -68,7 +67,7 @@ const PetsNew = ({ userID, token, pet = {} }) => {
       else {
         setError(null);
         addToast("La mascota fue agregada correctamente");
-        navigate(`/pets/${result.data.pet._id}`);
+        window.location.href = "/pets";
       }
     }
   };
@@ -235,7 +234,7 @@ const PetsNew = ({ userID, token, pet = {} }) => {
                   sx={{
                     width: 170,
                     height: 43,
-                    backgroundColor: "grey.main",
+                    backgroundColor: "primary",
                     mt: 3,
                     mb: 2,
                   }}

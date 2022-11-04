@@ -41,17 +41,22 @@ const UserFormRegister = () => {
   };
 
   return (
-    <Box
+    <Grid
+      item
       sx={{
-        backgroundColor: "#F0F0F0",
+        backgroundColor: "grey.light",
         color: "#545454",
         p: 5,
         borderRadius: "4px",
       }}
-      xs={4}
-      md={4}
+      xs={12}
+      md={6}
     >
-      <Grid sx={{ pb: 2 }}>
+      <Grid
+        item
+        container
+        sx={{ pb: 2, justifyContent: "center", alignItems: "center" }}
+      >
         <h3>¡Bienvenido a Global Pet!</h3>
       </Grid>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -64,6 +69,7 @@ const UserFormRegister = () => {
                 message: "El nombre debe contener al menos 10 caracteres",
               },
             })}
+            fullWidth
             label="Nombre"
             size="small"
             required
@@ -76,6 +82,7 @@ const UserFormRegister = () => {
             {...register("email", {
               required: "true",
             })}
+            fullWidth
             label="Correo"
             type="email"
             size="small"
@@ -93,6 +100,7 @@ const UserFormRegister = () => {
                 message: "La contraseña debe contener al menos 8 caracteres",
               },
             })}
+            fullWidth
             label="Contraseña"
             size="small"
             required
@@ -110,6 +118,7 @@ const UserFormRegister = () => {
                 message: "La contraseña debe contener al menos 8 caracteres",
               },
             })}
+            fullWidth
             label="Confirma tu contraseña"
             size="small"
             required
@@ -127,19 +136,26 @@ const UserFormRegister = () => {
         >
           <Button
             variant="contained"
-            sx={{ backgroundColor: "grey.main" }}
+            sx={{ backgroundColor: "primary.main" }}
             type="submit"
           >
             Continuar
           </Button>
         </Grid>
-        <Grid>
-          <Link href="/login" underline="none" sx={{ color: "grey.main" }}>
-            ¿Ya tienes cuenta? | Inicia sesión
+        <Grid
+          item
+          container
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Link href="/login" underline="hover" sx={{ color: "black.main" }}>
+            ¿Ya tienes cuenta? Inicia sesión
           </Link>
         </Grid>
       </form>
-    </Box>
+    </Grid>
   );
 };
 export default UserFormRegister;

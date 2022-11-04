@@ -1,4 +1,4 @@
-import { Box, Grid, IconButton, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React, { useState } from "react";
 import CustomImage from "../CustomImage/CustomImage";
 import { CardMedia } from "@mui/material";

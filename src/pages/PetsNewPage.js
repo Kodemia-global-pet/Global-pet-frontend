@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Typography, Box, Grid, CircularProgress } from "@mui/material";
+import { Typography, Box, Grid, CircularProgress } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import PetsNew from "../components/PetsNew/PetsNew";
@@ -7,9 +7,11 @@ import Template from "../components/Template/Template";
 import { Container } from "@mui/system";
 import { useLogedUser } from "../context/UserContext";
 import AuthValidation from "../components/AuthValidation/AuthValidation";
+import { useNavigate } from "react-router";
 
 const PetsNewPage = () => {
   let { user } = useLogedUser();
+  const navigate = useNavigate();
 
   return (
     <AuthValidation>
@@ -23,10 +25,12 @@ const PetsNewPage = () => {
               mt: 5,
             }}
           >
-            <IconButton color="black" component="label">
-              <Link href="/">
-                <ArrowBackIcon color="black" />
-              </Link>
+            <IconButton
+              color="black"
+              component="label"
+              onClick={() => navigate(-1)}
+            >
+              <ArrowBackIcon color="black" />
             </IconButton>
             <Typography
               component="h1"

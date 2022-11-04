@@ -11,7 +11,6 @@ const UserContext = React.createContext();
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

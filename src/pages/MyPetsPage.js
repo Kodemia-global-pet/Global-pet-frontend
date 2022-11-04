@@ -12,6 +12,7 @@ import AdSense from "react-adsense";
 
 const MyPetsPage = () => {
   let { user } = useLogedUser();
+  // window.location.reload();
   return (
     <AuthValidation>
       <Template>
@@ -57,7 +58,8 @@ const MyPetsPage = () => {
         </Grid>
         <Grid
           container
-          item={12}
+          item
+          xs={12}
           sx={{ w: 1, justifyContent: "center", mt: 3 }}
         >
           <AdSense.Google

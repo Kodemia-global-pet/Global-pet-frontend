@@ -1,10 +1,10 @@
 import React from "react";
-import { Link, Typography, Box, Alert } from "@mui/material";
+import { Typography, Box, Alert } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import NewEvent from "../components/NewEvent/NewEvent";
 import Template from "../components/Template/Template";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useLogedUser } from "../context/UserContext";
 import useFetch from "../hooks/useFetch";
 import { Container } from "@mui/system";
@@ -12,6 +12,7 @@ import AuthValidation from "../components/AuthValidation/AuthValidation";
 
 const EditEventPage = () => {
   const params = useParams();
+  const navigate = useNavigate();
   let { user } = useLogedUser();
   const { data, error } = useFetch(
     `${process.env.REACT_APP_BACKEND}records/${params.eventID}`
@@ -31,10 +32,12 @@ const EditEventPage = () => {
               mt: 5,
             }}
           >
-            <IconButton color="black" component="label">
-              <Link href="/">
-                <ArrowBackIcon color="black" />
-              </Link>
+            <IconButton
+              color="black"
+              component="label"
+              onClick={() => navigate(-1)}
+            >
+              <ArrowBackIcon color="black" />
             </IconButton>
             <Typography
               component="h1"

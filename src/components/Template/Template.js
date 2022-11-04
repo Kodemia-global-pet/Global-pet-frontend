@@ -17,15 +17,15 @@ const Template = ({ children }) => {
             style={{
               backgroundImage: `url(${backgroundImage})`,
               width: "100%",
-              minHeight: "calc(100vh - 250px)",
+              minHeight: "calc(100vh - 220px)",
               zIndex: 0,
-              padding: "20px",
+              padding: "32px 0",
             }}
           >
             {children}
           </main>
         </Grid>
-        <Grid xs={12}>
+        <Grid item xs={12}>
           <Footer />
         </Grid>
       </Grid>

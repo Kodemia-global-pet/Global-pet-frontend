@@ -6,7 +6,7 @@
 
 ![inicio sesion](https://user-images.githubusercontent.com/106880035/200089944-c9913252-0cea-4d3a-9c78-e247a9443661.png)
 
-## Has un perfil de tu mascota.
+## Haz un perfil de tu mascota.
 
 ![Registra tu mascota](https://user-images.githubusercontent.com/106880035/200087590-8797b990-03fb-42c6-ad8c-02d0c83d57eb.png)
 
